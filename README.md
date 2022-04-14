@@ -4,7 +4,7 @@
 
 ## Installation
 
-> We recommend you use yarn
+> We recommend you use yarn or npm
 
 1. Install all packages
 
