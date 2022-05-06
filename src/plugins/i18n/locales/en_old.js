@@ -1,6 +1,7 @@
 export default {
   Dashboards: 'Dashboards',
   CRM: 'CRM',
+  Warehouse: "Warehouse",
   Analytics: 'Analytics',
   eCommerce: 'eCommerce',
   Calendar: 'Calendar',

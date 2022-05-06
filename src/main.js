@@ -8,6 +8,10 @@ import './plugins/acl'
 import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
+import moment from 'moment'
+import 'material-icons/iconfont/material-icons.css';
+
+Vue.prototype.$moment = moment
 
 Vue.config.productionTip = false
 

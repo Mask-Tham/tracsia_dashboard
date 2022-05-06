@@ -5,6 +5,11 @@ import apps from './apps'
 import dashboard from './dashboard'
 import pages from './pages'
 import userInterface from './user-interface'
+import warehouse from './warehouse'
+import healthcare from './healthcare'
+import employee_tracking from './employee-tracking'
+
+
 
 Vue.use(VueRouter)
 
@@ -17,7 +22,7 @@ const routes = [
       const userData = JSON.parse(localStorage.getItem('userData'))
       const userRole = userData && userData.role ? userData.role : null
 
-      if (userRole === 'admin') return { name: 'dashboard-crm' }
+      if (userRole === 'admin') return { name: 'dashboard-warehouse' }
       if (userRole === 'client') return { name: 'page-access-control' }
 
       return { name: 'auth-login', query: to.query }
@@ -66,6 +71,9 @@ const routes = [
   ...userInterface,
   ...apps,
   ...pages,
+  ...warehouse,
+  ...healthcare,
+  ...employee_tracking,
   {
     path: '*',
     redirect: 'error-404',

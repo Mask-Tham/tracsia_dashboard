@@ -25,6 +25,8 @@ import { useLayout } from '@core/layouts/composable/useLayout'
 import LayoutContentVerticalNav from '@/layouts/variants/content/vertical-nav/LayoutContentVerticalNav.vue'
 import LayoutContentHorizontalNav from '@/layouts/variants/content/horizontal-nav/LayoutContentHorizontalNav.vue'
 import LayoutBlank from '@/layouts/variants/blank/LayoutBlank.vue'
+import LayoutContentTracsiaNav from '@/layouts/variants/content/tracsia-nav/LayoutContentTracsiaNav.vue'
+
 
 // Dynamic vh
 import useDynamicVh from '@core/utils/useDynamicVh'
@@ -34,6 +36,7 @@ export default {
     LayoutContentVerticalNav,
     LayoutContentHorizontalNav,
     LayoutBlank,
+    LayoutContentTracsiaNav,
   },
   setup() {
     const { route } = useRouter()
@@ -44,7 +47,10 @@ export default {
 
     const resolveLayoutVariant = computed(() => {
       if (route.value.meta.layout === 'blank') return 'layout-blank'
-      if (route.value.meta.layout === 'content') return `layout-content-${appContentLayoutNav.value}-nav`
+      if (route.value.meta.layout === 'content') return `layout-content-tracsia-nav`
+
+      // defult
+      // if (route.value.meta.layout === 'content') return `layout-content-${appContentLayoutNav.value}-nav`
 
       return null
     })

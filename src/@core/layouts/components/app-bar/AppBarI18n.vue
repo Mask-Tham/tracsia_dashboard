@@ -65,8 +65,8 @@ export default {
       },
       {
         title: 'ไทย',
-        img: require('@/assets/images/flags/fr.png'),
-        locale: 'fr',
+        img: require('@/assets/images/flags/th.png'),
+        locale: 'th',
       },
       
     ]
