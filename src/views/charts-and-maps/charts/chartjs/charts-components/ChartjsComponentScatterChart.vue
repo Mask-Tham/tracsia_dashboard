@@ -1,5 +1,6 @@
 <script>
-import { Scatter } from 'vue-chartjs'
+// import { Scatter } from 'vue-chartjs'
+import { Scatter } from 'vue-chartjs/legacy'
 
 export default {
   extends: Scatter,

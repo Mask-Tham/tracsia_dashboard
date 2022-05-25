@@ -1,5 +1,6 @@
 <script>
-import { Radar } from 'vue-chartjs'
+// import { Radar } from 'vue-chartjs'
+import { Radar } from 'vue-chartjs/legacy'
 
 export default {
   extends: Radar,

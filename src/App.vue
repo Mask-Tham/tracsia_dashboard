@@ -63,5 +63,8 @@ export default {
       appRouteTransition,
     }
   },
+  mounted() {
+    // console.log(process.env);
+  },
 }
 </script>

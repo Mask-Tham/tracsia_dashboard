@@ -15,6 +15,7 @@ module.exports = {
         apexcharts: path.resolve(__dirname, 'node_modules/apexcharts-clevision'),
       },
     },
+    devtool: 'source-map',
   },
   chainWebpack: config => {
     const modules = ['vue-modules', 'vue', 'normal-modules', 'normal']

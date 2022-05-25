@@ -1,5 +1,6 @@
 <script>
-import { Doughnut } from 'vue-chartjs'
+// import { Doughnut } from 'vue-chartjs'
+import { Doughnut } from 'vue-chartjs/legacy'
 
 export default {
   extends: Doughnut,

@@ -29,18 +29,18 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12" md="4"><healthcare-overview/></v-col>
+      <v-col cols="12" md="4"><healthcare-overall/></v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-import HealthcareCardAccessory from './HealthcareCardAccessory.vue'
-import HealthcareCardBioPanal from './HealthcareCardBioPanal.vue'
-import HealthcareCardLocation from './HealthcareCardLocation.vue'
-import HealthcareCardPart from './HealthcareCardPart.vue'
-import HealthcareCardToday from './HealthcareCardToday.vue'
-import HealthcareOverview from './HealthcareOverview.vue'
+import HealthcareCardAccessory from './HealthcarepersonCardAccessory.vue'
+import HealthcareCardBioPanal from './HealthcarepersonCardBioPanal.vue'
+import HealthcareCardLocation from './HealthcarepersonCardLocation.vue'
+import HealthcareCardPart from './HealthcarepersonCardPart.vue'
+import HealthcareCardToday from './HealthcarepersonCardToday.vue'
+import HealthcareOverall from './HealthcareOverall.vue'
 export default {
   components: {
     HealthcareCardBioPanal,
@@ -48,7 +48,7 @@ export default {
     HealthcareCardLocation,
     HealthcareCardPart,
     HealthcareCardAccessory,
-    HealthcareOverview,
+    HealthcareOverall,
   },
   data() {
     return {

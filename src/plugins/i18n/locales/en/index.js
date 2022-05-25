@@ -6,7 +6,7 @@ export default {
   Dashboards: 'Dashboards',
   Warehouse: "Warehouse",
   Healthcare:'Healthcare',
-  'Employee Tracing':'Employee Tracing',
+  'Employee Tracking':'Employee Tracing',
   warehouse:{...warehouse},
   healthcare:{...healthcare},
   employee_tracking:{...employee_tracking},

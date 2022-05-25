@@ -1,5 +1,6 @@
 <script>
-import { Bubble } from 'vue-chartjs'
+// import { Bubble } from 'vue-chartjs'
+import { Bubble } from 'vue-chartjs/legacy'
 
 export default {
   extends: Bubble,

@@ -5,6 +5,7 @@ import apps from './apps'
 import dashboard from './dashboard'
 import pages from './pages'
 import userInterface from './user-interface'
+import publicPage from './public-page'
 import warehouse from './warehouse'
 import healthcare from './healthcare'
 import employee_tracking from './employee-tracking'
@@ -69,6 +70,7 @@ const routes = [
   },
   ...dashboard,
   ...userInterface,
+  ...publicPage,
   ...apps,
   ...pages,
   ...warehouse,
@@ -94,7 +96,8 @@ router.beforeEach((to, _, next) => {
   const userData = localStorage.getItem('userData')
 
   const isLoggedIn = userData && localStorage.getItem('accessToken') && localStorage.getItem('userAbility')
-
+  // console.log(userData,isLoggedIn);
+  // console.log(canNavigate(to))
   if (!canNavigate(to)) {
     // Redirect to login if not logged in
     if (!isLoggedIn) return next({ name: 'auth-login', query: { marketplace: to.query.marketplace } })
