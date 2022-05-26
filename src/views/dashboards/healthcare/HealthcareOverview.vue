@@ -1,16 +1,14 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" md="6">
-        <healthcare-overall />
-      </v-col>
+      
       <v-col cols="12" md="6">
         <v-row>
           <v-col cols="12">
             <v-card>
               <v-card-title class="pa-3 pb-0"> {{ $tc('healthcare.location', 2) }} </v-card-title>
               <v-card-text class="pa-3">
-                <l-map style="height: 200px" :zoom="zoom" :center="center">
+                <l-map style="height: 200px;z-index:0" :zoom="zoom" :center="center">
                   <l-tile-layer :url="url"></l-tile-layer>
                   <!-- <l-marker :lat-lng="markerLatLng"></l-marker> -->
                   <l-circle-marker :lat-lng="markerLatLng" :radius="10" :color="'#f00'" />
@@ -20,7 +18,7 @@
           </v-col>
           <v-col cols="12">
             <v-card>
-              <v-card-title class="pa-3 pb-0"> fever trend </v-card-title>
+              <v-card-title class="pa-3 pb-0"> {{ $tc('healthcare.fever trend', 2) }}</v-card-title>
               <v-card-text>
                 <div style="position: relative; height: min-content">
                   <div
@@ -44,7 +42,7 @@
           <v-col cols="12">
             <v-card>
               <v-card-title class="pa-3 pb-0 d-flex justify-space-between">
-                <div>fever trend</div>
+                <div>{{ $tc('healthcare.fever trend', 2) }}</div>
                 <div>
                   <v-select
                     v-model="select"
@@ -66,6 +64,9 @@
             </v-card>
           </v-col>
         </v-row>
+      </v-col>
+      <v-col cols="12" md="6">
+        <healthcare-overall />
       </v-col>
     </v-row>
   </div>

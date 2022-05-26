@@ -23,7 +23,8 @@ const healthcare = {
   inactive:'inactive',
   'fever cases':'fever cases',
   'higher fever':'higher fever',
-  name:'name|Name|NAME'
+  name:'name|Name|NAME',
+  'fever trend':'fever trend',
 }
 
 export default healthcare

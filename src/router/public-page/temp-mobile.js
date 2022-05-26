@@ -1,10 +1,11 @@
 const temp = [
     {
-        path:'/temp',
-        name:'temp',
-        component: () => import('@/views/charts-and-maps/charts/apex-chart/ApexChart.vue'),
+        path:'/public-page',
+        name:'public-page',
+        component: () => import('@/views/pages/public-pages/PublicpageExample.vue'),
         meta: {
-          layout: 'content',
+          layout: 'blank',
+          resource: 'Public',
         },
     }
 ]

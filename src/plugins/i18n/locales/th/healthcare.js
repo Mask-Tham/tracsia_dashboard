@@ -24,6 +24,7 @@ const healthcare = {
   'fever cases': 'มีไข้',
   'higher fever': 'ไข้สูง',
   name: 'ชื่อ',
+  'fever trend':'แนวโน้มไข้',
 }
 
 export default healthcare

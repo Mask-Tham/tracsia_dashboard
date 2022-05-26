@@ -82,7 +82,6 @@ export default {
   },
   computed: {
     chartData() {
-      console.log(this.data);
       return this.data /* mutable chart data */
     },
     chartOptions() {
