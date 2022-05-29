@@ -4,73 +4,74 @@
       <h4>Diary</h4>
       {{ tab }}
     </div>
-     
+
     <div class="container_diary_tab">
       <v-tabs grow background-color="#EDF7F9" v-model="tab" color="#6CA8C2">
         <v-tab @click="logtab(i)" v-for="i in items" :key="i">{{ i }}</v-tab>
       </v-tabs>
     </div>
     <div class="container_diary_tab_main">
-      <div id="Temperature" class="tabcontent_none">
-        {{ text }}{{ text }}{{ text }}{{ text }}{{ text }}{{ text }}
-      </div>
+      <div id="Temperature" class="tabcontent_none"><tabTemperature /></div>
       <div id="Symptoms" class="tabcontent_none">xcc</div>
     </div>
   </div>
 </template>
 
 <script>
+import tabTemperature from '@/views/pages/public-pages/layout/Diary/tab_temperature.vue'
+import tabSymptoms from '@/views/pages/public-pages/layout/Diary/tab_symptoms.vue'
 export default {
+  components: { tabTemperature, tabSymptoms },
   data: () => ({
     tab: null,
-    model: "tab-2",
-    items: ["Temperature", "Symptoms"],
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    model: 'tab-2',
+    items: ['Temperature', 'Symptoms'],
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     items_monitor: [
       {
         id: 1,
-        name: "Leanne GrahamLeanne Graham",
-        icon: "sports_kabaddi",
-        email: "Sincere@april.biz",
-        website: "hildegard.org",
+        name: 'Leanne GrahamLeanne Graham',
+        icon: 'sports_kabaddi',
+        email: 'Sincere@april.biz',
+        website: 'hildegard.org',
       },
       {
         id: 2,
-        name: "Ervin HowellLeanne Graham",
-        icon: "wash",
-        email: "Shanna@melissa.tv",
-        website: "anastasia.net",
+        name: 'Ervin HowellLeanne Graham',
+        icon: 'wash',
+        email: 'Shanna@melissa.tv',
+        website: 'anastasia.net',
       },
       {
         id: 3,
-        name: "Clementine BauchLeanne Graham",
-        icon: "masks",
-        email: "Nathan@yesenia.net",
-        website: "ramiro.info",
+        name: 'Clementine BauchLeanne Graham',
+        icon: 'masks',
+        email: 'Nathan@yesenia.net',
+        website: 'ramiro.info',
       },
     ],
   }),
   methods: {
     logtab(b) {
-      console.log(b);
-      var i, tabcontent_none, tablinks;
-      tabcontent_none = document.getElementsByClassName("tabcontent_none");
+      console.log(b)
+      var i, tabcontent_none, tablinks
+      tabcontent_none = document.getElementsByClassName('tabcontent_none')
       for (i = 0; i < tabcontent_none.length; i++) {
-        tabcontent_none[i].style.display = "none";
+        tabcontent_none[i].style.display = 'none'
       }
-      tablinks = document.getElementsByClassName("tablinks");
+      tablinks = document.getElementsByClassName('tablinks')
       for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].className = tablinks[i].className.replace(' active', '')
       }
-      document.getElementById(b).style.display = "flex";
+      document.getElementById(b).style.display = 'flex'
     },
   },
   mounted() {
-    this.logtab("Temperature");
+    this.logtab('Temperature')
     // this.tab = 0;
-    console.log(this.tab);
+    console.log(this.tab)
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

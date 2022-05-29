@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import Monitor from './layout/monitor.vue'
-import Diary from './layout/Diary.vue'
+import Monitor from './views/layout/monitor.vue'
+import Diary from './views/layout/Diary.vue'
 export default {
   name: 'App',
 
@@ -51,5 +51,5 @@ export default {
 }
 </script>
 <style scoped>
-@import './layout/for_app.scss';
+@import './views/layout/for_app.scss';
 </style>
