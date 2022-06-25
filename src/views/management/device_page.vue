@@ -67,6 +67,7 @@
             <v-col cols="12" align="center" md="12">
               <div class="pa-2" outlined tile>
                 <v-img
+                  style="width: 100%"
                   src="https://i0.wp.com/www.minew.com/wp-content/uploads/2021/06/1920-587-27.png?fit=1920%2C587&ssl=1"
                 ></v-img>
               </div>
@@ -96,19 +97,11 @@
                   {{ i.info }}
                 </p>
               </div>
-              <v-img
-                v-else
-                style="width: 100%"
-                src="	https://i0.wp.com/www.minew.com/wp-content/uploads/2021/06/1-24.png?fit=960%2C550&ssl=1"
-              ></v-img>
+              <v-img v-else style="width: 100%" :src="i.img"></v-img>
             </div>
           </v-col>
           <v-col cols="12" sm="12" md="6">
-            <v-img
-              v-if="i.position"
-              style="width: 100%"
-              src="	https://i0.wp.com/www.minew.com/wp-content/uploads/2021/06/1-24.png?fit=960%2C550&ssl=1"
-            ></v-img>
+            <v-img v-if="i.position" style="width: 100%" :src="i.img"></v-img>
             <div v-else class="pa-2" outlined tile>
               <h2>{{ i.head }}</h2>
               <br />
@@ -128,28 +121,72 @@
           </v-tabs>
           <v-tabs-items v-model="tab">
             <v-tab-item v-for="(i, index) in tab_list" :key="index" :value="'tab-' + i.id">
-              <v-card :style="{ background: isDark ? '#28243d' : '#F4F5FA' }">
-                <v-row class="match-height ma-0">
-                  <v-simple-table grow>
-                    <template  v-slot:default>
-                      <!-- <thead>
-                        <tr>
-                          <th class="text-left">Name</th>
-                          <th class="text-left">Calories</th>
-                        </tr>
-                      </thead> -->
-                      <tbody>
-                        <tr v-for="item in desserts" :key="item.name">
-                          <td>{{ item.name }}</td>
-                          <td>{{ item.calories }}</td>
-                        </tr>
-                      </tbody>
-                    </template>
-                  </v-simple-table>
+              <v-card v-if="['tab-1'].includes(tab)" :style="{ background: isDark ? '#28243d' : '#F4F5FA' }">
+                <v-row>
+                  <v-col cols="12" md="12" sm="12" order="12" order-md="4">
+                    <v-simple-table>
+                      <template v-slot:default>
+                        <tbody>
+                          <tr v-for="(i, index) in data_value[res_value].table.parameters" :key="indeb">
+                            <td style="width: 50%">{{ i.head }}</td>
+                            <td style="width: 50%">{{ i.info }}</td>
+                          </tr>
+                        </tbody>
+                      </template>
+                    </v-simple-table></v-col
+                  >
                 </v-row>
+                <v-img style="width: 100%" :src="data_value[res_value].table.img"></v-img>
               </v-card>
             </v-tab-item>
           </v-tabs-items>
+        </v-col>
+      </v-row>
+    </section>
+    <section
+      style="background: white"
+      class="container pa-4 pa-sm-6 pa-md-15 container--fluid d-xl-flex d-md-flex d-lg-flex justify-center"
+    >
+      <v-row style="max-width: 1000px" class="">
+        <v-col align="center" cols="12">
+          <div class="pa-2">
+            <div>
+              <h1 style="color: #1b2e57" class="v-heading text-h3 text-sm-h4 mb-3">Contact Us</h1>
+            </div>
+            <br />
+            <v-col cols="12" align="center" md="12">
+              <v-form>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="6">
+                      <v-text-field v-model="first" label="First Name" outlined></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12" sm="6">
+                      <v-text-field v-model="last" label="Last Name" outlined></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" sm="6">
+                      <v-text-field v-model="first" label="Phone" outlined></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12" sm="6">
+                      <v-text-field v-model="last" label="Country" outlined></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-textarea autocomplete="email" outlined label="Tell us how we can help you"></v-textarea>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="space-around">
+                    <v-btn depressed color="primary"> Quote Now </v-btn>
+                  </v-row>
+                </v-container>
+              </v-form>
+            </v-col>
+          </div>
         </v-col>
       </v-row>
     </section>
@@ -157,8 +194,8 @@
 </template>
 
 <script>
-import deviceinfo from './list_info_device'
 import useAppConfig from '@core/@app-config/useAppConfig'
+import deviceinfo from './list_info_device'
 export default {
   data() {
     return {

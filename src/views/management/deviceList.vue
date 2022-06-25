@@ -1,19 +1,14 @@
 <template>
   <div>
-    <!-- <pre>{{ this.tab_list }}</pre> -->
-    <!-- <div>{{ Object.keys(data_a) }}</div> -->
- <div v-if="errorStr">
-    Sorry, but the following error
-    occurred: {{errorStr}}
-  </div>
+    <pre>{{ model }}</pre>
 
-  <div v-if="gettingLocation">
-    <i>Getting your location...</i>
-  </div>
+    <div v-if="errorStr">Sorry, but the following error occurred: {{ errorStr }}</div>
 
-  <div v-if="location">
-    Your location data is {{ location.coords.latitude }}, {{ location.coords.longitude}}
-  </div>
+    <div v-if="gettingLocation">
+      <i>Getting your location...</i>
+    </div>
+
+    <div v-if="location">Your location data is {{ location.coords.latitude }}, {{ location.coords.longitude }}</div>
     <v-row>
       <v-col cols="12" md="3" sm="6" order="1" class="align-self-end">
         <statistics-card-with-images
@@ -92,13 +87,12 @@
 </template>
 
 <script>
-import * as mqtt from 'mqtt'
-import StatisticsCardWithImages from '@core/components/statistics-card/StatisticsCardWithImages.vue'
-import StatisticsCardAreaChart from '@core/components/statistics-card/StatisticsCardAreaChart.vue'
 import StatisticsCardVertical from '@/@core/components/statistics-card/StatisticsCardVertical.vue'
 import carddevice from '@/views/management/components/card_device.vue'
+import StatisticsCardAreaChart from '@core/components/statistics-card/StatisticsCardAreaChart.vue'
+import StatisticsCardWithImages from '@core/components/statistics-card/StatisticsCardWithImages.vue'
+import * as mqtt from 'mqtt'
 // icons
-import { mdiLabelVariantOutline } from '@mdi/js'
 
 import useAppConfig from '@core/@app-config/useAppConfig'
 export default {
@@ -111,6 +105,32 @@ export default {
   },
   data() {
     return {
+      model: [
+        'K23',
+        'S1',
+        'M1',
+        'S4',
+        'P1',
+        'MBS01',
+        'MSP01',
+        'MSV01',
+        'B7',
+        'B8',
+        'S2',
+        'i10',
+        'F1',
+        'i10',
+        'W7',
+        'W59',
+        'K6',
+        'K68',
+        'K9P',
+        'KG01',
+        'KG02',
+        'MKGW-mini',
+        'MKGW1',
+        'B10',
+      ],
       tab: null,
       tab_list: [
         {
@@ -301,11 +321,13 @@ export default {
     })
     this.client.on('message', (topic, message) => {
       console.log(message)
+      this.model = []
       let temp = { All: [], IG: [], OG: [], PG: [], ST: [], WT: [], SMT: [], BT: [], LT: [], WP: [] }
       this.receiveNews = this.receiveNews.concat(message)
       this.data_a = JSON.parse(message)
       Object.keys(this.data_a).forEach(element => {
         Object.keys(temp).forEach((key, index) => {
+          console.log(this.data_a[element].Model)
           if (key == this.data_a[element].Type) {
             temp[key].push(this.data_a[element])
             temp['All'].push(this.data_a[element])
