@@ -1,3 +1,3 @@
 import tempMobile from './temp-mobile'
-
-export default [...tempMobile,]
+import devicelist from './devicelist'
+export default [...tempMobile,...devicelist ]

@@ -1,15 +1,18 @@
 import warehouse from './warehouse'
 import healthcare from './healthcare'
 import employee_tracking from './employee_tracking'
+import device_list from './device_list'
 
 export default {
-  Dashboards: 'Dashboards',
-  Warehouse: "Warehouse",
-  Healthcare:'Healthcare',
-  'Employee Tracking':'Employee Tracing',
-  warehouse:{...warehouse},
-  healthcare:{...healthcare},
-  employee_tracking:{...employee_tracking},
+    Dashboards: 'Dashboards',
+    Warehouse: "Warehouse",
+    Healthcare: 'Healthcare',
+    'Employee Tracking': 'Employee Tracing',
+    Management:'Management',
+    warehouse: {...warehouse },
+    healthcare: {...healthcare },
+    employee_tracking: {...employee_tracking },
+    device_list: {...device_list },
 
-// ...warehouse,
+    // ...warehouse,
 }
