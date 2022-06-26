@@ -12,7 +12,7 @@
     </v-app-bar>
     <section class="container pa-4 pa-sm-6 pa-md-15 container--fluid d-xl-flex d-md-flex d-lg-flex justify-center">
       <v-row style="max-width: 1000px" class="">
-        <v-col cols="12" sm="12" md="8">
+        <v-col cols="12" sm="12" md="7">
           <div class="pa-2" outlined tile>
             <div>
               <h1 style="color: #1b2e57" class="v-heading text-h3 text-sm-h4">{{ data_value[res_value].title }}</h1>
@@ -21,7 +21,7 @@
             <div>{{ data_value[res_value].detail }}</div>
           </div>
         </v-col>
-        <v-col cols="12" align="center" md="4">
+        <v-col cols="12" align="center" md="5">
           <div class="pa-2" outlined tile>
             <v-img width="500" :src="require('@/assets/images/device/' + res_value + '.png')"></v-img>
           </div>
@@ -61,15 +61,15 @@
         <v-col align="center" cols="12">
           <div class="pa-2">
             <div>
-              <h1 style="color: #1b2e57" class="v-heading text-h3 text-sm-h4 mb-3">How it works</h1>
+              <h1 style="color: #1b2e57" class="v-heading text-h3 text-sm-h4 mb-3">
+                {{ data_value[res_value].item_1.title }}
+              </h1>
+              <span v-if="data_value[res_value].item_1.info"> {{ data_value[res_value].item_1.info }}</span>
             </div>
             <br />
             <v-col cols="12" align="center" md="12">
               <div class="pa-2" outlined tile>
-                <v-img
-                  style="width: 100%"
-                  src="https://i0.wp.com/www.minew.com/wp-content/uploads/2021/06/1920-587-27.png?fit=1920%2C587&ssl=1"
-                ></v-img>
+                <v-img style="width: 100%" :src="data_value[res_value].item_1.img_how_it_works"></v-img>
               </div>
             </v-col>
           </div>
@@ -77,6 +77,7 @@
       </v-row>
     </section>
     <section
+      v-if="data_value[res_value].highlights"
       style="background: white"
       class="container pa-4 pa-sm-6 pa-md-15 container--fluid d-xl-flex d-md-flex d-lg-flex justify-center"
     >
@@ -124,7 +125,21 @@
               <v-card v-if="['tab-1'].includes(tab)" :style="{ background: isDark ? '#28243d' : '#F4F5FA' }">
                 <v-row>
                   <v-col cols="12" md="12" sm="12" order="12" order-md="4">
-                    <v-simple-table>
+                    <v-simple-table v-if="['B7'].includes(res_value)" class="pt-3">
+                      <template v-slot:default>
+                        <tbody>
+                          <tr v-for="(i, index) in data_value[res_value].table.parameters" :key="index">
+                            <td>{{ i.head }}</td>
+                            <td v-for="(b, index) in 4" :key="index">
+                              <v-icon v-if="[true].includes(i['i' + b])">done</v-icon>
+                              <span v-if="![true, false].includes(i['i' + b])"> {{ i['i' + b] }} </span>
+                              <v-icon v-if="[false].includes(i['i' + b])">close</v-icon>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </template>
+                    </v-simple-table>
+                    <v-simple-table v-else class="pt-3">
                       <template v-slot:default>
                         <tbody>
                           <tr v-for="(i, index) in data_value[res_value].table.parameters" :key="indeb">
@@ -136,7 +151,11 @@
                     </v-simple-table></v-col
                   >
                 </v-row>
-                <v-img style="width: 100%" :src="data_value[res_value].table.img"></v-img>
+                <v-img
+                  style="width: 100%"
+                  :style="{ background: isDark ? '#28243d' : 'white' }"
+                  :src="data_value[res_value].table.img"
+                ></v-img>
               </v-card>
             </v-tab-item>
           </v-tabs-items>

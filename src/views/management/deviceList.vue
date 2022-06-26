@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pre>{{ model }}</pre>
+    <!-- <pre>{{ model }}</pre> -->
 
     <div v-if="errorStr">Sorry, but the following error occurred: {{ errorStr }}</div>
 
@@ -106,29 +106,29 @@ export default {
   data() {
     return {
       model: [
-        'K23',
+        //   'K23',
         'S1',
-        'M1',
+        //   'M1',
         'S4',
         'P1',
         'MBS01',
-        'MSP01',
+        //   'MSP01',
         'MSV01',
         'B7',
         'B8',
         'S2',
         'i10',
-        'F1',
-        'i10',
-        'W7',
-        'W59',
-        'K6',
-        'K68',
-        'K9P',
-        'KG01',
-        'KG02',
-        'MKGW-mini',
-        'MKGW1',
+        //   'F1',
+        //   'i10',
+        //   'W7',
+        //   'W59',
+        //   'K6',
+        //   'K68',
+        //   'K9P',
+        //   'KG01',
+        //   'KG02',
+        //   'MKGW-mini',
+        //   'MKGW1',
         'B10',
       ],
       tab: null,
