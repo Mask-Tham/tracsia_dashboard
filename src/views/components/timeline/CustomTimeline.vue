@@ -1,65 +1,45 @@
 <template>
   <v-card>
-    <v-card-title>
-      Custom Timeline
-    </v-card-title>
+    <v-card-title> Custom Timeline </v-card-title>
 
     <v-card-text>
-      <v-timeline
-        dense
-        class="timeline-custom-dense timeline-custom-dots"
-      >
+      <v-timeline dense class="timeline-custom-dense timeline-custom-dots">
         <!-- Timeline Item: Flight -->
-        <v-timeline-item
-          small
-          color="error"
-        >
+        <v-timeline-item small color="error">
           <!-- Header -->
           <div class="d-flex justify-space-between">
-            <p class="mb-1 text--primary font-weight-semibold">
-              Get on the flight
-            </p>
+            <p class="mb-1 text--primary font-weight-semibold">Get on the flight</p>
             <small>Wednesday</small>
           </div>
 
           <!-- Content -->
           <p class="mb-1">
             <span>Charles de Gaulle Airport, Paris</span>
-            <v-icon
-              size="20"
-              class="mx-2"
-            >
+            <v-icon size="20" class="mx-2">
               {{ icons.mdiArrowRight }}
             </v-icon>
             <span>Heathrow Airport, London</span>
           </p>
           <p>6:30 AM</p>
           <span class="d-flex align-center">
-            <v-icon
-              color="error"
-              class="me-1"
-            >
-              {{ icons.mdiFilePdf }}
+            <v-icon color="error" class="me-1">
+              {{ icons.mdiFilePdfBox }}
             </v-icon>
             <span class="text--primary font-weight-semibold text-sm">booking-card.pdf</span>
           </span>
         </v-timeline-item>
 
         <!-- Timeline Item: Interview Schedule -->
-        <v-timeline-item
-          small
-          color="primary"
-        >
+        <v-timeline-item small color="primary">
           <!-- Header -->
           <div class="d-flex justify-space-between">
-            <p class="mb-1 text--primary font-weight-semibold">
-              Interview Schedule
-            </p>
+            <p class="mb-1 text--primary font-weight-semibold">Interview Schedule</p>
             <small class="text-no-wrap">April, 18</small>
           </div>
 
           <p class="mb-0">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus quos, voluptates voluptas rem veniam expedita.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus quos, voluptates voluptas rem veniam
+            expedita.
           </p>
 
           <!-- Divider -->
@@ -69,10 +49,7 @@
           <div class="d-flex justify-space-between align-center">
             <!-- Avatar & Personal Info -->
             <span class="d-flex align-bottom mt-2">
-              <v-avatar
-                size="40"
-                class="me-2"
-              >
+              <v-avatar size="40" class="me-2">
                 <v-img src="@/assets/images/avatars/2.png"></v-img>
               </v-avatar>
               <div class="d-flex flex-column">
@@ -92,74 +69,51 @@
         </v-timeline-item>
 
         <!-- Timeline Item: Puma Shoes -->
-        <v-timeline-item
-          small
-          color="info"
-        >
+        <v-timeline-item small color="info">
           <div class="d-flex align-start mb-3 flex-sm-row flex-column">
-            <v-img
-              height="100"
-              width="100"
-              src="@/assets/images/pages/puma-shoes.jpeg"
-              class="rounded me-4"
-            ></v-img>
+            <v-img height="100" width="100" src="@/assets/images/pages/puma-shoes.jpeg" class="rounded me-4"></v-img>
             <div>
               <!-- Header -->
               <div class="d-flex justify-space-between">
-                <p class="mb-1 font-weight-semibold text-base text--primary">
-                  Sold Puma POPX Blue Color
-                </p>
+                <p class="mb-1 font-weight-semibold text-base text--primary">Sold Puma POPX Blue Color</p>
                 <small class="text-no-wrap">January, 10</small>
               </div>
-              <span>PUMA presents the latest shoes from its collection. Light &amp; comfortable made with highly durable material.</span>
+              <span
+                >PUMA presents the latest shoes from its collection. Light &amp; comfortable made with highly durable
+                material.</span
+              >
             </div>
           </div>
 
           <!-- Timeline Item: Meta Content -->
           <div class="d-flex justify-space-between">
             <div class="text-center">
-              <p class="mb-1 text-base font-weight-semibold text--primary">
-                Customer
-              </p>
+              <p class="mb-1 text-base font-weight-semibold text--primary">Customer</p>
               <span>Micheal Scott</span>
             </div>
             <div class="text-center">
-              <p class="mb-1 text-base font-weight-semibold text--primary">
-                Price
-              </p>
+              <p class="mb-1 text-base font-weight-semibold text--primary">Price</p>
               <span>$375.00</span>
             </div>
             <div class="text-center">
-              <p class="mb-1 text-base font-weight-semibold text--primary">
-                Quantity
-              </p>
+              <p class="mb-1 text-base font-weight-semibold text--primary">Quantity</p>
               <span>1</span>
             </div>
           </div>
         </v-timeline-item>
 
         <!-- Design Review -->
-        <v-timeline-item
-          small
-          color="success"
-        >
+        <v-timeline-item small color="success">
           <!-- Header -->
           <div class="d-flex justify-space-between">
-            <p class="mb-1 text--primary font-weight-semibold">
-              Design Review
-            </p>
+            <p class="mb-1 text--primary font-weight-semibold">Design Review</p>
             <small class="text-no-wrap">September, 20</small>
           </div>
 
           <!-- Content -->
-          <p>
-            Weekly review of freshly prepared design for our new application.
-          </p>
+          <p>Weekly review of freshly prepared design for our new application.</p>
           <div class="d-flex align-center">
-            <v-avatar
-              size="40"
-              class="me-2"
-            >
+            <v-avatar size="40" class="me-2">
               <v-img src="@/assets/images/avatars/1.png"></v-img>
             </v-avatar>
             <span class="text--primary font-weight-semibold">John Doe (Client)</span>
@@ -172,13 +126,13 @@
 
 <script>
 // eslint-disable-next-line object-curly-newline
-import { mdiFilePdf, mdiArrowRight, mdiMessageTextOutline, mdiPhone } from '@mdi/js'
+import { mdiFilePdfBox, mdiArrowRight, mdiMessageTextOutline, mdiPhone } from '@mdi/js'
 
 export default {
   setup() {
     return {
       icons: {
-        mdiFilePdf,
+        mdiFilePdfBox,
         mdiArrowRight,
         mdiMessageTextOutline,
         mdiPhone,

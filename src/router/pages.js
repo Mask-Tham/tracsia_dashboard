@@ -217,6 +217,7 @@ const pages = [
     meta: {
       layout: 'content',
       resource: 'Demo',
+      action:'read'
     },
   },
 ]

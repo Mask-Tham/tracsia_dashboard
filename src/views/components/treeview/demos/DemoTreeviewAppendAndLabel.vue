@@ -1,12 +1,5 @@
 <template>
-  <v-treeview
-    v-model="tree"
-    :open="initiallyOpen"
-    :items="items"
-    activatable
-    item-key="name"
-    open-on-click
-  >
+  <v-treeview v-model="tree" :open="initiallyOpen" :items="items" activatable item-key="name" open-on-click>
     <template #prepend="{ item, open }">
       <v-icon v-if="!item.file">
         {{ open ? icons.mdiFolderOpenOutline : icons.mdiFolderOutline }}
@@ -25,7 +18,7 @@ import {
   mdiNodejs,
   mdiCodeJson,
   mdiLanguageMarkdownOutline,
-  mdiFilePdfBoxOutline,
+  mdiFilePdfBox,
   mdiFileImageOutline,
   mdiFileDocumentOutline,
   mdiFileExcelOutline,
@@ -41,7 +34,7 @@ export default {
       js: mdiNodejs,
       json: mdiCodeJson,
       md: mdiLanguageMarkdownOutline,
-      pdf: mdiFilePdfBoxOutline,
+      pdf: mdiFilePdfBox,
       png: mdiFileImageOutline,
       txt: mdiFileDocumentOutline,
       xls: mdiFileExcelOutline,

@@ -1,11 +1,13 @@
-const management = [{
+const management = [
+  {
     path: '/management/deviceList',
     name: 'management-deviceList',
-    component: () =>
-        import ('@/views/management/deviceList.vue'),
+    component: () => import('@/views/management/deviceList.vue'),
     meta: {
-        layout: 'content',
+      layout: 'content',
+      resource: 'management',
     },
-}]
+  },
+]
 
 export default management

@@ -3,28 +3,20 @@
     v-if="canViewVerticalNavMenuGroup(item)"
     ref="refVListGroup"
     class="vertical-nav-menu-group"
-    :class="[{'vertical-nav-menu-group-active': isActive}, ...rootThemeClasses]"
+    :class="[{ 'vertical-nav-menu-group-active': isActive }, ...rootThemeClasses]"
     :value="isGroupExpanded"
     @click="updateGroupOpen(!isOpen)"
   >
     <template #prependIcon>
-      <v-icon :class="{'alternate-icon-small': !item.icon}">
+      <v-icon :class="{ 'alternate-icon-small': !item.icon }">
         {{ item.icon || alternateIcon }}
       </v-icon>
     </template>
     <template #activator>
       <v-list-item-title>{{ t(item.title) }}</v-list-item-title>
 
-      <v-list-item-action
-        v-if="item.badge"
-        class="flex-shrink-0"
-      >
-        <v-badge
-          :color="item.badgeColor"
-          inline
-          :content="item.badge"
-        >
-        </v-badge>
+      <v-list-item-action v-if="item.badge" class="flex-shrink-0">
+        <v-badge :color="item.badgeColor" inline :content="item.badge"> </v-badge>
       </v-list-item-action>
     </template>
 
@@ -87,6 +79,8 @@ export default {
 
     const isAccordion = themeConfig.menu.verticalMenuAccordion
 
+    const canView = canViewVerticalNavMenuGroup(props.item)
+
     // Template ref
     const refVListGroup = ref(null)
 
@@ -94,24 +88,32 @@ export default {
     const isGroupExpanded = computed({
       get: () => (refVListGroup.value ? refVListGroup.value.isActive : false),
       set: value => {
+        // console.log(refVListGroup, value)
         refVListGroup.value.isActive = value
       },
     })
     watch(isOpen, value => {
+      // console.log('isOpen', value, isGroupExpanded)
       if (isAccordion) isGroupExpanded.value = value
     })
 
     watch(menuIsVerticalNavMini, val => {
-      if (val && !isMouseHovered) isGroupExpanded.value = false
-      else {
-        isGroupExpanded.value = isOpen.value
+      // console.log('menuIsVerticalNavMini', isOpen, isGroupExpanded)
+      if (canView) {
+        if (val && !isMouseHovered) isGroupExpanded.value = false
+        else {
+          isGroupExpanded.value = isOpen.value
+        }
       }
     })
 
     watch(isMouseHovered, value => {
-      if (menuIsVerticalNavMini.value) {
-        if (value) isGroupExpanded.value = isOpen.value
-        else isGroupExpanded.value = false
+      // console.log('isMouseHovered', isOpen, isGroupExpanded)
+      if (canView) {
+        if (menuIsVerticalNavMini.value) {
+          if (value) isGroupExpanded.value = isOpen.value
+          else isGroupExpanded.value = false
+        }
       }
     })
 
