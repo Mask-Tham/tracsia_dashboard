@@ -5,6 +5,7 @@ const warehouse = [
     component: () => import('@/views/dashboards/warehouse/Warehouse.vue'),
     meta: {
       layout: 'content',
+      resource: 'warehouse',
     },
   },
 ]

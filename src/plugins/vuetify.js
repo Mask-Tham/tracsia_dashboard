@@ -9,6 +9,9 @@ export default new Vuetify({
   icons: {
     iconfont: 'mdiSvg',
   },
+  breakpoint: {
+    mobileBreakpoint: 'xs' // This is equivalent to a value of 960
+  },
   theme: {
     options: {
       customProperties: true,

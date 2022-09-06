@@ -169,6 +169,7 @@ $material-light: map-deep-merge(
     // * New
       'primary-shade': $primary-shade--light,
     'shadow-color': $shadow-color--light,
+    'bottom-navigation': #f4f5fa
   )
 );
 // #endregion
@@ -328,7 +329,8 @@ $material-dark: map-deep-merge(
       'bg-color': #312d4b,
     // * New
       'primary-shade': $primary-shade--dark,
-    'shadow-color': $shadow-color--dark
+    'shadow-color': $shadow-color--dark,
+    'bottom-navigation': #312d4b
   )
 );
 

@@ -29,6 +29,19 @@ export const passwordValidator = password => {
   )
 }
 
+export const passwordValidator2 = password => {
+  /* eslint-disable no-useless-escape */
+  const regExp = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+  /* eslint-enable no-useless-escape */
+  const validPassword = regExp.test(password)
+
+  return (
+    // eslint-disable-next-line operator-linebreak
+    validPassword ||
+    'Field must contain at least one uppercase, lowercase and digit with min 8 chars'
+  )
+}
+
 export const confirmedValidator = (value, target) =>
   // eslint-disable-next-line implicit-arrow-linebreak
   value === target || 'The Confirm Password field confirmation does not match'
@@ -103,4 +116,23 @@ export const alphaDashValidator = value => {
   const valueAsString = String(value)
 
   return /^[0-9A-Z_-]*$/i.test(valueAsString) || 'All Character is not valid'
+}
+
+export const uperCaseValidator = val => {
+  const pattern = /[A-Z]/g
+  return pattern.test(val) || 'This field must contain uppercase'
+}
+
+export const lowerCaseValidator=val => {
+  const pattern = /[a-z]/g
+  return pattern.test(val) || 'This field must contain lowercase'
+}
+
+export const lengthMore8Validator = val => {
+  return val.length >= 8 || 'This field must contain Minimun 8 characters'
+}
+
+export const  numberValidator= val => {
+  const pattern = /[0-9]/g
+  return pattern.test(val) || 'This field must contain Number'
 }

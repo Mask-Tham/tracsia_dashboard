@@ -10,114 +10,160 @@ import warehouse from './warehouse'
 import healthcare from './healthcare'
 import employee_tracking from './employee-tracking'
 import management from './management'
-
+import super_admin from './super-admin'
+import user from './user'
+import room_tracking from './room-tracking'
+import manage_user from './manage-user'
 
 Vue.use(VueRouter)
 
 const routes = [
-    // ? We are redirecting to different pages based on role.
-    // NOTE: Role is just for UI purposes. ACL is based on abilities.
-    {
-        path: '/',
-        redirect: to => {
-            const userData = JSON.parse(localStorage.getItem('userData'))
-            const userRole = userData && userData.role ? userData.role : null
+  // ? We are redirecting to different pages based on role.
+  // NOTE: Role is just for UI purposes. ACL is based on abilities.
+  {
+    path: '/',
+    redirect: to => {
+      // const userData = JSON.parse(localStorage.getItem('userData'))
+      const userData = Vue.prototype.$cookies.get('userData')
+      const userRole = userData && userData.role ? userData.role : null
+      console.log(userData, userRole)
+      // if (userRole === 'SuperAdmin') return { name: 'dashboard-warehouse' }
+      // if (userRole === 'admin') return { name: 'dashboard-warehouse' }
+      // if (userRole === 'client') return { name: 'page-access-control' }
+      const homePage = userData
+        ? userData.homePage
+          ? userData.homePage
+          : 'user-profile'
+        : 'auth-login'
+      return { name: homePage }
 
-            if (userRole === 'admin') return { name: 'dashboard-warehouse' }
-            if (userRole === 'client') return { name: 'page-access-control' }
-
-            return { name: 'auth-login', query: to.query }
-        },
+      // return { name: 'page-access-control' }
+      // return { name: 'user-profile' }
+      // return { name: 'auth-login', query: to.query }
     },
-    {
-        path: '/error-404',
-        name: 'error-404',
-        component: () =>
-            import ('@/views/Error404.vue'),
-        meta: {
-            layout: 'blank',
-            resource: 'Public',
-        },
+  },
+  {
+    path: '/error-404',
+    name: 'error-404',
+    component: () => import('@/views/Error404.vue'),
+    meta: {
+      layout: 'blank',
+      resource: 'Public',
     },
-    {
-        path: '/login',
-        name: 'auth-login',
-        component: () =>
-            import ('@/views/Login.vue'),
-        meta: {
-            layout: 'blank',
-            resource: 'Public',
-            redirectIfLoggedIn: true,
-        },
+  },
+  {
+    path: '/login',
+    name: 'auth-login',
+    component: () => import('@/views/Login.vue'),
+    meta: {
+      layout: 'blank',
+      resource: 'Public',
+      redirectIfLoggedIn: true,
     },
-    {
-        path: '/register',
-        name: 'auth-register',
-        component: () =>
-            import ('@/views/Register.vue'),
-        meta: {
-            layout: 'blank',
-            resource: 'Public',
-            redirectIfLoggedIn: true,
-        },
+  },
+  {
+    path: '/login-old',
+    name: 'auth-login-old',
+    component: () => import('@/views/LoginOld.vue'),
+    meta: {
+      layout: 'blank',
+      resource: 'Public',
+      redirectIfLoggedIn: true,
     },
-    {
-        path: '/forgot-password',
-        name: 'auth-forgot-password',
-        component: () =>
-            import ('@/views/ForgotPassword.vue'),
-        meta: {
-            layout: 'blank',
-            resource: 'Public',
-            redirectIfLoggedIn: true,
-        },
+  },
+  {
+    path: '/register',
+    name: 'auth-register',
+    component: () => import('@/views/Register.vue'),
+    meta: {
+      layout: 'blank',
+      resource: 'Public',
+      redirectIfLoggedIn: true,
     },
-    ...dashboard,
-    ...userInterface,
-    ...publicPage,
-    ...apps,
-    ...pages,
-    ...warehouse,
-    ...healthcare,
-    ...employee_tracking,
-    ...management, {
-        path: '*',
-        redirect: 'error-404',
+  },
+  {
+    path: '/forgot-password',
+    name: 'auth-forgot-password',
+    component: () => import('@/views/ForgotPassword.vue'),
+    meta: {
+      layout: 'blank',
+      resource: 'Public',
+      redirectIfLoggedIn: true,
     },
+  },
+  ...dashboard,
+  ...userInterface,
+  ...publicPage,
+  ...apps,
+  ...pages,
+  ...warehouse,
+  ...healthcare,
+  ...employee_tracking,
+  ...management,
+  ...super_admin,
+  ...user,
+  ...room_tracking,
+  ...manage_user,
+  {
+    path: '*',
+    redirect: 'error-404',
+  },
 ]
 
 const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes,
-    scrollBehavior() {
-        return { x: 0, y: 0 }
-    },
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes,
+  scrollBehavior() {
+    return { x: 0, y: 0 }
+  },
 })
 
 // ? Router Before Each hook: https://router.vuejs.org/guide/advanced/navigation-guards.html
 router.beforeEach((to, _, next) => {
-    const userData = localStorage.getItem('userData')
+  // const userData = localStorage.getItem('userData')
+  // const isLoggedIn = userData && localStorage.getItem('accessToken') && localStorage.getItem('userAbility')
 
-    const isLoggedIn = userData && localStorage.getItem('accessToken') && localStorage.getItem('userAbility')
-        // console.log(userData,isLoggedIn);
-        // console.log(canNavigate(to))
-    if (!canNavigate(to)) {
-        // Redirect to login if not logged in
-        if (!isLoggedIn) return next({ name: 'auth-login', query: { marketplace: to.query.marketplace } })
+  const userData = JSON.stringify(Vue.prototype.$cookies.get('userData'))
 
-        // If logged in => not authorized
-        return next({ name: 'misc-not-authorized' })
+  const accessToken = Vue.prototype.$cookies.get('accessToken')
+  const userAbility = JSON.stringify(Vue.prototype.$cookies.get('userAbility'))
+  console.log('userAbility', userAbility)
+  // const userAbility =  localStorage.getItem('userAbility')
+  const isLoggedIn = userData && accessToken && userAbility
+  console.log(to)
+  const canTo = to.meta.resource == 'Public' ? true : false
+  console.log('userData', userData)
+  console.log(isLoggedIn)
+  // console.log(canNavigate(to))
+  console.log(!canNavigate(to))
+  console.log(!isLoggedIn)
+  if (!canNavigate(to)) {
+    // Redirect to login if not logged in
+    if (!isLoggedIn) return next({ name: 'auth-login', query: { marketplace: to.query.marketplace } })
 
-        // return next({ name: 'misc-not-authorized' })
-    }
+    // If logged in => not authorized
+    return next({ name: 'misc-not-authorized' })
 
-    // Redirect if logged in
-    if (to.meta.redirectIfLoggedIn && isLoggedIn) {
-        next('/')
-    }
+    // return next({ name: 'misc-not-authorized' })
+  }
+  // Redirect if logged in
+  if (to.meta.redirectIfLoggedIn && isLoggedIn) {
+    console.log('Redirect if logged in')
+    next('/')
+  }
 
-    return next()
+  // if (!canTo) {
+  //     console.log('can not to');
+  //     console.log(!accessToken);
+  //     if (accessToken) return next()
+
+  //     console.log('to LOGIN');
+
+  //     return next({ name: 'auth-login'})
+  // }
+
+  return next()
 })
 
 export default router

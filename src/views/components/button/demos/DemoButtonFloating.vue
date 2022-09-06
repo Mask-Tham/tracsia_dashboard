@@ -60,7 +60,7 @@
       color="error"
     >
       <v-icon dark>
-        {{ icons.mdiAndroidDebugBridge }}
+        <!-- {{ icons.mdiAndroidDebugBridge }} -->
       </v-icon>
     </v-btn>
   </div>
@@ -73,7 +73,7 @@ import {
   mdiPlus,
   mdiFormatListBulletedSquare,
   mdiGreasePencil,
-  mdiAndroidDebugBridge,
+  // mdiAndroidDebugBridge,
 } from '@mdi/js'
 
 export default {
@@ -85,7 +85,7 @@ export default {
         mdiPlus,
         mdiFormatListBulletedSquare,
         mdiGreasePencil,
-        mdiAndroidDebugBridge,
+        // mdiAndroidDebugBridge,
       },
     }
   },

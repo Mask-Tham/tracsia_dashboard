@@ -6,7 +6,7 @@
           <v-icon>arrow_back</v-icon>
         </v-btn>
         <v-toolbar-title>
-          <v-img width="200" align="center" src="@/assets/images/svg/nav-logo.png"></v-img>
+          <v-img width="200" align="center" src="@/assets/images/svg/nav-logo-light.png"></v-img>
         </v-toolbar-title>
       </div>
     </v-app-bar>
@@ -40,7 +40,7 @@
             </div>
             <br />
             <v-row>
-              <v-col v-for="i in data_value[res_value].keyfeatures">
+              <v-col v-for="i in data_value[res_value].keyfeatures" :key="i">
                 <div>
                   <div class="pa-7 bg-secondary rounded-circle d-inline-block">
                     <v-icon style="color: #1b2e57" x-large>{{ i.img }}</v-icon>

@@ -23,6 +23,8 @@
 @import '~vuetify/src/components/VSnackbar/_variables.scss';
 @import '~vuetify/src/components/VStepper/_variables.scss';
 @import '~vuetify/src/components/VToolbar/_variables.scss';
+@import '~vuetify/src/components/VBottomNavigation/_variables.scss';
+
 
 // * Change the font size of content
 @include theme(v-application) using ($material) {
@@ -847,6 +849,7 @@ $btn-custom-heights: (
     padding-bottom: 0;
   }
 }
+
 
 // Browser Autofill styles
 .v-application.theme--light {

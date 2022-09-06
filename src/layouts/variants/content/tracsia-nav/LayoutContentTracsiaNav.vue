@@ -5,16 +5,13 @@
     <!-- Slot: Navbar -->
     <template #navbar="{ isVerticalNavMenuActive, toggleVerticalNavMenuActive }">
       <div
+        v-if="!$vuetify.breakpoint.mobile"
         class="navbar-content-container"
-        :class="{'expanded-search': shallShowFullSearch}"
+        :class="{ 'expanded-search': shallShowFullSearch }"
       >
         <!-- Left Content: Search -->
         <div class="d-flex align-center">
-          <v-icon
-            v-if="$vuetify.breakpoint.mdAndDown"
-            class="me-3"
-            @click="toggleVerticalNavMenuActive"
-          >
+          <v-icon v-if="$vuetify.breakpoint.mdAndDown" class="me-3" @click="toggleVerticalNavMenuActive">
             {{ icons.mdiMenu }}
           </v-icon>
           <app-bar-search
@@ -22,7 +19,9 @@
             :data="appBarSearchData"
             :filter="searchFilterFunc"
             :search-query.sync="appBarSearchQuery"
-            @update:shallShowFullSearch="handleShallShowFullSearchUpdate(isVerticalNavMenuActive, toggleVerticalNavMenuActive)"
+            @update:shallShowFullSearch="
+              handleShallShowFullSearchUpdate(isVerticalNavMenuActive, toggleVerticalNavMenuActive)
+            "
           ></app-bar-search>
         </div>
 
@@ -34,21 +33,34 @@
           <app-bar-user-menu></app-bar-user-menu>
         </div>
       </div>
+      <div v-else class="navbar-content-container" :class="{ 'expanded-search': shallShowFullSearch }">
+        <!-- Left Content: Search -->
+        <div class="d-flex align-center">
+          <v-icon v-if="$vuetify.breakpoint.mdAndDown" class="me-3" @click="toggleVerticalNavMenuActive">
+            {{ icons.mdiMenu }}
+          </v-icon>
+        </div>
+        <div class="d-flex align-center">
+          <v-img max-height="100" max-width="100" src="@/assets/images/svg/nav-logo-light.png"></v-img>
+        </div>
+        <!-- Right Content: I18n, Light/Dark, Notification & User Dropdown -->
+        <div class="d-flex align-center right-row">
+          <app-bar-notification></app-bar-notification>
+          <app-bar-user-menu-mobile></app-bar-user-menu-mobile>
+        </div>
+      </div>
     </template>
 
     <!-- Slot: Footer -->
     <template #footer>
       <div class="d-flex justify-space-between">
-        <span>COPYRIGHT &copy; {{ new Date().getFullYear() }} <a
-          href="https://themeselection.com"
-          class="text-decoration-none"
-        >Tracsia</a><span class="d-none d-md-inline">, All rights Reserved</span></span>
+        <span
+          >COPYRIGHT &copy; {{ new Date().getFullYear() }} <a href="#" class="text-decoration-none">Tracsia</a
+          ><span class="d-none d-md-inline">, All rights Reserved</span></span
+        >
         <div class="align-center d-none d-md-flex">
           <span>Hand-crafted &amp; Made with</span>
-          <v-icon
-            color="error"
-            class="ms-2"
-          >
+          <v-icon color="error" class="ms-2">
             {{ icons.mdiHeartOutline }}
           </v-icon>
         </div>
@@ -57,6 +69,23 @@
 
     <template #v-app-content>
       <!-- <app-customizer class="d-none d-md-block"></app-customizer> -->
+      <v-bottom-navigation color="primary" grow app v-if="$vuetify.breakpoint.mobile">
+        <v-btn min-height="56" value="home" to="/dashboards/warehouse">
+          <v-icon>home</v-icon>
+        </v-btn>
+
+        <v-btn min-height="56" value="edit_calendar" to="/apps/calendar">
+          <v-icon>edit_calendar</v-icon>
+        </v-btn>
+
+        <v-btn min-height="56" value="chat" to="/apps/chat">
+          <v-icon>chat</v-icon>
+        </v-btn>
+
+        <v-btn min-height="56" value="person" to="/apps/user/view/3">
+          <v-icon>person</v-icon>
+        </v-btn>
+      </v-bottom-navigation>
     </template>
   </layout-content-vertical-nav>
 </template>
@@ -65,13 +94,17 @@
 import LayoutContentVerticalNav from '@/@core/layouts/variants/content/vertical-nav/LayoutContentVerticalNav.vue'
 import AppCustomizer from '@core/layouts/components/app-customizer/AppCustomizer.vue'
 import navMenuItems from '@/navigation/sidebar'
+// import navMenuItems from '@/navigation/vertical'
+
+import useAppConfig from '@core/@app-config/useAppConfig'
 
 
 // App Bar Components
 import AppBarSearch from '@core/layouts/components/app-bar/AppBarSearch.vue'
 import AppBarI18n from '@core/layouts/components/app-bar/AppBarI18n.vue'
 import AppBarThemeSwitcher from '@core/layouts/components/app-bar/AppBarThemeSwitcher.vue'
-import AppBarUserMenu from '@core/layouts/components/app-bar/AppBarUserMenu.vue'
+import AppBarUserMenu from '@/components/app-bar/AppBarUserMenu.vue'
+import AppBarUserMenuMobile from '@/components/app-bar/AppBarUserMenuMobile.vue'
 import AppBarNotification from '@core/layouts/components/app-bar/AppBarNotification.vue'
 import { mdiMenu, mdiHeartOutline } from '@mdi/js'
 
@@ -93,9 +126,11 @@ export default {
     AppBarThemeSwitcher,
     AppBarUserMenu,
     AppBarNotification,
+    AppBarUserMenuMobile,
   },
   setup() {
     const $vuetify = getVuetify()
+    const { menuIsVerticalNavMini } = useAppConfig()
 
     // Search
     const appBarSearchQuery = ref('')
@@ -113,6 +148,17 @@ export default {
         contacts: 0,
       }
     })
+
+    watch($vuetify, () => {
+      // console.log('mobile',$vuetify);
+      if ($vuetify.breakpoint.mdAndDown) {
+        menuIsVerticalNavMini.value = false
+      }else{
+        menuIsVerticalNavMini.value = true
+
+      }
+    })
+
     const searchFilterFunc = (item, queryText, itemText) => {
       if (item.header || item.divider) return true
 
@@ -157,6 +203,14 @@ export default {
         mdiHeartOutline,
       },
     }
+  },
+  data() {
+    return {
+      value: '',
+    }
+  },
+  mounted() {
+    
   },
 }
 </script>

@@ -187,25 +187,25 @@ $nav-drawer-mini-width: 68px;
         left: $nav-drawer-mini-width !important;
       }
     }
-    @media screen and (max-width: 1263px) {
-      .v-main {
-      // We haven't used `ltr` & `rtl` mixin because those doesn't work with top-level selectors: https://github.com/vuetifyjs/vuetify/issues/13987
-      @at-root {
-        .nav-drawer-mini {
-          &.v-application--is-ltr {
-            .v-main {
-              padding-left: 0 !important;
-            }
-          }
-          &.v-application--is-rtl {
-            .v-main {
-              padding-right: 0 !important;
-            }
-          }
-        }
-      }
-    }
-    }
+    // @media screen and (max-width: 1263px) {
+    //   .v-main {
+    //   // We haven't used `ltr` & `rtl` mixin because those doesn't work with top-level selectors: https://github.com/vuetifyjs/vuetify/issues/13987
+    //   @at-root {
+    //     .nav-drawer-mini {
+    //       &.v-application--is-ltr {
+    //         .v-main {
+    //           padding-left: 0 !important;
+    //         }
+    //       }
+    //       &.v-application--is-rtl {
+    //         .v-main {
+    //           padding-right: 0 !important;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // }
   }
 
   .v-app-bar,
