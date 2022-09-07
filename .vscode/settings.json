@@ -58,4 +58,5 @@
     // Extension: npm
     "npm.packageManager": "yarn",
     "nuxt.isNuxtApp": false,
+    "compile-hero.disable-compile-files-on-did-save-code": false,
 }
