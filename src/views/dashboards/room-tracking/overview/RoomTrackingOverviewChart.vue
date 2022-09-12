@@ -3,7 +3,7 @@
     <v-card-title class="">
       <p>Meeting Room Visualization</p>
       <v-spacer></v-spacer>
-      <div style="max-width:120px">
+      <div style="max-width: 120px">
         <v-select
           v-model="select"
           :items="items"
