@@ -4,6 +4,7 @@ import employee_tracking from './employee_tracking'
 import device_list from './device_list'
 export default {
     Dashboards: 'แผงควบคุม',
+    Dashboard: 'แผงควบคุม',
     Warehouse: "คลังสินค้า",
     Healthcare: 'ดูแลสุขภาพ',
     'Employee Tracking': 'การติดตามพนักงาน',
@@ -17,6 +18,11 @@ export default {
     'Meeting Room':'ห้องประชุม',
     'Room List':'รายชื่อห้อง',
     'Overall Dashboard':'แผงควบคุมโดยรวม',
+    TracBot: 'TracBot',
+    'Add Device': 'เพิ่มอุปกรณ์',
+    'Porter Tracking':'Porter Tracking',
+    'Porter Management':'Porter Management',
+    Location:'Location',
     warehouse: {...warehouse },
     healthcare: {...healthcare },
     employee_tracking: {...employee_tracking },

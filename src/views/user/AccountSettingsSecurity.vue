@@ -105,24 +105,12 @@
 
         <!-- success -->
         <v-card-text>
-          <v-alert dense outlined :value="alertSuc" type="success">
-            <v-row align="center">
-              <v-col>
-                {{ success }}
-              </v-col>
-            </v-row>
-          </v-alert>
+          <alert :isShow="alertSuc" :message="success" type="success"></alert>
         </v-card-text>
 
         <!-- alert -->
         <v-card-text>
-          <v-alert dense outlined :value="alert" type="error">
-            <v-row align="center">
-              <v-col>
-                {{ error }}
-              </v-col>
-            </v-row>
-          </v-alert>
+          <alert :isShow="alert" :message="error"></alert>
         </v-card-text>
 
         <!-- action buttons -->
@@ -140,6 +128,7 @@
 import { mdiKeyOutline, mdiLockOpenOutline, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
 import { required, passwordValidator2 } from '@core/utils/validation'
 // import { ref } from '@vue/composition-api'
+import Alert from '@/utils/Alert.vue'
 
 export default {
   setup() {
@@ -156,6 +145,7 @@ export default {
       },
     }
   },
+  components: { Alert },
   data() {
     return {
       isCurrentPasswordVisible: false,

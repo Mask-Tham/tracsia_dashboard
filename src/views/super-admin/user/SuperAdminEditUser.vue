@@ -22,13 +22,7 @@
       </div>
 
       <v-card-text>
-        <v-alert dense outlined :value="alert" type="error">
-          <v-row align="center">
-            <v-col>
-              {{ error }}
-            </v-col>
-          </v-row>
-        </v-alert>
+        <alert :isShow="alert" :message="error"></alert>
       </v-card-text>
 
       <v-card-text>
@@ -83,6 +77,7 @@
 import { mdiClose } from '@mdi/js'
 import { required, emailValidator } from '@core/utils/validation'
 import ability_list from '@/views/ability_list'
+import Alert from '@/utils/Alert.vue'
 
 export default {
   model: {
@@ -110,6 +105,7 @@ export default {
       },
     }
   },
+  components: { Alert },
   data() {
     return {
       userData: {

@@ -1,4 +1,4 @@
-import { mdiHomeOutline,mdiAccountStar,mdiViewDashboard,mdiAccountEdit  } from '@mdi/js'
+import { mdiHomeOutline,mdiAccountStar,mdiViewDashboard,mdiAccountEdit,mdiOfficeBuildingMarker   } from '@mdi/js'
 
 export default [
   {
@@ -48,10 +48,20 @@ export default [
     ],
   },
   {
+    title: 'Location',
+    icon: mdiOfficeBuildingMarker ,
+    children: [
+      {
+        title: 'Location',
+        to: 'location',
+        action: 'management',
+        resource: 'location',
+      },
+    ],
+  },
+  {
     title: 'Meeting Room',
     icon: mdiViewDashboard,
-    // badge: '3',
-    badgeColor: 'warning',
     children: [
       {
         title: 'Overall Dashboard',
@@ -64,6 +74,42 @@ export default [
         to: 'dashboard-room-tracking-list',
         action: 'read',
         resource: 'roomTracking',
+      },
+    ],
+  },
+  {
+    title: 'TracBot',
+    icon: mdiViewDashboard,
+    children: [
+      {
+        title: 'Dashboard',
+        to: 'tracbot-dashboard',
+        action: 'read',
+        resource: 'tracbot',
+      },
+      {
+        title: 'Add Device',
+        to: 'tracbot-add-device',
+        action: 'manage',
+        resource: 'tracbot',
+      },
+    ],
+  },
+  {
+    title: 'Porter Tracking',
+    icon: mdiViewDashboard,
+    children: [
+      {
+        title: 'Dashboard',
+        to: 'porter_tracking-dashboard',
+        action: 'read',
+        resource: 'porterTracking',
+      },
+      {
+        title: 'Porter Management',
+        to: 'porter_tracking-management',
+        action: 'read',
+        resource: 'porterTracking',
       },
     ],
   },

@@ -14,6 +14,9 @@ import super_admin from './super-admin'
 import user from './user'
 import room_tracking from './room-tracking'
 import manage_user from './manage-user'
+import tracbot from './tracbot'
+import porter_tracking from './porter-tracking'
+import location from './location'
 
 Vue.use(VueRouter)
 
@@ -26,7 +29,7 @@ const routes = [
       // const userData = JSON.parse(localStorage.getItem('userData'))
       const userData = Vue.prototype.$cookies.get('userData')
       const userRole = userData && userData.role ? userData.role : null
-      console.log(userData, userRole)
+      // console.log(userData, userRole)
       // if (userRole === 'SuperAdmin') return { name: 'dashboard-warehouse' }
       // if (userRole === 'admin') return { name: 'dashboard-warehouse' }
       // if (userRole === 'client') return { name: 'page-access-control' }
@@ -100,10 +103,13 @@ const routes = [
   ...healthcare,
   ...employee_tracking,
   ...management,
-  ...super_admin,
-  ...user,
   ...room_tracking,
+  ...tracbot,
+  ...porter_tracking,
+  ...location,
+  ...super_admin,
   ...manage_user,
+  ...user,
   {
     path: '*',
     redirect: 'error-404',
@@ -133,11 +139,11 @@ router.beforeEach((to, _, next) => {
   const isLoggedIn = userData && accessToken && userAbility
   console.log(to)
   const canTo = to.meta.resource == 'Public' ? true : false
-  console.log('userData', userData)
-  console.log(isLoggedIn)
+  // console.log('userData', userData)
+  // console.log(isLoggedIn)
   // console.log(canNavigate(to))
-  console.log(!canNavigate(to))
-  console.log(!isLoggedIn)
+  // console.log(!canNavigate(to))
+  // console.log(!isLoggedIn)
   if (!canNavigate(to)) {
     // Redirect to login if not logged in
     if (!isLoggedIn) return next({ name: 'auth-login', query: { marketplace: to.query.marketplace } })

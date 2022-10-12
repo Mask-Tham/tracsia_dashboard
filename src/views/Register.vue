@@ -72,13 +72,7 @@
                   </v-card-text>
 
                   <v-card-text>
-                    <v-alert dense outlined :value="alert" type="error">
-                      <v-row align="center">
-                        <v-col>
-                          {{ error }}
-                        </v-col>
-                      </v-row>
-                    </v-alert>
+                    <alert :isShow="alert" :message="error"></alert>
                   </v-card-text>
 
                   <!-- login form -->
@@ -289,6 +283,7 @@ import axios from '@axios'
 import { useRouter } from '@core/utils'
 import themeConfig from '@themeConfig'
 import ability_list from '@/views/ability_list'
+import Alert from '@/utils/Alert.vue'
 
 export default {
   setup() {
@@ -317,6 +312,7 @@ export default {
       // Template Refs
     }
   },
+  components: { Alert },
   data() {
     return {
       items: [

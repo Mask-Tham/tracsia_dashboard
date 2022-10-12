@@ -11,7 +11,7 @@
     <v-card height="100%">
       <div class="drawer-header d-flex align-center mb-4">
         <span class="font-weight-semibold text-base text--primary">{{
-          !propRoleData ? 'Add New Customer' : 'Edit Customer'
+          !propRoleData ? 'Add New Role' : 'Edit Role'
         }}</span>
         <v-spacer></v-spacer>
         <v-btn icon small @click="$emit('update:is-add-new-user-sidebar-active', false)">
@@ -22,13 +22,7 @@
       </div>
 
       <v-card-text>
-        <v-alert dense outlined :value="alert" type="error">
-          <v-row align="center">
-            <v-col>
-              {{ error }}
-            </v-col>
-          </v-row>
-        </v-alert>
+        <alert :isShow="alert" :message="error"></alert>
       </v-card-text>
 
       <v-card-text>
@@ -81,6 +75,7 @@
 <script>
 import { mdiClose } from '@mdi/js'
 import { required, emailValidator } from '@core/utils/validation'
+import Alert from '@/utils/Alert.vue'
 
 export default {
   model: {
@@ -108,6 +103,7 @@ export default {
       },
     }
   },
+  components: { Alert },
   data() {
     return {
       roleData: {

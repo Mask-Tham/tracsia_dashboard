@@ -5,6 +5,7 @@ import device_list from './device_list'
 
 export default {
     Dashboards: 'Dashboards',
+    Dashboard: 'Dashboard',
     Warehouse: "Warehouse",
     Healthcare: 'Healthcare',
     'Employee Tracking': 'Employee Tracing',
@@ -18,6 +19,11 @@ export default {
     'Meeting Room':'Meeting Room',
     'Room List':'Room List',
     'Overall Dashboard':'Overall Dashboard',
+    TracBot: 'TracBot',
+    'Add Device': 'Add Device',
+    'Porter Tracking':'Porter Tracking',
+    'Porter Management':'Porter Management',
+    Location:'Location',
     warehouse: {...warehouse },
     healthcare: {...healthcare },
     employee_tracking: {...employee_tracking },

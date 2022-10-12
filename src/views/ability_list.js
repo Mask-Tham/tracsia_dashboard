@@ -10,7 +10,13 @@ const ability_list = [
   { text: 'read-healthcare', action: 'read', subject: 'healthcare', isDefault: false },
   { text: 'read-employee-tracking', action: 'read', subject: 'employeeTracking', isDefault: false },
   { text: 'manage-user', action: 'manage', subject: 'manageUser', isDefault: false },
+  { text: 'manage-location', action: 'manage', subject: 'location', isDefault: false },
+  { text: 'manage-porter-tracking', action: 'manage', subject: 'porterTracking', isDefault: false },
 
 ]
+
+const MANAGE_ALL = 'manage-all'
+
+const ability=''
 
 export default ability_list

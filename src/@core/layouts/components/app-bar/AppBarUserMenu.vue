@@ -206,7 +206,9 @@ export default {
           localStorage.removeItem('userData')
           localStorage.removeItem('userAbility')
 
+          this.$cookies.remove('idToken')
           this.$cookies.remove('accessToken')
+          this.$cookies.remove('refreshToken')
           this.$cookies.remove('userData')
           this.$cookies.remove('userAbility')
 
