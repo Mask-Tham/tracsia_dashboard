@@ -192,6 +192,7 @@ import axios from '@axios'
 import { useRouter } from '@core/utils'
 import themeConfig from '@themeConfig'
 import Alert from '@/utils/Alert.vue'
+import { abilityKeytoArrayObj } from './ability_list'
 
 export default {
   components: { Alert },
@@ -351,7 +352,7 @@ export default {
           this.$cookies.set('accessToken', data.accessToken)
           this.$cookies.set('refreshToken', data.refreshToken)
 
-          let userAbility = data.ability
+          let userAbility = abilityKeytoArrayObj(data.ability)
           // let userAbility = [{ action: 'manage', subject: 'all' }]
           // let userAbility = [
           //   {

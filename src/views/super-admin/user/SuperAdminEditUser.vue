@@ -45,7 +45,6 @@
             label="Role"
             item-text="roleID"
             item-value="roleID"
-            
             chips
             hint="What content is accessible?"
             persistent-hint
@@ -56,8 +55,9 @@
             v-model="select_ability"
             :items="ability_listC"
             label="ability"
+            item-text="text"
+            item-value="key"
             multiple
-            return-object
             chips
             hint="What content is accessible?"
             persistent-hint
@@ -65,7 +65,7 @@
           ></v-select>
 
           <v-btn v-if="!propUserData" color="primary" class="me-3" type="submit" @click="createCustomer"> Add </v-btn>
-          <v-btn v-else color="primary" class="me-3" type="submit" @click="editCustomer"> Edit </v-btn>
+          <v-btn v-else color="primary" class="me-3" type="submit" @click="editUser"> Edit </v-btn>
           <v-btn color="secondary" outlined type="reset"> Cancel </v-btn>
         </v-form>
       </v-card-text>
@@ -169,13 +169,13 @@ export default {
         this.alert = true
       }
     },
-    async editCustomer(e) {
+    async editUser(e) {
       e.preventDefault()
       this.$refs.form.validate()
       try {
         console.log(this.valid)
         if (this.valid) {
-          // console.log(this.userData)
+          console.log(this.select_ability)
           let body = { ability: this.select_ability,
           roleID:this.select_role }
           let username = this.userData.username

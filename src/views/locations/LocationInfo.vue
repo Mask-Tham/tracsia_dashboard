@@ -5,14 +5,18 @@
 
     <!-- porter device -->
     <porter-tracking-add-device-drawer
-    v-if="location.children.length <= 0 && isUsePorter"
+      v-if="location.children.length <= 0 && isUsePorter"
       v-model="isDevicePorterSidebarActive"
       :propFormData="porterData"
       :allUserData="userTableC"
     ></porter-tracking-add-device-drawer>
     <v-card>
+      <v-progress-linear
+          :active="loading"
+          :indeterminate="loading"
+        ></v-progress-linear>
       <v-card-title> Location Information </v-card-title>
-      <v-card-text class="d-flex flex-row justify-space-between">
+      <v-card-text class="d-flex flex-row justify-space-between" v-if="!loading">
         <div>
           <div>
             <span class="text-capitalize">name : </span>
@@ -30,14 +34,14 @@
             <span class="text-capitalize">customer : </span>
             <span>{{ locationData.custumerID }}</span>
           </div>
-          <div>
+          <!-- <div>
             <span class="text-capitalize">create at : </span>
             <span>{{ $moment(locationData.createdAt).format('YYYY-MM-DD HH:mm:ss') }}</span>
           </div>
           <div>
             <span class="text-capitalize">update at : </span>
             <span>{{ $moment(locationData.updatedAt).format('YYYY-MM-DD HH:mm:ss') }}</span>
-          </div>
+          </div> -->
         </div>
         <div>
           <v-tooltip bottom v-if="false">
@@ -128,7 +132,9 @@ export default {
         locationID: '',
         locationName: '',
         responseAdmin: '',
+        locationSort: '',
       },
+      loading:false,
       userTable: [],
       userData: $cookies.get('userData'),
     }
@@ -144,8 +150,11 @@ export default {
   },
   mounted() {
     // console.log(this.location)
+    this.loading = true
     this.getInfo()
     this.getAllUser()
+    this.loading = false
+
   },
   beforeDestroy() {
     // localStorage.removeItem('location')
@@ -156,8 +165,8 @@ export default {
         let res = await this.$http.get(
           `/v1/location/info?custumerID=${this.location.custumerID}&locationSort=${this.location.locationSort}`,
         )
-        // console.log(res)
-        this.locationData = { ...res.data.data[0] }
+        console.log(this.location,res)
+        this.locationData = res.data.data.find(el => el.locationSort === this.location.locationSort)
         this.setVar()
       } catch (error) {
         console.error(error)
@@ -179,9 +188,10 @@ export default {
         this.porterData = {
           custumerID: this.locationData.custumerID,
           deviceID: '',
-          locationID: this.locationData.locationSort,
+          locationID: this.locationData.locationID,
           locationName: this.locationData.locationName,
           responseAdmin: '',
+          locationSort: this.locationData.locationSort,
         }
       }
     },

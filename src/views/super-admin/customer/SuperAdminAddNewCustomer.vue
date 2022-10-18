@@ -53,8 +53,9 @@
             v-model="customerData.ability"
             :items="ability_list"
             label="ability"
+            item-text="text"
+            item-value="key"
             multiple
-            return-object
             outlined
             chips
             hint="What content is accessible?"
@@ -136,6 +137,7 @@
                     label="Picker Date"
                     :rules="[validators.required]"
                     readonly
+                    hide-details
                     outlined
                     v-bind="attrs"
                     v-on="on"
@@ -162,6 +164,7 @@
                     label="Picker Time"
                     :rules="[validators.required]"
                     readonly
+                    hide-details
                     outlined
                     v-bind="attrs"
                     v-on="on"

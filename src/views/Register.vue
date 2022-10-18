@@ -337,8 +337,8 @@ export default {
         custumerID: 'tracsia',
         isUse: false,
         ability: [],
-        shortname:'',
-        homePage:''
+        shortname: '',
+        homePage: '',
       },
       dialogDate: false,
       isPasswordVisible: false,
@@ -347,7 +347,7 @@ export default {
       dialogOTP: false,
       error: '',
       alert: false,
-      abilityList:ability_list,
+      abilityList: ability_list,
 
       // otp
       otp: '',
@@ -367,12 +367,21 @@ export default {
       }
       body.phone_number = `+66${body.phone_number}`
 
-      let shortname = body.name.split(' ').reduce((value,e) => {return value+e[0].toUpperCase()},'')
+      let shortname = body.name.split(' ').reduce((value, e) => {
+        return value + e[0].toUpperCase()
+      }, '')
       body.shortname = shortname
 
       this.email = body.email
 
-      let defaultAbility = this.abilityList.filter((e)=>e.isDefault)
+      // let defaultAbility = this.abilityList.filter((e)=>e.isDefault)
+      let defaultAbility = []
+      this.abilityList.forEach(e => {
+        if (e.isDefault) {
+           defaultAbility.push(e.key)
+        }
+      })
+
       body.ability = defaultAbility
 
       console.log(body)

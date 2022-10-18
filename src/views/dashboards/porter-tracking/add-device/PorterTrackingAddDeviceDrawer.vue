@@ -34,7 +34,7 @@
             placeholder="Device ID"
             hide-details="auto"
             class="mb-6"
-            :disabled="!!propFormData.deviceID"
+            :disabled="disable"
           ></v-text-field>
 
           <v-autocomplete
@@ -60,7 +60,8 @@
             class="mb-6"
           ></v-textarea> -->
 
-          <v-btn color="primary" class="me-3" type="submit" @click="submitForm"> Add </v-btn>
+          <v-btn color="primary" class="me-3" type="submit" @click="submitForm" v-if="!disable"> Add </v-btn>
+          <v-btn color="primary" class="me-3" type="submit" @click="updateForm" v-else> update </v-btn>
           <v-btn color="secondary" outlined type="reset"> Cancel </v-btn>
         </v-form>
       </v-card-text>
@@ -109,6 +110,7 @@ export default {
         locationID: '',
         locationName: '',
         responseAdmin: '',
+        locationSort: '',
       },
       disable: false,
       error: '',
@@ -125,6 +127,36 @@ export default {
         console.log(this.location)
         let res = await this.$http.get(`/v1/location-device/list/?custumerID=${this.location.custumerID}`)
         console.log(res)
+        if (res.data.isSuccess) {
+          let formData = res.data.data.find(el => el.locationSort === this.location.locationSort)
+          if (formData) {
+            delete formData.createdAt
+            delete formData.updatedAt
+            console.log(formData)
+            this.disable = true
+            this.formData = { ...formData }
+          } else {
+            this.disable = false
+            this.formData = {
+              custumerID: this.location.custumerID,
+              deviceID: '',
+              locationID: this.location.locationID,
+              locationName: this.location.locationName,
+              responseAdmin: '',
+              locationSort: this.location.locationSort,
+            }
+          }
+        } else {
+          this.disable = false
+          this.formData = {
+            custumerID: this.location.custumerID,
+            deviceID: '',
+            locationID: this.location.locationID,
+            locationName: this.location.locationName,
+            responseAdmin: '',
+            locationSort: this.location.locationSort,
+          }
+        }
       } catch (error) {
         console.error(error)
       }
@@ -137,12 +169,35 @@ export default {
         console.log(this.propFormData)
         if (this.valid) {
           let body = {
-            custumerID: 'tracsia',
-            deviceID: 'A002',
-            locationID: 'buding1#foor1#zoon1#',
-            locationName: 'ห้องฝ่าตัด',
-            responseAdmin: 'Admin#001#002#003#',
+            ...this.formData,
           }
+          console.log(body)
+          let res = await this.$http.post('v1/location-device/create', body)
+          console.log(res)
+          this.$emit('refetch-data')
+          this.$emit('update:is-sidebar-active', false)
+        }
+      } catch (error) {
+        console.error(error)
+        this.error = error.data.message
+        this.alert = true
+      }
+    },
+    async updateForm(e) {
+      e.preventDefault()
+      this.$refs.form.validate()
+      try {
+        console.log(this.valid)
+        console.log(this.propFormData)
+        if (this.valid) {
+          let body = {
+            ...this.formData,
+          }
+          console.log(body)
+          let res = await this.$http.put('v1/location-device/create', body)
+          console.log(res)
+          this.$emit('refetch-data')
+          this.$emit('update:is-sidebar-active', false)
         }
       } catch (error) {
         console.error(error)
@@ -156,15 +211,16 @@ export default {
       handler(newVal, oldVal) {
         console.log(newVal)
         if (newVal == undefined) {
-          this.formData = {
-            custumerID: '',
-            deviceID: '',
-            locationID: '',
-            locationName: '',
-            responseAdmin: '',
-          }
+          // this.formData = {
+          //   custumerID: '',
+          //   deviceID: '',
+          //   locationID: '',
+          //   locationName: '',
+          //   responseAdmin: '',
+          //   locationSort: '',
+          // }
         } else {
-          this.formData = newVal
+          // this.formData = { ...newVal }
         }
         console.log(!!newVal.deviceID)
         // this.getData()

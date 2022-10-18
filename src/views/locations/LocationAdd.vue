@@ -10,7 +10,7 @@
   >
     <v-card height="100%">
       <div class="drawer-header d-flex align-center mb-4">
-        <span class="font-weight-semibold text-base text--primary">{{ 'Porter Add Device' }}</span>
+        <span class="font-weight-semibold text-base text--primary text-capitalize">{{ 'add location' }}</span>
         <v-spacer></v-spacer>
         <v-btn icon small @click="$emit('update:is-sidebar-active', false)">
           <v-icon size="22">
@@ -109,10 +109,6 @@ export default {
     return {
       formData: {
         locationName: '',
-        locationSort: '',
-        deviceID: '',
-        custumerID: '',
-        responseAdmin: '',
       },
       error: '',
       alert: false,
@@ -132,7 +128,7 @@ export default {
           const axios = axiosIns
           const body = {
             locationName: this.formData.locationName,
-            locationSort: `${this.nodeData.path || ''}${this.formData.locationName}#`,
+            locationSort: `${this.nodeData.locationSort || ''}${this.formData.locationName}#`,
             custumerID: `${userData.custumerID}`,
             adminCreate: '',
             adminUpdate: '',
@@ -157,13 +153,13 @@ export default {
     nodeData: {
       handler(newVal, oldVal) {
         console.log(newVal)
+         this.formData =  {
+        locationName: '',
+      }
         if (newVal == undefined) {
-          //   this.formData = {
-          //     roleID: '',
-          //     description: '',
-          //     custumerID: '',
-          //     isUse: true,
-          //   }
+          // this.formData = {
+          //   locationName: '',
+          // }
         } else {
           //   this.formData = newVal
         }

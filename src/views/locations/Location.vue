@@ -4,7 +4,7 @@
     <!-- <porter-tracking-add-device-drawer v-model="isDevicePorterSidebarActive"></porter-tracking-add-device-drawer> -->
 
     <!-- Drawer Add Location -->
-    <location-add v-model="isAddLocationSidebarActive" :nodeData="node" />
+    <location-add v-model="isAddLocationSidebarActive" :nodeData="node" @refetch-data="fetchData" />
     <v-card>
       <v-card-title>
         <div>Location</div>
@@ -21,6 +21,10 @@
           <span class="text-capitalize">add location</span>
         </v-tooltip>
       </v-card-title>
+        <v-progress-linear
+          :active="loading"
+          :indeterminate="loading"
+        ></v-progress-linear>
       <v-divider></v-divider>
       <v-card-text>
         <Tree :value="location">
@@ -164,7 +168,7 @@ export default {
   data() {
     return {
       userAbility: $cookies.get('userAbility'),
-      userData : $cookies.get('userData'),
+      userData: $cookies.get('userData'),
       isUsePorter: canUse({ action: 'manage', resource: 'porterTracking' }),
       location: [
         // { text: 'node 1', $folded: false, children: [] },
@@ -237,6 +241,7 @@ export default {
           responseAdmin: '',
         },
       ],
+      loading: false,
       node: {},
       refPath: [],
       isDevicePorterSidebarActive: false,
@@ -263,10 +268,13 @@ export default {
   },
   methods: {
     async fetchData() {
-      let res = await this.$http.get(`/v1/location-device/list/?custumerID=${this.userData.custumerID}`)
-      // console.log(res)
+      this.loading = true
+      let res = await this.$http.get(`/v1/location/list/?custumerID=${this.userData.custumerID}`)
+
+      this.rawlocation = [...res.data.data]
 
       this.genLocation(this.rawlocation)
+      this.loading = false
     },
     genLocation(rawlocation) {
       let location = []
