@@ -130,7 +130,7 @@
                 </v-list-item-title>
               </v-list-item>
             </v-list> -->
-          </v-menu>
+          <!-- </v-menu> -->
         </template>
 
       </v-data-table>
@@ -215,7 +215,6 @@ export default {
         { text: 'phone number', value: 'phone_number' },
         { text: 'position', value: 'position' },
         { text: 'roleID', value: 'roleID' },
-
         { text: 'Customer ID', value: 'custumerID' },
         {
           text: 'STATUS',

@@ -92,13 +92,7 @@
         <v-card-title class="text-h5"> Enter your OTP </v-card-title>
 
         <v-card-text>
-          <v-alert dense outlined :value="alert" type="error">
-            <v-row align="center">
-              <v-col>
-                {{ error }}
-              </v-col>
-            </v-row>
-          </v-alert>
+          <alert :isShow="alert" :message="error"></alert>
         </v-card-text>
 
         <v-card-text>
@@ -134,6 +128,7 @@
 import { mdiChevronLeft, mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
 import themeConfig from '@themeConfig'
+import Alert from '@/utils/Alert.vue'
 
 export default {
   setup() {
@@ -155,6 +150,7 @@ export default {
       },
     }
   },
+  components: { Alert },
   data() {
     return {
       username: 'Tracsia',

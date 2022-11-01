@@ -14,6 +14,9 @@
             "@axios": [
                 "src/plugins/axios.js"
             ],
+            "@socket": [
+                "src/plugins/socket.js"
+            ],
             "@user-variables": [
                 "src/styles/variables.scss"
             ]

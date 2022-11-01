@@ -18,10 +18,12 @@ axiosIns.interceptors.request.use(
 
     // const accessToken = localStorage.getItem('accessToken')
     const accessToken = Vue.prototype.$cookies.get('accessToken')
+    const idToken = Vue.prototype.$cookies.get('idToken')
 
     // console.log(accessToken);
     // eslint-disable-next-line no-param-reassign
-    if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`
+    if (idToken) config.headers.Authorization = `Bearer ${idToken}`
+    // config.headers['Content-Type']= 'application/json'
 
     return config
   },
@@ -37,12 +39,14 @@ axiosIns.interceptors.response.use(
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    console.log(error.response.data.message)
-    if (error.response.data.message == 'Unauthorized') {
+    console.log(error.response.data?.message)
+    if (error.response.data?.message == 'Unauthorized') {
       console.log('Unauthorized')
       localStorage.removeItem('userAbility')
 
       Vue.prototype.$cookies.remove('accessToken')
+      Vue.prototype.$cookies.remove('refreshToken')
+      Vue.prototype.$cookies.remove('idToken')
       Vue.prototype.$cookies.remove('userData')
       Vue.prototype.$cookies.remove('userAbility')
 

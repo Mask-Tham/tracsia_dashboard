@@ -42,14 +42,14 @@
           v-model="userTab"
           class="mt-5 pa-1"
         >
-          <v-tab-item>
+          <!-- <v-tab-item>
             <user-tab-overview></user-tab-overview>
-          </v-tab-item>
+          </v-tab-item> -->
 
           <v-tab-item>
             <user-tab-security></user-tab-security>
           </v-tab-item>
-          <v-tab-item>
+          <!-- <v-tab-item>
             <user-tab-billings-plans :is-plan-upgrade-dialog-visible.sync="isPlanUpgradeDialogVisible"></user-tab-billings-plans>
           </v-tab-item>
           <v-tab-item>
@@ -57,7 +57,7 @@
           </v-tab-item>
           <v-tab-item>
             <user-tab-connections></user-tab-connections>
-          </v-tab-item>
+          </v-tab-item> -->
         </v-tabs-items>
       </v-col>
     </v-row>
@@ -177,11 +177,11 @@ export default {
     ]
 
     const tabs = [
-      { icon: mdiAccountOutline, title: 'Overview' },
+      // { icon: mdiAccountOutline, title: 'Overview' },
       { icon: mdiLockOutline, title: 'Security' },
-      { icon: mdiBookmarkOutline, title: 'Billing & Plan' },
-      { icon: mdiBellOutline, title: 'Notifications' },
-      { icon: mdiLinkVariant, title: 'Connections' },
+      // { icon: mdiBookmarkOutline, title: 'Billing & Plan' },
+      // { icon: mdiBellOutline, title: 'Notifications' },
+      // { icon: mdiLinkVariant, title: 'Connections' },
     ]
 
     // ui

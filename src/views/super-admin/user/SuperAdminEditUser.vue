@@ -22,13 +22,7 @@
       </div>
 
       <v-card-text>
-        <v-alert dense outlined :value="alert" type="error">
-          <v-row align="center">
-            <v-col>
-              {{ error }}
-            </v-col>
-          </v-row>
-        </v-alert>
+        <alert :isShow="alert" :message="error"></alert>
       </v-card-text>
 
       <v-card-text>
@@ -51,7 +45,6 @@
             label="Role"
             item-text="roleID"
             item-value="roleID"
-            
             chips
             hint="What content is accessible?"
             persistent-hint
@@ -62,8 +55,9 @@
             v-model="select_ability"
             :items="ability_listC"
             label="ability"
+            item-text="text"
+            item-value="key"
             multiple
-            return-object
             chips
             hint="What content is accessible?"
             persistent-hint
@@ -71,7 +65,7 @@
           ></v-select>
 
           <v-btn v-if="!propUserData" color="primary" class="me-3" type="submit" @click="createCustomer"> Add </v-btn>
-          <v-btn v-else color="primary" class="me-3" type="submit" @click="editCustomer"> Edit </v-btn>
+          <v-btn v-else color="primary" class="me-3" type="submit" @click="editUser"> Edit </v-btn>
           <v-btn color="secondary" outlined type="reset"> Cancel </v-btn>
         </v-form>
       </v-card-text>
@@ -83,6 +77,7 @@
 import { mdiClose } from '@mdi/js'
 import { required, emailValidator } from '@core/utils/validation'
 import ability_list from '@/views/ability_list'
+import Alert from '@/utils/Alert.vue'
 
 export default {
   model: {
@@ -110,6 +105,7 @@ export default {
       },
     }
   },
+  components: { Alert },
   data() {
     return {
       userData: {
@@ -173,13 +169,13 @@ export default {
         this.alert = true
       }
     },
-    async editCustomer(e) {
+    async editUser(e) {
       e.preventDefault()
       this.$refs.form.validate()
       try {
         console.log(this.valid)
         if (this.valid) {
-          // console.log(this.userData)
+          console.log(this.select_ability)
           let body = { ability: this.select_ability,
           roleID:this.select_role }
           let username = this.userData.username

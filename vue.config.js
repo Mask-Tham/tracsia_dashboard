@@ -4,6 +4,9 @@ const { mergeSassVariables } = require('@vuetify/cli-plugin-utils')
 module.exports = {
   publicPath: '/',
   lintOnSave: false,
+  //  devServer: {
+  //   https: true
+  // },
   transpileDependencies: ['vuetify'],
   configureWebpack: {
     resolve: {
@@ -11,6 +14,7 @@ module.exports = {
         '@themeConfig': path.resolve(__dirname, 'themeConfig.js'),
         '@core': path.resolve(__dirname, 'src/@core'),
         '@axios': path.resolve(__dirname, 'src/plugins/axios.js'),
+        '@socket': path.resolve(__dirname, 'src/plugins/socket.js'),
         '@user-variables': path.resolve(__dirname, 'src/styles/variables.scss'),
         apexcharts: path.resolve(__dirname, 'node_modules/apexcharts-clevision'),
       },

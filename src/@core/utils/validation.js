@@ -136,3 +136,8 @@ export const  numberValidator= val => {
   const pattern = /[0-9]/g
   return pattern.test(val) || 'This field must contain Number'
 }
+
+export const  locationValidator= val => {
+  const pattern = /[#]/g
+  return !pattern.test(val) || "This field can't use '#'"
+}

@@ -72,13 +72,7 @@
                   </v-card-text>
 
                   <v-card-text>
-                    <v-alert dense outlined :value="alert" type="error">
-                      <v-row align="center">
-                        <v-col>
-                          {{ error }}
-                        </v-col>
-                      </v-row>
-                    </v-alert>
+                    <alert :isShow="alert" :message="error"></alert>
                   </v-card-text>
 
                   <!-- login form -->
@@ -289,6 +283,7 @@ import axios from '@axios'
 import { useRouter } from '@core/utils'
 import themeConfig from '@themeConfig'
 import ability_list from '@/views/ability_list'
+import Alert from '@/utils/Alert.vue'
 
 export default {
   setup() {
@@ -317,6 +312,7 @@ export default {
       // Template Refs
     }
   },
+  components: { Alert },
   data() {
     return {
       items: [
@@ -341,8 +337,8 @@ export default {
         custumerID: 'tracsia',
         isUse: false,
         ability: [],
-        shortname:'',
-        homePage:''
+        shortname: '',
+        homePage: '',
       },
       dialogDate: false,
       isPasswordVisible: false,
@@ -351,7 +347,7 @@ export default {
       dialogOTP: false,
       error: '',
       alert: false,
-      abilityList:ability_list,
+      abilityList: ability_list,
 
       // otp
       otp: '',
@@ -371,12 +367,21 @@ export default {
       }
       body.phone_number = `+66${body.phone_number}`
 
-      let shortname = body.name.split(' ').reduce((value,e) => {return value+e[0].toUpperCase()},'')
+      let shortname = body.name.split(' ').reduce((value, e) => {
+        return value + e[0].toUpperCase()
+      }, '')
       body.shortname = shortname
 
       this.email = body.email
 
-      let defaultAbility = this.abilityList.filter((e)=>e.isDefault)
+      // let defaultAbility = this.abilityList.filter((e)=>e.isDefault)
+      let defaultAbility = []
+      this.abilityList.forEach(e => {
+        if (e.isDefault) {
+           defaultAbility.push(e.key)
+        }
+      })
+
       body.ability = defaultAbility
 
       console.log(body)

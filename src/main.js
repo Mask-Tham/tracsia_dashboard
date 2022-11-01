@@ -12,6 +12,7 @@ import store from './store'
 import moment from 'moment'
 import 'material-icons/iconfont/material-icons.css';
 import axios from '@axios'
+import socket from '@socket'
 // import VueCookies from 'vue-cookies'
 import http from './middlewares/http'
 

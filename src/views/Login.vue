@@ -95,13 +95,7 @@
                   </v-alert>
                 </v-card-text> -->
                   <v-card-text>
-                    <v-alert dense outlined :value="alert" type="error">
-                      <v-row align="center">
-                        <v-col>
-                          {{ error }}
-                        </v-col>
-                      </v-row>
-                    </v-alert>
+                    <alert :isShow="alert" :message="error"></alert>
                   </v-card-text>
 
                   <!-- login form -->
@@ -197,8 +191,11 @@ import axios from '@axios'
 // import axios from 'axios'
 import { useRouter } from '@core/utils'
 import themeConfig from '@themeConfig'
+import Alert from '@/utils/Alert.vue'
+import { abilityKeytoArrayObj } from './ability_list'
 
 export default {
+  components: { Alert },
   setup() {
     // Template Ref
     const loginForm = ref(null)
@@ -351,10 +348,11 @@ export default {
           // const { accessToken } = response.data
           console.log(response)
           const data = response.data.data
+          this.$cookies.set('idToken', data.idToken)
           this.$cookies.set('accessToken', data.accessToken)
           this.$cookies.set('refreshToken', data.refreshToken)
 
-          let userAbility = data.ability
+          let userAbility = abilityKeytoArrayObj(data.ability)
           // let userAbility = [{ action: 'manage', subject: 'all' }]
           // let userAbility = [
           //   {
