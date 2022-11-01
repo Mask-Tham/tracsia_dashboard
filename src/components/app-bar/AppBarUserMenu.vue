@@ -194,30 +194,36 @@ export default {
       }
       console.log(userData)
       try {
-        let res = await this.$http.post('user/api/signout', body)
-        console.log(res)
-        if (res.data.message == 'User successfully signed out') {
-          console.log('successfully')
-          // Remove userData from localStorage
-          // ? We just removed token from localStorage. If you like, you can also make API call to backend to blacklist used token
-          localStorage.removeItem('accessToken')
+        this.$store.dispatch('auth/onLogout',body)
+        
+      } catch (error) {
+        
+      }
+      // try {
+      //   let res = await this.$http.post('user/api/signout', body)
+      //   console.log(res)
+      //   if (res.data.message == 'User successfully signed out') {
+      //     console.log('successfully')
+      //     // Remove userData from localStorage
+      //     // ? We just removed token from localStorage. If you like, you can also make API call to backend to blacklist used token
+      //     localStorage.removeItem('accessToken')
 
-          // Remove userData & Ability from localStorage
-          localStorage.removeItem('userData')
-          localStorage.removeItem('userAbility')
+      //     // Remove userData & Ability from localStorage
+      //     localStorage.removeItem('userData')
+      //     localStorage.removeItem('userAbility')
 
-          this.$cookies.remove('idToken')
-          this.$cookies.remove('accessToken')
-          this.$cookies.remove('refreshToken')
-          this.$cookies.remove('userData')
-          this.$cookies.remove('userAbility')
+      //     this.$cookies.remove('idToken')
+      //     this.$cookies.remove('accessToken')
+      //     this.$cookies.remove('refreshToken')
+      //     this.$cookies.remove('userData')
+      //     this.$cookies.remove('userAbility')
 
-          // Reset ability
-          this.$ability.update(initialAbility)
+      //     // Reset ability
+      //     this.$ability.update(initialAbility)
 
-          this.$router.push({ name: 'auth-login' })
-        }
-      } catch (error) {}
+      //     this.$router.push({ name: 'auth-login' })
+      //   }
+      // } catch (error) {}
     },
   },
 }
