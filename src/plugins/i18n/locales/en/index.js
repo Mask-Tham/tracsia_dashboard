@@ -24,6 +24,7 @@ export default {
     'Porter Tracking':'Porter Tracking',
     'Porter Management':'Porter Management',
     Location:'Location',
+    Tracle:'Tracle',
     warehouse: {...warehouse },
     healthcare: {...healthcare },
     employee_tracking: {...employee_tracking },

@@ -17,6 +17,7 @@ import manage_user from './manage-user'
 import tracbot from './tracbot'
 import porter_tracking from './porter-tracking'
 import location from './location'
+import tracle from './tracle'
 
 Vue.use(VueRouter)
 
@@ -110,6 +111,7 @@ const routes = [
   ...super_admin,
   ...manage_user,
   ...user,
+  ...tracle,
   {
     path: '*',
     redirect: 'error-404',
