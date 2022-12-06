@@ -110,10 +110,10 @@
   
 <script>
 import { mdiExportVariant } from '@mdi/js'
-// import LottieAnimation from 'lottie-web-vue'
+import LottieAnimation from 'lottie-web-vue'
   export default {
     components: {
-    // LottieAnimation,
+    LottieAnimation,
   },
     data() {
       return {

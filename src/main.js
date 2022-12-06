@@ -12,9 +12,9 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
 // import VueCookies from 'vue-cookies'
-// import LottieAnimation from 'lottie-web-vue'
+import LottieAnimation from 'lottie-web-vue'
  
-// Vue.use(LottieAnimation); // add lottie-animation to your global scope
+Vue.use(LottieAnimation); // add lottie-animation to your global scope
 Vue.prototype.$moment = moment
 Vue.prototype.$url = 'https://rbqxuvsm0e.execute-api.ap-southeast-1.amazonaws.com/'
 
