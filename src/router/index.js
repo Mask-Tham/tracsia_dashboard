@@ -3,21 +3,21 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import apps from './apps'
 import dashboard from './dashboard'
-import pages from './pages'
-import userInterface from './user-interface'
-import publicPage from './public-page'
-import warehouse from './warehouse'
-import healthcare from './healthcare'
 import employee_tracking from './employee-tracking'
-import management from './management'
-import super_admin from './super-admin'
-import user from './user'
-import room_tracking from './room-tracking'
-import manage_user from './manage-user'
-import tracbot from './tracbot'
-import porter_tracking from './porter-tracking'
+import healthcare from './healthcare'
 import location from './location'
-
+import manage_user from './manage-user'
+import management from './management'
+import pages from './pages'
+import porter_tracking from './porter-tracking'
+import publicPage from './public-page'
+import room_tracking from './room-tracking'
+import smartFarm from './smartFarm'
+import super_admin from './super-admin'
+import tracbot from './tracbot'
+import user from './user'
+import userInterface from './user-interface'
+import warehouse from './warehouse'
 Vue.use(VueRouter)
 
 const routes = [
@@ -110,6 +110,7 @@ const routes = [
   ...super_admin,
   ...manage_user,
   ...user,
+  ...smartFarm,
   {
     path: '*',
     redirect: 'error-404',
