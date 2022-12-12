@@ -11,6 +11,7 @@ import './plugins/cookies'
 import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
+
 // import VueCookies from 'vue-cookies'
 import LottieAnimation from 'lottie-web-vue'
  
