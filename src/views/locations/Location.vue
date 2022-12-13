@@ -51,7 +51,7 @@
               <div>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn icon v-bind="attrs" v-on="on" @click="goto(node, path)">
+                    <v-btn icon v-bind="attrs" v-on="on" @click="goto(node, path, index )">
                       <v-icon>
                         {{ icons.mdiEye }}
                       </v-icon>
@@ -306,7 +306,7 @@ export default {
     goto(node, path, index) {
       console.log(canUse({ action: 'manage', resource: 'porterTracking' }))
       console.log('goto')
-      console.log(node)
+      console.log(node,path,index)
       localStorage.setItem('location', JSON.stringify(node))
       this.$router.push(`/location/info`)
     },

@@ -6,18 +6,24 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col> </v-col>
+      <v-col> 
+        <tracle-location-card :markerList="listLocation"></tracle-location-card>  
+      </v-col>
     </v-row>
     <v-row>
-      <v-col> </v-col>
+      <v-col>
+        <tracle-device-list-card></tracle-device-list-card>
+      </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
 import TracleCountCard from '@/components/dashboard/tracle/TracleCountCard.vue'
+import TracleLocationCard from '@/components/dashboard/tracle/TracleLocationCard.vue'
+import TracleDeviceListCard from '@/components/dashboard/tracle/TracleDeviceListCard.vue'
 export default {
-  components: { TracleCountCard },
+  components: { TracleCountCard, TracleLocationCard, TracleDeviceListCard },
   data() {
     return {
       listCardCount: [
@@ -27,6 +33,7 @@ export default {
         { title: 'total active gateway', count: 0, total: 1, img: '',color:'teaRose' },
         { title: 'total active gateway', count: 0, img: '',color:'red' },
       ],
+      listLocation:[{latlng:[51.504, -0.159]},{latlng:[51.5043, -0.160]}],
     }
   },
   computed:{

@@ -10,7 +10,7 @@
                 {{item.count}}
                 {{item.total? `/${item.total}` : ''}}
             </span>
-            <v-progress-linear v-if="item.total" :value="(item.count/item.total*100)"></v-progress-linear>
+            <v-progress-linear v-if="item.total" color="info" :value="(item.count/item.total*100)"></v-progress-linear>
         </div>
     </v-card-text>
   </v-card>
