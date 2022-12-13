@@ -1,4 +1,4 @@
-import { mdiHomeOutline,mdiAccountStar,mdiViewDashboard,mdiAccountEdit,mdiOfficeBuildingMarker   } from '@mdi/js'
+import { mdiAccountEdit, mdiAccountStar, mdiHomeOutline, mdiOfficeBuildingMarker, mdiViewDashboard } from '@mdi/js'
 
 export default [
   {
@@ -149,5 +149,25 @@ export default [
         to: 'super_admin-manage-user',
       },
     ],
+  },
+  {
+    icon: mdiAccountStar,
+    title: 'Smart Farm',
+    to: 'smart-Farm-dashboard',
+  },
+  {
+    icon: mdiAccountStar,
+    title: 'Smart Industry',
+    to: 'smart-industry-dashboard',
+  },
+  {
+    icon: mdiAccountStar,
+    title: 'Smart Retail',
+    to: 'smart-retail-dashboard',
+  },
+  {
+    icon: mdiAccountStar,
+    title: 'Smart Warehouse',
+    to: 'smart-warehouse-dashboard',
   },
 ]
