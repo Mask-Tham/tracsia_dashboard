@@ -35,10 +35,10 @@ const themeConfig = {
   },
   themes: {
     light: {
-      ...themeStyle.themes.light,
+      ...themeStyle.themeStyle.themes.light,
     },
     dark: {
-      ...themeStyle.themes.dark,
+      ...themeStyle.themeStyle.themes.dark,
     },
   },
 }

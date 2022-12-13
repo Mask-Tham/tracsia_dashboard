@@ -109,14 +109,16 @@
                       </div>
 
                     </div>
-                    <div class="temp card-div">
-                      <v-row class="mb-6" no-gutters>
-                        <v-col v-for="n in 12" :key="n">
-                          <v-card class="pa-2" tile outlined>
-                            col
-                          </v-card>
-                        </v-col>
-                      </v-row>
+                    <div class="temp card-div tw-grid tw-grid-cols-3 tw-gap-4">
+                        <div class="tw-p-2 tw-flex" v-for="i in grid_items">
+                          <div class="tw-w-[120px]">
+                            <img style="height: auto;" :width="i.w_img" :src="require(`@/assets/images/dashboard/icon_dash_morni/${i.imgmap}`)" alt="">
+                          </div>
+                          <div class="tw-w-[calc(100% - 120px)]">
+                           <h3>{{i.title}}</h3> 
+                           <h3>0.3 {{i.unit}}</h3>
+                          </div>
+                        </div>
                     </div>
                     <div class="vibration card-div">
                       
@@ -205,6 +207,15 @@ export default {
       ],
       selectedRows: [],
       loadingTable: false,
+      grid_items: [
+        { title: 'Light Sensor', total: 193.86, unit: 'lux', w_img: 55, imgmap: '1.png', color: '#0095FF' },
+        { title: 'VPD Volume', total: 193.86, unit: 'RH', w_img: 55, imgmap: '2.png', color: '#01C282' },
+        { title: 'Rain Volume', total: 193.86, unit: 'RH', w_img: 55, imgmap: '3.png', color: '#884DFF' },
+        { title: 'Soil Humid', total: 193.86, unit: '%', w_img: 55, imgmap: '4.png', color: '#FF708D' },
+        { title: 'CO2 Volume', total: 193.86, unit: 'ppm', w_img: 55, imgmap: '5.png', color: '#01C282' },
+        { title: 'BC Volume', total: 193.86, unit: 'PPFD', w_img: 55, imgmap: '6.png', color: '#884DFF' },
+        { title: 'PH Volume', total: 193.86, unit: 'pH', w_img: 35, imgmap: '7.png', color: '#FF708D' },
+      ],
       gender: [
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i1.png', imgmap: 'map_Industry.png', color: '#0095FF' },
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i2.png', imgmap: 'map_Industry.png', color: '#01C282' },
