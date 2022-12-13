@@ -157,6 +157,11 @@ export default [
   },
   {
     icon: mdiAccountStar,
+    title: 'Smart Monitoring Farm',
+    to: 'farm-monitoring-dashboard',
+  },
+  {
+    icon: mdiAccountStar,
     title: 'Smart Industry',
     to: 'smart-industry-dashboard',
   },
