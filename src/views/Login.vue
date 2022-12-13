@@ -100,7 +100,7 @@
 
                   <!-- login form -->
                   <v-card-text>
-                    <v-form ref="loginForm" @submit="login">
+                    <v-form ref="loginForm">
                       <v-text-field
                         v-model="username"
                         outlined
@@ -132,7 +132,7 @@
                         </router-link>
                       </div>
 
-                      <v-btn block color="primary" type="submit" class="mt-6"> Login </v-btn>
+                      <v-btn block color="primary" type="submit" class="mt-6" @click="login"> Login </v-btn>
                     </v-form>
                   </v-card-text>
 
@@ -184,14 +184,14 @@
 
 <script>
 // eslint-disable-next-line object-curly-newline
-import { mdiFacebook, mdiTwitter, mdiGithub, mdiGoogle, mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js'
-import { ref, getCurrentInstance } from '@vue/composition-api'
-import { required, emailValidator } from '@core/utils/validation'
 import axios from '@axios'
+import { emailValidator, required } from '@core/utils/validation'
+import { mdiEyeOffOutline, mdiEyeOutline, mdiFacebook, mdiGithub, mdiGoogle, mdiTwitter } from '@mdi/js'
+import { getCurrentInstance, ref } from '@vue/composition-api'
 // import axios from 'axios'
+import Alert from '@/utils/Alert.vue'
 import { useRouter } from '@core/utils'
 import themeConfig from '@themeConfig'
-import Alert from '@/utils/Alert.vue'
 import { abilityKeytoArrayObj } from './ability_list'
 
 export default {
@@ -334,71 +334,80 @@ export default {
     }
   },
   methods: {
-    login(event) {
+    async login(event) {
       event.preventDefault()
       this.overlay = true
       let body = {
         username: this.username,
         password: this.password,
       }
-
-      this.$http
-        .post('user/api/signin', body)
-        .then(response => {
-          // const { accessToken } = response.data
-          console.log(response)
-          const data = response.data.data
-          this.$cookies.set('idToken', data.idToken)
-          this.$cookies.set('accessToken', data.accessToken)
-          this.$cookies.set('refreshToken', data.refreshToken)
-
-          let userAbility = abilityKeytoArrayObj(data.ability)
-          // let userAbility = [{ action: 'manage', subject: 'all' }]
-          // let userAbility = [
-          //   {
-          //     action: 'read',
-          //     subject: 'ACL',
-          //   },
-          //   {
-          //     action: 'read',
-          //     subject: 'Demo',
-          //   },
-          //   {
-          //     action: 'read',
-          //     subject: 'Public',
-          //   },
-          // ]
-
-          let userData = { ...data }
-          delete userData.accessToken
-          delete userData.refreshToken
-          delete userData.ability
-          userData.avatar = '@/assets/images/avatars/1.png'
-          userData.role = userData.roleID
-          userData.fullName = userData.name
-
-          this.$ability.update(userAbility)
-          // localStorage.setItem('userAbility', JSON.stringify(userAbility))
-          // localStorage.setItem('userData', JSON.stringify(userData))
-
-          this.$cookies.set('userData', userData)
-          this.$cookies.set('userAbility', JSON.stringify(userAbility))
-
-          this.overlay = false
-
-          this.$router.push('/')
-
-          // ? Set access token in localStorage so axios interceptor can use it
-          // Axios Interceptors: https://github.com/axios/axios#interceptors
-          // localStorage.setItem('accessToken', accessToken)
-
-          // return response
-        })
-        .catch(error => {
-          this.overlay = false
-          this.error = error.data.message
+      console.log(this)
+      try {
+        await this.$store.dispatch('auth/onLogin', body)
+        this.overlay = false
+        this.$router.push('/')
+      } catch (error) {
+        this.overlay = false
+        this.error = error.data.message
         this.alert = true
-        })
+      }
+      // this.$http
+      //   .post('user/api/signin', body)
+      //   .then(response => {
+      //     // const { accessToken } = response.data
+      //     console.log(response)
+      //     const data = response.data.data
+      //     this.$cookies.set('idToken', data.idToken)
+      //     this.$cookies.set('accessToken', data.accessToken)
+      //     this.$cookies.set('refreshToken', data.refreshToken)
+
+      //     let userAbility = abilityKeytoArrayObj(data.ability)
+      //     // let userAbility = [{ action: 'manage', subject: 'all' }]
+      //     // let userAbility = [
+      //     //   {
+      //     //     action: 'read',
+      //     //     subject: 'ACL',
+      //     //   },
+      //     //   {
+      //     //     action: 'read',
+      //     //     subject: 'Demo',
+      //     //   },
+      //     //   {
+      //     //     action: 'read',
+      //     //     subject: 'Public',
+      //     //   },
+      //     // ]
+
+      //     let userData = { ...data }
+      //     delete userData.accessToken
+      //     delete userData.refreshToken
+      //     delete userData.ability
+      //     userData.avatar = '@/assets/images/avatars/1.png'
+      //     userData.role = userData.roleID
+      //     userData.fullName = userData.name
+
+      //     this.$ability.update(userAbility)
+      //     // localStorage.setItem('userAbility', JSON.stringify(userAbility))
+      //     // localStorage.setItem('userData', JSON.stringify(userData))
+
+      //     this.$cookies.set('userData', userData)
+      //     this.$cookies.set('userAbility', JSON.stringify(userAbility))
+
+      //     this.overlay = false
+
+      //     this.$router.push('/')
+
+      //     // ? Set access token in localStorage so axios interceptor can use it
+      //     // Axios Interceptors: https://github.com/axios/axios#interceptors
+      //     // localStorage.setItem('accessToken', accessToken)
+
+      //     // return response
+      //   })
+      //   .catch(error => {
+      //     this.overlay = false
+      //     this.error = error.data.message
+      //     this.alert = true
+      //   })
     },
   },
 }

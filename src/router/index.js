@@ -18,6 +18,10 @@ import tracbot from './tracbot'
 import user from './user'
 import userInterface from './user-interface'
 import warehouse from './warehouse'
+import porter_tracking from './porter-tracking'
+import location from './location'
+import tracle from './tracle'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -111,6 +115,7 @@ const routes = [
   ...manage_user,
   ...user,
   ...smartFarm,
+  ...tracle,
   {
     path: '*',
     redirect: 'error-404',

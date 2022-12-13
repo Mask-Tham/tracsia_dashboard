@@ -1,4 +1,5 @@
 import { mdiCheckboxBlankCircleOutline } from '@mdi/js'
+const themeStyle = require('./themeStyle')
 
 const themeConfig = {
   app: {
@@ -34,24 +35,10 @@ const themeConfig = {
   },
   themes: {
     light: {
-      primary: '#26E661',
-      accent: '#0d6efd',
-      secondary: '#8A8D93',
-      success: '#56CA00',
-      info: '#16B1FF',
-      warning: '#FFB400',
-      error: '#FF4C51',
-      third:'#A2A5AB',
+      ...themeStyle.themes.light,
     },
     dark: {
-      primary: '#26E661',
-      accent: '#0d6efd',
-      secondary: '#8A8D93',
-      success: '#56CA00',
-      info: '#16B1FF',
-      warning: '#FFB400',
-      error: '#FF4C51',
-      third:'#A2A5AB',
+      ...themeStyle.themes.dark,
     },
   },
 }

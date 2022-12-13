@@ -114,6 +114,18 @@ export default [
     ],
   },
   {
+    title: 'Tracle',
+    icon: mdiViewDashboard,
+    children: [
+      {
+        title: 'Dashboard',
+        to: 'tracle-dashboard',
+        action: 'read',
+        resource: 'tracle',
+      },
+    ],
+  },
+  {
     title: 'manage user',
     icon: mdiAccountEdit ,
     children: [

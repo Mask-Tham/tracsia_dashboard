@@ -5,16 +5,17 @@
 
     <!-- porter device -->
     <porter-tracking-add-device-drawer
-      v-if="location.children.length <= 0 && isUsePorter"
+      v-if="location.children.length <= 0 && usePorter"
       v-model="isDevicePorterSidebarActive"
       :propFormData="porterData"
       :allUserData="userTableC"
     ></porter-tracking-add-device-drawer>
-    <v-card>
-      <v-progress-linear
-          :active="loading"
-          :indeterminate="loading"
-        ></v-progress-linear>
+
+    <v-skeleton-loader
+      v-if="loading"
+      type="article"
+    ></v-skeleton-loader>
+    <v-card v-else >
       <v-card-title> Location Information </v-card-title>
       <v-card-text class="d-flex flex-row justify-space-between" v-if="!loading">
         <div>
@@ -44,6 +45,7 @@
           </div> -->
         </div>
         <div>
+          <!-- edit -->
           <v-tooltip bottom v-if="false">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -63,7 +65,9 @@
             </template>
             <span class="text-capitalize">edit</span>
           </v-tooltip>
-          <v-tooltip bottom v-if="location.children.length <= 0 && isUsePorter">
+
+          <!-- porter -->
+          <v-tooltip bottom v-if="location.children.length <= 0 && usePorter">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 icon
@@ -82,6 +86,27 @@
             </template>
             <span class="text-capitalize">porter</span>
           </v-tooltip>
+
+          <!-- tracle -->
+          <v-tooltip bottom v-if="isRunnerUp && useTracle">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                icon
+                v-bind="attrs"
+                v-on="on"
+                @click="
+                  () => {
+                    $router.push(`/tracle/${location.locationName}/dashboard`)
+                  }
+                "
+              >
+                <v-icon>
+                  {{ icons.mdiAccessPoint }}
+                </v-icon>
+              </v-btn>
+            </template>
+            <span class="text-capitalize">tracle</span>
+          </v-tooltip>
         </div>
       </v-card-text>
     </v-card>
@@ -99,6 +124,7 @@ import {
   mdiMinus,
   mdiCircleSmall,
   mdiEye,
+  mdiAccessPoint,
   mdiPencil,
   mdiCellphoneLink,
 } from '@mdi/js'
@@ -110,12 +136,14 @@ export default {
   data() {
     return {
       location: JSON.parse(localStorage.getItem('location')),
-      isUsePorter: canUse({ action: 'manage', resource: 'porterTracking' }),
+      usePorter: canUse({ action: 'manage', resource: 'porterTracking' }),
+      useTracle: canUse({ action: 'manage', resource: 'tracle' }),
       isDevicePorterSidebarActive: false,
       isUpdateLocationSidebarActive: false,
       icons: {
         mdiCellphoneLink,
         mdiPencil,
+        mdiAccessPoint,
       },
       locationData: {
         custumerID: '',
@@ -137,6 +165,7 @@ export default {
       loading:false,
       userTable: [],
       userData: $cookies.get('userData'),
+      isRunnerUp:false,
     }
   },
   computed: {
@@ -148,11 +177,15 @@ export default {
       })
     },
   },
-  mounted() {
+  async mounted() {
     // console.log(this.location)
     this.loading = true
-    this.getInfo()
-    this.getAllUser()
+    await this.getInfo()
+    await this.getAllUser()
+    const order = this.checkOrder(this.location)
+    if (order === 1) {
+      this.isRunnerUp = true
+    }
     this.loading = false
 
   },
@@ -183,8 +216,16 @@ export default {
       }
       this.loadingTable = false
     },
+    checkOrder(location){
+      if (location.children.length > 0) {
+        let i_r = this.checkOrder(location.children[0])
+        return i_r+=1
+      }else{
+        return 0
+      }
+    },
     setVar() {
-      if (this.isUsePorter) {
+      if (this.usePorter) {
         this.porterData = {
           custumerID: this.locationData.custumerID,
           deviceID: '',

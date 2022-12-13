@@ -74,6 +74,9 @@ export default function useAppConfig() {
     set: value => {
       $vuetify.theme.dark = value
       localStorage.setItem('materio-active-theme', value ? 'dark' : 'light')
+      value 
+        ? document.documentElement.classList.add('dark') 
+        : document.documentElement.classList.remove('dark')
     },
   })
 
