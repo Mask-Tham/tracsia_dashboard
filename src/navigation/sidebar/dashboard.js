@@ -187,4 +187,9 @@ export default [
     title: 'Smart Warehouse',
     to: 'smart-warehouse-dashboard',
   },
+  {
+    icon: mdiAccountStar,
+    title: 'Smart Warehouse',
+    to: 'smart-esl-dashboard',
+  },
 ]
