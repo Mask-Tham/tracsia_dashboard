@@ -57,10 +57,17 @@
 
                   </v-col>
                   <v-col cols="12" md="3" sm="6" xs="12" class="d-flex align-center">
-                    <div class="d-flex" style="width: 100%;  align-items: center; padding: 15px; border-radius: 15px;">
+                    <div class="d-flex"
+                      style="width: 100%; position: relative;  align-items: center; padding: 15px; border-radius: 15px;">
                       <h1 class=" font-weight-semibold" style="font-size: 25px;">
                         23 JUN Monday, 14:23
                       </h1>
+                      <v-btn style="position: absolute; right: 5px; top: -20px;" fab dark small color="primary"
+                        @click="openFullscreen('mysl' + i)">
+                        <v-icon size="17">
+                          {{ icons.mdiOverscan }}
+                        </v-icon>
+                      </v-btn>
                     </div>
                   </v-col>
                   <div class="container_grid">
@@ -102,29 +109,30 @@
                         </div>
                       </div>
                     </div>
-                    <div class="map card-div">
-                      <h2 style="padding: 15px">Live Machine Status</h2>
-                      <div align="center">
-                        <img style="width: 400px;" :src="require(`@/assets/images/dashboard/farm-plant.png`)" alt="">
+                    <div class="map card-div" style="position: relative;">
+                      <h2 style="padding: 15px; position: absolute; top: 10px; left: 10px;">Live Machine Status</h2>
+                      <div style="height: 100%; width: 100%; display: grid; align-items: center; justify-items: center;">
+                        <img style="width: 470px;" :src="require(`@/assets/images/dashboard/farm-plant.png`)" alt="">
                       </div>
 
                     </div>
                     <div class="temp card-div tw-grid tw-grid-cols-3 tw-gap-4">
-                        <div class="tw-p-2 tw-flex" v-for="i in grid_items">
-                          <div class="tw-w-[120px]">
-                            <img style="height: auto;" :width="i.w_img" :src="require(`@/assets/images/dashboard/icon_dash_morni/${i.imgmap}`)" alt="">
-                          </div>
-                          <div class="tw-w-[calc(100% - 120px)]">
-                           <h3>{{i.title}}</h3> 
-                           <h3>0.3 {{i.unit}}</h3>
-                          </div>
+                      <div class="tw-p-2 tw-flex" v-for="i in grid_items">
+                        <div style="width: 60px;" align="center">
+                          <img style="height: auto;" :width="i.w_img"
+                            :src="require(`@/assets/images/dashboard/icon_dash_morni/${i.imgmap}`)" alt="">
                         </div>
+                        <div  style="width: calc(100% - 60px);">
+                          <h3>{{ i.title }}</h3>
+                          <h3>0.3 {{ i.unit }}</h3>
+                        </div>
+                      </div>
                     </div>
                     <div class="vibration card-div">
-                      
-                        <vue-apex-charts style="width: 100%;padding: 15px " height="280" type="line" :options="options"
-                          :series="series"></vue-apex-charts>
-                   
+
+                      <vue-apex-charts style="width: 100%;padding: 15px " height="280" type="line" :options="options"
+                        :series="series"></vue-apex-charts>
+
                     </div>
                   </div>
                 </v-row>
@@ -138,7 +146,7 @@
 </template>
 
 <script>
-import { mdiExportVariant } from '@mdi/js'
+import { mdiExportVariant, mdiOverscan } from '@mdi/js'
 import LottieAnimation from 'lottie-web-vue'
 import VueApexCharts from 'vue-apexcharts'
 import apexChatData from './chart/apexChartData'
@@ -150,7 +158,7 @@ export default {
   data() {
     return {
       icons: {
-        mdiExportVariant
+        mdiExportVariant,mdiOverscan
       },
       tab: null,
       items: ['PLANT A', 'PLANT B', 'PLANT C', 'PLANT D', 'PLANT E',],
@@ -266,7 +274,16 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+:fullscreen {
+  background-image: url("../../../../assets/farm/background.png");
+  /* Full height */
+  height: 100%;
+  overflow-y: scroll;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .container_grid {
   display: grid;
   width: 100%;

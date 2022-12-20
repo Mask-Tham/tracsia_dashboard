@@ -87,33 +87,43 @@
                                             <h2 style="padding: 15px">Live Machine Status</h2>
                                             <div align="center" style="position: relative; width: 100%;">
                                                 <!-- sensor -->
-                                                <v-tooltip top :color="items_temp[select_door].door == 'OPEN'? 'success' : ''">
+                                                <v-tooltip top
+                                                    :color="items_temp[select_door].door == 'OPEN' ? 'success' : ''">
                                                     <template v-slot:activator="{ on, attrs }">
-                                                        <img   v-bind="attrs" v-on="on" :style="'width: 40px;position: absolute; left:' + items_temp[select_door].w_d +'%; top:'+ items_temp[select_door].t_d +'%; '"
-                                                            :src="items_temp[select_door].door == 'OPEN'?  require(`@/assets/images/dashboard/loca_door.png`): require(`@/assets/images/dashboard/loca_door_close.png`)" alt="">
+                                                        <img v-bind="attrs" v-on="on"
+                                                            :style="'width: 40px;position: absolute; left:' + items_temp[select_door].w_d + '%; top:' + items_temp[select_door].t_d + '%; '"
+                                                            :src="items_temp[select_door].door == 'OPEN' ? require(`@/assets/images/dashboard/loca_door.png`) : require(`@/assets/images/dashboard/loca_door_close.png`)"
+                                                            alt="">
                                                     </template>
-                                                    <span>Door_0{{select_door+1}} : {{items_temp[select_door].door}} </span>
+                                                    <span>Door_0{{ select_door + 1 }} : {{ items_temp[select_door].door }}
+                                                    </span>
                                                 </v-tooltip>
                                                 <v-tooltip top color="success">
                                                     <template v-slot:activator="{ on, attrs }">
-                                                        <img v-bind="attrs" v-on="on" style="width: 40px; right: 30%; top: 9%; position: absolute;"
-                                                             :src="require(`@/assets/images/dashboard/loca_temp.png`)" alt="">
+                                                        <img v-bind="attrs" v-on="on"
+                                                            style="width: 40px; right: 30%; top: 9%; position: absolute;"
+                                                            :src="require(`@/assets/images/dashboard/loca_temp.png`)"
+                                                            alt="">
                                                     </template>
-                                                    <span>Temperature_01 : {{items_temp[0].value}}°C </span>
+                                                    <span>Temperature_01 : {{ items_temp[0].value }}°C </span>
                                                 </v-tooltip>
                                                 <v-tooltip top color="success">
                                                     <template v-slot:activator="{ on, attrs }">
-                                                        <img v-bind="attrs" v-on="on" style="width: 40px; right: 45%; top: 8%; position: absolute;"
-                                                             :src="require(`@/assets/images/dashboard/loca_temp.png`)" alt="">
+                                                        <img v-bind="attrs" v-on="on"
+                                                            style="width: 40px; right: 45%; top: 8%; position: absolute;"
+                                                            :src="require(`@/assets/images/dashboard/loca_temp.png`)"
+                                                            alt="">
                                                     </template>
-                                                    <span>Temperature_02 : {{items_temp[1].value}}°C </span>
+                                                    <span>Temperature_02 : {{ items_temp[1].value }}°C </span>
                                                 </v-tooltip>
                                                 <v-tooltip top color="warning">
                                                     <template v-slot:activator="{ on, attrs }">
-                                                        <img v-bind="attrs" v-on="on" style="width: 40px; right: 19%; top: 26%; position: absolute;"
-                                                              :src="require(`@/assets/images/dashboard/loca_temp_warning.png`)" alt="">
+                                                        <img v-bind="attrs" v-on="on"
+                                                            style="width: 40px; right: 19%; top: 26%; position: absolute;"
+                                                            :src="require(`@/assets/images/dashboard/loca_temp_warning.png`)"
+                                                            alt="">
                                                     </template>
-                                                    <span>Temperature_03: {{items_temp[2].value}}°C </span>
+                                                    <span>Temperature_03: {{ items_temp[2].value }}°C </span>
                                                 </v-tooltip>
                                                 <!-- map -->
                                                 <img style="width: 700px; "
@@ -147,9 +157,9 @@
                                                         <h3>max {{ items_temp[select].max }}<sup>°C</sup></h3>
                                                         <h3>min {{ items_temp[select].min }}<sup>°C</sup></h3>
                                                     </div>
-                                                    <div>
-                                                        <h5>Date 2022-10-15</h5>
-                                                        <h5>Time 22:40:27 </h5>
+                                                    <div >
+                                                        <h5>Date : {{items_temp[0].timestamp}}</h5>
+                                                        <h5>Time : {{items_temp[0].date}} </h5>
                                                     </div>
                                                 </v-col>
                                             </v-row>
@@ -168,7 +178,7 @@
                                                     md="3" sm="6" xs="12">
                                                     <div align="center">
                                                         <v-select :items="items2" v-model="select_door" item-text="door"
-                                                                item-value="index" filled label="Data of : "></v-select>
+                                                            item-value="index" filled label="Data of : "></v-select>
                                                     </div>
                                                 </v-col>
                                                 <v-col class="p-2" style="display: flex; align-items: center;" cols="4"
@@ -177,9 +187,13 @@
                                                         <h2>
                                                             Status
                                                         </h2>
-                                                        <h1 style="font-size: 40px;"  :style="{color:items_temp[select_door].door == 'OPEN'? '#4BB22D':'#123559'}">{{ items_temp[select_door].door }}</h1>
-                                                        <h4 class="cont-btn" >Count</h4>
-                                                        <h5 style="color: #ECB314;">Open Times : <span style="color: #31394D;">{{ items_temp[select_door].max }}</span> </h5>
+                                                        <h1 style="font-size: 40px;"
+                                                            :style="{ color: items_temp[select_door].door == 'OPEN' ? '#4BB22D' : '#123559' }">
+                                                            {{ items_temp[select_door].door }}</h1>
+                                                        <h4 class="cont-btn">Count</h4>
+                                                        <h5 style="color: #ECB314;">Open Times : <span
+                                                                style="color: #31394D;">{{ items_temp[select_door].max
+                                                                }}</span> </h5>
                                                     </div>
                                                 </v-col>
                                             </v-row>
@@ -208,18 +222,19 @@ export default {
             icons: {
                 mdiExportVariant,
             },
+            rawData: null,
             tab: null,
             select: 0,
             select_door: 0,
             items2: [
-                { temp: 'temp1', index: 0 ,door: 'Door 01'},
-                { temp: 'temp2', index: 1 ,door: 'Door 02'},
-                { temp: 'temp3', index: 2 ,door: 'Door 03' },
+                { temp: 'temp1', index: 0, door: 'Door 01' },
+                { temp: 'temp2', index: 1, door: 'Door 02' },
+                { temp: 'temp3', index: 2, door: 'Door 03' },
             ],
             items_temp: [
-                { temp: 'temp1', value: '26', max: '33', min: '24' ,door: "OPEN" , w_t: 30 ,t_t: 9 , w_d: 53 ,t_d: 30},
-                { temp: 'temp2', value: '33', max: '41', min: '29' ,door: "CLOSE" , w_t: 19,t_t: 26, w_d: 43 ,t_d: 30},
-                { temp: 'temp3', value: '28', max: '37', min: '24' ,door: "OPEN" , w_t: 45,t_t: 8, w_d: 54 ,t_d: 10},
+                { temp: 'temp1', value: '', max: '33', min: '24', door: "OPEN" ,timestamp : '',date: '', w_t: 30, t_t: 9, w_d: 53, t_d: 30 },
+                { temp: 'temp2', value: '33', max: '41', min: '29', door: "CLOSE",timestamp : '',date: '', w_t: 19, t_t: 26, w_d: 43, t_d: 30 },
+                { temp: 'temp3', value: '28', max: '37', min: '24', door: "OPEN",timestamp : '',date: '', w_t: 45, t_t: 8, w_d: 54, t_d: 10 },
             ],
             items: ['PLANT A', 'PLANT B', 'PLANT C', 'PLANT D', 'PLANT E',],
             text: 'Lorem ipsum dolor sit amet,',
@@ -265,21 +280,19 @@ export default {
             apexChatData,
         }
     },
-    computed: {
-        userTableC() {
-            console.log(this.statusFilter)
-            let statusFilter = this.statusFilter == null ? '' : this.statusFilter
-            let customerFilter = this.userData == null ? undefined : this.userData.custumerID
-
-            return this.userTable.filter(el => {
-                return el.isUse.toString().includes(statusFilter) && el.custumerID.includes(customerFilter)
-            })
-        },
+    mounted() {
+        this.fetchData()
     },
     methods: {
-        selectValueTemp(value) {
-            return this.items_temp[value]
+        async fetchData() {
+            let res = await this.$http.get(`/v1/custumer-sensor/by-group-poge/?custumerID=tracsia&pageOptionID=POT20221219075808543`)
+            console.log(res.data.data[0]) //temperature
+            this.items_temp[0].value = res.data.data[0].temperature 
+            this.items_temp[0].timestamp = this.$moment(res.data.data[0].timestamp).format('L')
+            this.items_temp[0].date = this.$moment(res.data.data[0].timestamp).format('h:mm:ss a')
+
         },
+       
         openFullscreen(id) {
             var elem = document.getElementById(id);
             if (elem.requestFullscreen) {
@@ -340,10 +353,11 @@ export default {
     background: #2EC094;
     width: 100px;
 }
-.cont-btn{
+
+.cont-btn {
     border-radius: 19px;
     color: #31394D;
-    background: linear-gradient(90deg,  #FF6C6C 0%, #F2F89B 100%);
+    background: linear-gradient(90deg, #FF6C6C 0%, #F2F89B 100%);
     width: 70px;
     margin-bottom: 5px;
 }

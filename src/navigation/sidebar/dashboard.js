@@ -1,4 +1,4 @@
-import { mdiAccountEdit, mdiAccountStar, mdiHomeOutline, mdiOfficeBuildingMarker, mdiViewDashboard } from '@mdi/js'
+import { mdiAccountEdit, mdiAccountStar, mdiCogs, mdiHomeOutline, mdiOfficeBuildingMarker, mdiShoppingOutline, mdiSprout, mdiStorefrontOutline, mdiTractorVariant, mdiViewDashboard, mdiWarehouse } from '@mdi/js'
 
 export default [
   {
@@ -163,33 +163,33 @@ export default [
     ],
   },
   {
-    icon: mdiAccountStar,
+    icon: mdiTractorVariant,
     title: 'Smart Farm',
     to: 'smart-Farm-dashboard',
   },
   {
-    icon: mdiAccountStar,
+    icon: mdiSprout,
     title: 'Smart Monitoring Farm',
     to: 'farm-monitoring-dashboard',
   },
   {
-    icon: mdiAccountStar,
+    icon: mdiCogs,
     title: 'Smart Industry',
     to: 'smart-industry-dashboard',
   },
   {
-    icon: mdiAccountStar,
+    icon: mdiStorefrontOutline,
     title: 'Smart Retail',
     to: 'smart-retail-dashboard',
   },
   {
-    icon: mdiAccountStar,
+    icon: mdiWarehouse,
     title: 'Smart Warehouse',
     to: 'smart-warehouse-dashboard',
   },
   {
-    icon: mdiAccountStar,
-    title: 'Smart Warehouse',
+    icon: mdiShoppingOutline,
+    title: 'Smart ESL',
     to: 'smart-esl-dashboard',
   },
 ]
