@@ -1,9 +1,6 @@
 <template>
-  <div
-    class="auth-wrapper auth-v2"
-    style="position: fixed"
-    :style="{ background: $vuetify.theme.dark ? '#312d4b' : '#fff' }"
-  >
+  <div class="auth-wrapper auth-v2" style="position: fixed"
+    :style="{ background: $vuetify.theme.dark ? '#312d4b' : '#fff' }">
     <div class="auth-inner">
       <!-- brand logo -->
       <!-- <router-link to="/" class="brand-logo d-flex align-center">
@@ -15,8 +12,7 @@
       </router-link> -->
       <!--/ brand logo -->
 
-      <div
-        style="
+      <div style="
           width: 356px;
           height: 341px;
           background-color: #3abb6d;
@@ -24,10 +20,8 @@
           position: absolute;
           top: -206px;
           left: -178px;
-        "
-      ></div>
-      <div
-        style="
+        "></div>
+      <div style="
           width: 677px;
           height: 650px;
           background-color: #3abb6d;
@@ -35,33 +29,23 @@
           position: absolute;
           top: 500px;
           left: -54px;
-        "
-      ></div>
+        "></div>
 
       <v-row class="auth-row ma-0">
         <v-col lg="7" class="d-none d-lg-flex justify-lg-center overflow-hidden pa-0">
           <div class="d-lg-flex flex-column align-center justify-lg-center" style="width: 100%">
             <div style="width: 500px">
-              <v-img
-                :src="
-                  $vuetify.theme.dark
-                    ? require('@/assets/images/svg/nav-logo-dark.png')
-                    : require('@/assets/images/svg/nav-logo-light.png')
-                "
-                width="400"
-                class="mb-10"
-              ></v-img>
+              <v-img :src="
+                $vuetify.theme.dark
+                  ? require('@/assets/images/svg/nav-logo-dark.png')
+                  : require('@/assets/images/svg/nav-logo-light.png')
+              " width="400" class="mb-10"></v-img>
               <p class="text-2xl font-weight-semibold text--primary mb-2">
                 The most flexible IoT integration and management platform.
               </p>
               <v-carousel :show-arrows="false" hide-delimiter-background cycle height="400">
-                <v-carousel-item
-                  v-for="(item, i) in items"
-                  :key="i"
-                  :src="item.src"
-                  reverse-transition="fade-transition"
-                  transition="fade-transition"
-                ></v-carousel-item>
+                <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src"
+                  reverse-transition="fade-transition" transition="fade-transition"></v-carousel-item>
               </v-carousel>
             </div>
           </div>
@@ -70,11 +54,8 @@
         <v-col lg="4" class="d-flex align-center auth-bg pa-10 pb-0">
           <v-row>
             <v-col cols="12" sm="8" md="6" lg="12" class="mx-auto">
-              <div
-                class="shadow-green"
-                style="z-index: 1; position: relative"
-                :style="{ background: $vuetify.theme.dark ? '#312d4b' : '#fff' }"
-              >
+              <div class="shadow-green" style="z-index: 1; position: relative"
+                :style="{ background: $vuetify.theme.dark ? '#312d4b' : '#fff' }">
                 <v-card flat>
                   <v-card-text>
                     <p class="text-2xl font-weight-semibold text--primary mb-2">Login to your Account</p>
@@ -101,27 +82,13 @@
                   <!-- login form -->
                   <v-card-text>
                     <v-form ref="loginForm">
-                      <v-text-field
-                        v-model="username"
-                        outlined
-                        label="Username"
-                        :error-messages="errorMessages.email"
-                        :rules="[validators.required]"
-                        hide-details="auto"
-                        class="mb-6"
-                      ></v-text-field>
+                      <v-text-field v-model="username" outlined label="Username" :error-messages="errorMessages.email"
+                        :rules="[validators.required]" hide-details="auto" class="mb-6"></v-text-field>
                       <!-- placeholder="email" -->
 
-                      <v-text-field
-                        v-model="password"
-                        outlined
-                        :type="isPasswordVisible ? 'text' : 'password'"
-                        label="Password"
-                        :error-messages="errorMessages.password"
-                        :rules="[validators.required]"
-                        hide-details="auto"
-                        class="mb-2"
-                      ></v-text-field>
+                      <v-text-field v-model="password" outlined :type="isPasswordVisible ? 'text' : 'password'"
+                        label="Password" :error-messages="errorMessages.password" :rules="[validators.required]"
+                        hide-details="auto" class="mb-2"></v-text-field>
                       <!-- placeholder="Password" -->
                       <div class="d-flex align-center justify-space-between flex-wrap">
                         <!-- <v-checkbox hide-details label="Remember Me" class="mt-0"> </v-checkbox> -->
@@ -143,9 +110,26 @@
 
                   <v-card-text class="d-flex align-center justify-center flex-wrap mt-2">
                     <p class="mb-0 me-2">By clicking "Sign In" you agree to Tracsia's</p>
-                    <router-link :to="{ path: '' }"> Terms Of Service </router-link>
+                    <v-dialog transition="dialog-bottom-transition" max-width="800">
+                        <template v-slot:activator="{ on, attrs }">
+                          <a v-bind="attrs" v-on="on"> Terms Of Service </a>
+                          <!-- <v-btn color="primary" v-bind="attrs" v-on="on">From the bottom</v-btn> -->
+                        </template>
+                      <template v-slot:default="dialog">
+                        <textTeams></textTeams>
+                      </template>
+                    </v-dialog>
+                    
                     <p class="mb-0 me-2">and</p>
-                    <router-link :to="{ path: '' }"> Privacy Policy </router-link>
+                    <v-dialog transition="dialog-bottom-transition" max-width="800">
+                        <template v-slot:activator="{ on, attrs }">
+                          <a v-bind="attrs" v-on="on"> Privacy Policy </a>
+                          <!-- <v-btn color="primary" v-bind="attrs" v-on="on">From the bottom</v-btn> -->
+                        </template>
+                      <template v-slot:default="dialog">
+                        <textPrivacy></textPrivacy>
+                      </template>
+                    </v-dialog>
                   </v-card-text>
 
                   <!-- create new account  -->
@@ -169,6 +153,7 @@
                       </v-icon>
                     </v-btn>
                   </v-card-actions> -->
+                 
                 </v-card>
                 <v-overlay :value="overlay" absolute>
                   <v-progress-circular indeterminate size="64"></v-progress-circular>
@@ -192,10 +177,19 @@ import { getCurrentInstance, ref } from '@vue/composition-api'
 import Alert from '@/utils/Alert.vue'
 import { useRouter } from '@core/utils'
 import themeConfig from '@themeConfig'
-import { abilityKeytoArrayObj } from './ability_list'
+import textPrivacy from './textPrivacy.vue'
+import textTeams from './textTeams.vue'
 
 export default {
-  components: { Alert },
+  components: { Alert,textPrivacy,textTeams },
+  data() {
+    return {
+      dialog: false,
+      notifications: false,
+      sound: true,
+      widgets: false,
+    }
+  },
   setup() {
     // Template Ref
     const loginForm = ref(null)
@@ -423,4 +417,9 @@ export default {
   // width: auto;
   // background: #fff;
 }
+.paragraph-css{
+  text-indent: 8px;
+  word-break: break-all;
+}
+
 </style>
