@@ -57,6 +57,14 @@
               <div class="shadow-green" style="z-index: 1; position: relative"
                 :style="{ background: $vuetify.theme.dark ? '#312d4b' : '#fff' }">
                 <v-card flat>
+                  <div class="md:tw-hidden tw-block" style="width: 100%;">
+                    <div style="width: 100%; display: flex;">
+                      <v-img align="center" :src="require('@/assets/images/svg/nav-logo-light.png')
+                      " width="80"></v-img>
+                    </div>
+
+                  </div>
+                  <br>
                   <v-card-text>
                     <p class="text-2xl font-weight-semibold text--primary mb-2">Login to your Account</p>
                     <p class="mb-2">Please sign-in to your account and start the adventure</p>
@@ -111,21 +119,21 @@
                   <v-card-text class="d-flex align-center justify-center flex-wrap mt-2">
                     <p class="mb-0 me-2">By clicking "Sign In" you agree to Tracsia's</p>
                     <v-dialog transition="dialog-bottom-transition" max-width="800">
-                        <template v-slot:activator="{ on, attrs }">
-                          <a v-bind="attrs" v-on="on"> Terms Of Service </a>
-                          <!-- <v-btn color="primary" v-bind="attrs" v-on="on">From the bottom</v-btn> -->
-                        </template>
+                      <template v-slot:activator="{ on, attrs }">
+                        <a v-bind="attrs" v-on="on"> Terms Of Service </a>
+                        <!-- <v-btn color="primary" v-bind="attrs" v-on="on">From the bottom</v-btn> -->
+                      </template>
                       <template v-slot:default="dialog">
                         <textTeams></textTeams>
                       </template>
                     </v-dialog>
-                    
+
                     <p class="mb-0 me-2">and</p>
                     <v-dialog transition="dialog-bottom-transition" max-width="800">
-                        <template v-slot:activator="{ on, attrs }">
-                          <a v-bind="attrs" v-on="on"> Privacy Policy </a>
-                          <!-- <v-btn color="primary" v-bind="attrs" v-on="on">From the bottom</v-btn> -->
-                        </template>
+                      <template v-slot:activator="{ on, attrs }">
+                        <a v-bind="attrs" v-on="on"> Privacy Policy </a>
+                        <!-- <v-btn color="primary" v-bind="attrs" v-on="on">From the bottom</v-btn> -->
+                      </template>
                       <template v-slot:default="dialog">
                         <textPrivacy></textPrivacy>
                       </template>
@@ -153,7 +161,7 @@
                       </v-icon>
                     </v-btn>
                   </v-card-actions> -->
-                 
+
                 </v-card>
                 <v-overlay :value="overlay" absolute>
                   <v-progress-circular indeterminate size="64"></v-progress-circular>
@@ -181,7 +189,7 @@ import textPrivacy from './textPrivacy.vue'
 import textTeams from './textTeams.vue'
 
 export default {
-  components: { Alert,textPrivacy,textTeams },
+  components: { Alert, textPrivacy, textTeams },
   data() {
     return {
       dialog: false,
@@ -417,9 +425,9 @@ export default {
   // width: auto;
   // background: #fff;
 }
-.paragraph-css{
+
+.paragraph-css {
   text-indent: 8px;
   word-break: break-all;
 }
-
 </style>
