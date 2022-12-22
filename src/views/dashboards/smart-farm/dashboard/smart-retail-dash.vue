@@ -95,7 +95,8 @@
                                                             :src="items_temp[select_door].door == 'OPEN' ? require(`@/assets/images/dashboard/loca_door.png`) : require(`@/assets/images/dashboard/loca_door_close.png`)"
                                                             alt="">
                                                     </template>
-                                                    <span>Door_0{{ select_door + 1 }} : {{ items_temp[select_door].door }}
+                                                    <span>Door_0{{ select_door + 1 }} : {{ items_temp[select_door].door
+                                                    }}
                                                     </span>
                                                 </v-tooltip>
                                                 <v-tooltip top color="success">
@@ -157,9 +158,9 @@
                                                         <h3>max {{ items_temp[select].max }}<sup>°C</sup></h3>
                                                         <h3>min {{ items_temp[select].min }}<sup>°C</sup></h3>
                                                     </div>
-                                                    <div >
-                                                        <h5>Date : {{items_temp[0].timestamp}}</h5>
-                                                        <h5>Time : {{items_temp[0].date}} </h5>
+                                                    <div>
+                                                        <h5>Date : {{ items_temp[0].timestamp }}</h5>
+                                                        <h5>Time : {{ items_temp[0].date }} </h5>
                                                     </div>
                                                 </v-col>
                                             </v-row>
@@ -232,9 +233,9 @@ export default {
                 { temp: 'temp3', index: 2, door: 'Door 03' },
             ],
             items_temp: [
-                { temp: 'temp1', value: '', max: '33', min: '24', door: "OPEN" ,timestamp : '',date: '', w_t: 30, t_t: 9, w_d: 53, t_d: 30 },
-                { temp: 'temp2', value: '33', max: '41', min: '29', door: "CLOSE",timestamp : '',date: '', w_t: 19, t_t: 26, w_d: 43, t_d: 30 },
-                { temp: 'temp3', value: '28', max: '37', min: '24', door: "OPEN",timestamp : '',date: '', w_t: 45, t_t: 8, w_d: 54, t_d: 10 },
+                { temp: 'temp1', value: '', max: '33', min: '24', door: "OPEN", timestamp: '', date: '', w_t: 30, t_t: 9, w_d: 53, t_d: 30 },
+                { temp: 'temp2', value: '33', max: '41', min: '29', door: "CLOSE", timestamp: '', date: '', w_t: 19, t_t: 26, w_d: 43, t_d: 30 },
+                { temp: 'temp3', value: '28', max: '37', min: '24', door: "OPEN", timestamp: '', date: '', w_t: 45, t_t: 8, w_d: 54, t_d: 10 },
             ],
             items: ['PLANT A', 'PLANT B', 'PLANT C', 'PLANT D', 'PLANT E',],
             text: 'Lorem ipsum dolor sit amet,',
@@ -281,18 +282,23 @@ export default {
         }
     },
     mounted() {
-        this.fetchData()
+        this.fetchData();
+        this.realTime();
     },
     methods: {
         async fetchData() {
             let res = await this.$http.get(`/v1/custumer-sensor/by-group-poge/?custumerID=tracsia&pageOptionID=POT20221219075808543`)
             console.log(res.data.data[0]) //temperature
-            this.items_temp[0].value = res.data.data[0].temperature 
+            this.items_temp[0].value = res.data.data[0].temperature
             this.items_temp[0].timestamp = this.$moment(res.data.data[0].timestamp).format('L')
             this.items_temp[0].date = this.$moment(res.data.data[0].timestamp).format('h:mm:ss a')
 
         },
-       
+        realTime() {
+            setInterval(() => {
+                this.fetchData();
+            }, 10000);
+        },
         openFullscreen(id) {
             var elem = document.getElementById(id);
             if (elem.requestFullscreen) {
