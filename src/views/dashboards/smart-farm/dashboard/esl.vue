@@ -54,11 +54,11 @@ export default {
     data() {
         return {
             url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            zoom: 12,
-            center: [13.8069954, 100.5545989],
-            markerLatLng: [13.8069954, 100.5545989],
+            zoom: 17,
+            center: [13.68528740559085, 100.6113370260246],
+            markerLatLng: [13.68528740559085, 100.6113370260246],
             circle: {
-                center: [13.8069954, 100.5545989],
+                center: [13.68528740559085, 100.6113370260246],
                 radius: 200,
                 color: '#EA5455',
             },

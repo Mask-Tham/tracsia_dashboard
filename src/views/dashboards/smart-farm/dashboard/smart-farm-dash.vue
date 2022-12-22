@@ -46,10 +46,10 @@
 
                       <lottie-animation ref="anim" style="width: 100px; position: absolute; left: 0; top: 0;"
                         :loop="true" :animationData="require(`@/assets/lottie/sun.json`)" />
-                      <h1 style="position: absolute; bottom: 0; left: 70px; font-size: 40px;">43 <sup
+                      <h1 style="position: absolute; bottom: 0; left: 70px; font-size: 40px;">{{ temp }} <sup
                           style="font-size: 25px;">°C</sup></h1>
                       <h1 style="position: absolute; bottom: 0; color: #3F8FA8; right: 20px; font-size: 25px;"><img
-                          width="27" src="@/assets/images/dashboard/water-outline.png" alt=""> 83%</h1>
+                          width="27" src="@/assets/images/dashboard/water-outline.png" alt=""> {{ gender[1].total }}%</h1>
                     </div>
 
                   </v-col>
@@ -57,7 +57,7 @@
                     <div class="d-flex"
                       style="width: 100%; position: relative;  align-items: center; padding: 15px; border-radius: 15px;">
                       <h1 class=" font-weight-semibold" style="font-size: 25px;">
-                        23 JUN Monday, 14:23
+                         {{ time_1 }}
                       </h1>
                       <v-btn style="position: absolute; right: 5px; top: -20px;" fab dark small color="primary"
                         @click="openFullscreen('mysl' + i)">
@@ -204,6 +204,8 @@ export default {
         },
       ],
       userTable: [],
+      temp: "",
+      items_temp: [],
       searchTable: '',
       statusFilter: null,
       statusOptions: [
@@ -212,10 +214,11 @@ export default {
       ],
       selectedRows: [],
       loadingTable: false,
+      time_1: "",
       gender: [
-        { title: 'Light Sensor', total: 0.3, unit: 'lux', img: 'i1.png', imgmap: 'sun.json', color: '#0095FF' },
-        { title: 'Moisture', total: 14.3, unit: '%', img: 'i2.png', imgmap: 'humidly.json', color: '#01C282' },
-        { title: 'Conductivity', total: 42, unit: 'µS/cm', img: 'i3.png', imgmap: 'plant.json', color: '#884DFF' },
+        { title: 'Light Sensor', total: "", unit: 'lux', img: 'i1.png', imgmap: 'sun.json', color: '#0095FF' },
+        { title: 'Moisture', total: "", unit: '%', img: 'i2.png', imgmap: 'humidly.json', color: '#01C282' },
+        { title: 'Conductivity', total: "", unit: 'µS/cm', img: 'i3.png', imgmap: 'plant.json', color: '#884DFF' },
         //   { title: 'Power Volume', total: 193.86 ,unit: 'kWh', img: 'i4.png', imgmap: 'map_Industry.png', color: '#FF708D' },
       ],
     }
@@ -232,15 +235,18 @@ export default {
     },
   },
   mounted() {
-    this.fetchData()
+    this.fetchData();
+    this.toLocaleTime();
+    this.realTime();
   },
   methods: {
     async fetchData() {
       let res = await this.$http.get(`v1/custumer-sensor/by-group-poge/?custumerID=tracsia&pageOptionID=POT20221219075517485`)
       console.log(res.data.data[0]) //temperature
-      // this.items_temp[0].value = res.data.data[0].temperature
-      // this.items_temp[0].timestamp = this.$moment(res.data.data[0].timestamp).format('L')
-      // this.items_temp[0].date = this.$moment(res.data.data[0].timestamp).format('h:mm:ss a')
+      this.gender[0].total = res.data.data[0].illuminance
+      this.gender[1].total = res.data.data[0].moisture
+      this.gender[2].total = res.data.data[0].conductivity
+      this.temp = res.data.data[0].temperature
 
     },
     openFullscreen(id) {
@@ -252,6 +258,17 @@ export default {
       } else if (elem.msRequestFullscreen) { /* IE11 */
         elem.msRequestFullscreen();
       }
+    },
+    toLocaleTime() {
+      // setInterval(function () {
+    this.time_1 = this.$moment().format('lll')
+      // }, 1000);
+    },
+    realTime() {
+      setInterval(() => {
+        this.fetchData();
+        this.toLocaleTime();
+      }, 10000);
     }
   }
 }

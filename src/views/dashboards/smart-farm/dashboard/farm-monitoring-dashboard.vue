@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12">
         <v-card-title> Farm Monitoring Dashboard </v-card-title>
-        <v-tabs v-model="tab" align-with-title>
+        <v-tabs v-model="tab" fixed-tabs align-with-title>
           <v-tabs-slider color="yellow"></v-tabs-slider>
           <v-tab v-for="item in items" :key="item">
             {{ item }}
@@ -60,7 +60,7 @@
                     <div class="d-flex"
                       style="width: 100%; position: relative;  align-items: center; padding: 15px; border-radius: 15px;">
                       <h1 class=" font-weight-semibold" style="font-size: 25px;">
-                        23 JUN Monday, 14:23
+                        {{ time_1 }}
                       </h1>
                       <v-btn style="position: absolute; right: 5px; top: -20px;" fab dark small color="primary"
                         @click="openFullscreen('mysl' + i)">
@@ -111,7 +111,8 @@
                     </div>
                     <div class="map card-div" style="position: relative;">
                       <h2 style="padding: 15px; position: absolute; top: 10px; left: 10px;">Live Machine Status</h2>
-                      <div style="height: 100%; width: 100%; display: grid; align-items: center; justify-items: center;">
+                      <div
+                        style="height: 100%; width: 100%; display: grid; align-items: center; justify-items: center;">
                         <img style="width: 470px;" :src="require(`@/assets/images/dashboard/farm-plant.png`)" alt="">
                       </div>
 
@@ -122,7 +123,7 @@
                           <img style="height: auto;" :width="i.w_img"
                             :src="require(`@/assets/images/dashboard/icon_dash_morni/${i.imgmap}`)" alt="">
                         </div>
-                        <div  style="width: calc(100% - 60px);">
+                        <div style="width: calc(100% - 60px);">
                           <h3>{{ i.title }}</h3>
                           <h3>0.3 {{ i.unit }}</h3>
                         </div>
@@ -158,7 +159,7 @@ export default {
   data() {
     return {
       icons: {
-        mdiExportVariant,mdiOverscan
+        mdiExportVariant, mdiOverscan
       },
       tab: null,
       items: ['PLANT A', 'PLANT B', 'PLANT C', 'PLANT D', 'PLANT E',],
@@ -230,6 +231,7 @@ export default {
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i3.png', imgmap: 'map_Industry.png', color: '#884DFF' },
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i4.png', imgmap: 'map_Industry.png', color: '#FF708D' },
       ],
+      time_1: ""
     }
   },
   setup() {
@@ -247,6 +249,7 @@ export default {
         return el.isUse.toString().includes(statusFilter) && el.custumerID.includes(customerFilter)
       })
     },
+
   },
   methods: {
     openFullscreen(id) {
@@ -258,7 +261,22 @@ export default {
       } else if (elem.msRequestFullscreen) { /* IE11 */
         elem.msRequestFullscreen();
       }
+    },
+    toLocaleTime() {
+      // setInterval(function () {
+      this.time_1 = this.$moment().format('lll')
+      // }, 1000);
+    },
+    realTime() {
+      setInterval(() => {
+        this.toLocaleTime();
+      }, 1000);
     }
+  }
+  ,
+  mounted() {
+    this.toLocaleTime();
+    this.realTime();
   }
 }
 </script>
@@ -274,6 +292,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 :fullscreen {
   background-image: url("../../../../assets/farm/background.png");
   /* Full height */
@@ -284,6 +303,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .container_grid {
   display: grid;
   width: 100%;
@@ -334,6 +354,7 @@ export default {
   background: #2EC094;
   width: 100px;
 }
+
 /* width */
 ::-webkit-scrollbar {
   width: 7px;
@@ -341,16 +362,16 @@ export default {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 </style>

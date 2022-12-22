@@ -189,7 +189,7 @@ export default [
   },
   {
     icon: mdiShoppingOutline,
-    title: 'Smart ESL',
+    title: 'Smart Store',
     to: 'smart-esl-dashboard',
   },
 ]
