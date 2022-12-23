@@ -38,7 +38,16 @@ const smartFarm = [
     {
       path: '/SmartWarehouseDashboard',
       name: 'smart-warehouse-dashboard',
-      component: () => import('@/views/dashboards/smart-farm/dashboard/smart-warehouse-dash.vue'),
+      component: () => import('@/views/dashboards/smart-farm/dashboard/warehouse/Warehouse.vue'),
+      meta: {
+        layout: 'content',
+        resource: 'tracbot',
+      },
+    },
+    {
+      path: '/ESLDashboard',
+      name: 'smart-esl-dashboard',
+      component: () => import('@/views/dashboards/smart-farm/dashboard/esl.vue'),
       meta: {
         layout: 'content',
         resource: 'tracbot',

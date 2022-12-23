@@ -1,7 +1,7 @@
-import warehouse from './warehouse'
-import healthcare from './healthcare'
-import employee_tracking from './employee_tracking'
 import device_list from './device_list'
+import employee_tracking from './employee_tracking'
+import healthcare from './healthcare'
+import warehouse from './warehouse'
 export default {
     Dashboards: 'แผงควบคุม',
     Dashboard: 'แผงควบคุม',
@@ -22,6 +22,11 @@ export default {
     'Add Device': 'เพิ่มอุปกรณ์',
     'Porter Tracking':'Porter Tracking',
     'Porter Management':'Porter Management',
+    'Smart Farm':'Smart Farm',
+    'Smart Monitoring Farm':'Smart Monitoring Farm',
+    'Smart Industry':'Smart Industry',
+    'Smart Retail':'Smart Retail',
+    'Smart Warehouse':'Smart Warehouse',
     Location:'Location',
     Tracle:'Tracle',
     warehouse: {...warehouse },

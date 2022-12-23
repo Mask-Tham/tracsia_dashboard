@@ -9,16 +9,17 @@ import location from './location'
 import manage_user from './manage-user'
 import management from './management'
 import pages from './pages'
+// import porter_tracking from './porter-tracking'
 import porter_tracking from './porter-tracking'
 import publicPage from './public-page'
 import room_tracking from './room-tracking'
 import smartFarm from './smartFarm'
 import super_admin from './super-admin'
 import tracbot from './tracbot'
+import tracle from './tracle'
 import user from './user'
 import userInterface from './user-interface'
 import warehouse from './warehouse'
-import tracle from './tracle'
 
 Vue.use(VueRouter)
 

@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12">
         <v-card-title> Farm Monitoring Dashboard </v-card-title>
-        <v-tabs v-model="tab" align-with-title>
+        <v-tabs v-model="tab" fixed-tabs align-with-title>
           <v-tabs-slider color="yellow"></v-tabs-slider>
           <v-tab v-for="item in items" :key="item">
             {{ item }}
@@ -57,10 +57,17 @@
 
                   </v-col>
                   <v-col cols="12" md="3" sm="6" xs="12" class="d-flex align-center">
-                    <div class="d-flex" style="width: 100%;  align-items: center; padding: 15px; border-radius: 15px;">
+                    <div class="d-flex"
+                      style="width: 100%; position: relative;  align-items: center; padding: 15px; border-radius: 15px;">
                       <h1 class=" font-weight-semibold" style="font-size: 25px;">
-                        23 JUN Monday, 14:23
+                        {{ time_1 }}
                       </h1>
+                      <v-btn style="position: absolute; right: 5px; top: -20px;" fab dark small color="primary"
+                        @click="openFullscreen('mysl' + i)">
+                        <v-icon size="17">
+                          {{ icons.mdiOverscan }}
+                        </v-icon>
+                      </v-btn>
                     </div>
                   </v-col>
                   <div class="container_grid">
@@ -102,27 +109,31 @@
                         </div>
                       </div>
                     </div>
-                    <div class="map card-div">
-                      <h2 style="padding: 15px">Live Machine Status</h2>
-                      <div align="center">
-                        <img style="width: 400px;" :src="require(`@/assets/images/dashboard/farm-plant.png`)" alt="">
+                    <div class="map card-div" style="position: relative;">
+                      <h2 style="padding: 15px; position: absolute; top: 10px; left: 10px;">Live Machine Status</h2>
+                      <div
+                        style="height: 100%; width: 100%; display: grid; align-items: center; justify-items: center;">
+                        <img style="width: 470px;" :src="require(`@/assets/images/dashboard/farm-plant.png`)" alt="">
                       </div>
 
                     </div>
-                    <div class="temp card-div">
-                      <v-row class="mb-6" no-gutters>
-                        <v-col v-for="n in 12" :key="n">
-                          <v-card class="pa-2" tile outlined>
-                            col
-                          </v-card>
-                        </v-col>
-                      </v-row>
+                    <div class="temp card-div tw-grid tw-grid-cols-3 tw-gap-4">
+                      <div class="tw-p-2 tw-flex" v-for="i in grid_items">
+                        <div style="width: 60px;" align="center">
+                          <img style="height: auto;" :width="i.w_img"
+                            :src="require(`@/assets/images/dashboard/icon_dash_morni/${i.imgmap}`)" alt="">
+                        </div>
+                        <div style="width: calc(100% - 60px);">
+                          <h3>{{ i.title }}</h3>
+                          <h3>0.3 {{ i.unit }}</h3>
+                        </div>
+                      </div>
                     </div>
                     <div class="vibration card-div">
-                      
-                        <vue-apex-charts style="width: 100%;padding: 15px " height="280" type="line" :options="options"
-                          :series="series"></vue-apex-charts>
-                   
+
+                      <vue-apex-charts style="width: 100%;padding: 15px " height="280" type="line" :options="options"
+                        :series="series"></vue-apex-charts>
+
                     </div>
                   </div>
                 </v-row>
@@ -136,7 +147,7 @@
 </template>
 
 <script>
-import { mdiExportVariant } from '@mdi/js'
+import { mdiExportVariant, mdiOverscan } from '@mdi/js'
 import LottieAnimation from 'lottie-web-vue'
 import VueApexCharts from 'vue-apexcharts'
 import apexChatData from './chart/apexChartData'
@@ -148,7 +159,7 @@ export default {
   data() {
     return {
       icons: {
-        mdiExportVariant
+        mdiExportVariant, mdiOverscan
       },
       tab: null,
       items: ['PLANT A', 'PLANT B', 'PLANT C', 'PLANT D', 'PLANT E',],
@@ -205,12 +216,22 @@ export default {
       ],
       selectedRows: [],
       loadingTable: false,
+      grid_items: [
+        { title: 'Light Sensor', total: 193.86, unit: 'lux', w_img: 55, imgmap: '1.png', color: '#0095FF' },
+        { title: 'VPD Volume', total: 193.86, unit: 'RH', w_img: 55, imgmap: '2.png', color: '#01C282' },
+        { title: 'Rain Volume', total: 193.86, unit: 'RH', w_img: 55, imgmap: '3.png', color: '#884DFF' },
+        { title: 'Soil Humid', total: 193.86, unit: '%', w_img: 55, imgmap: '4.png', color: '#FF708D' },
+        { title: 'CO2 Volume', total: 193.86, unit: 'ppm', w_img: 55, imgmap: '5.png', color: '#01C282' },
+        { title: 'BC Volume', total: 193.86, unit: 'PPFD', w_img: 55, imgmap: '6.png', color: '#884DFF' },
+        { title: 'PH Volume', total: 193.86, unit: 'pH', w_img: 35, imgmap: '7.png', color: '#FF708D' },
+      ],
       gender: [
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i1.png', imgmap: 'map_Industry.png', color: '#0095FF' },
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i2.png', imgmap: 'map_Industry.png', color: '#01C282' },
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i3.png', imgmap: 'map_Industry.png', color: '#884DFF' },
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i4.png', imgmap: 'map_Industry.png', color: '#FF708D' },
       ],
+      time_1: ""
     }
   },
   setup() {
@@ -228,6 +249,7 @@ export default {
         return el.isUse.toString().includes(statusFilter) && el.custumerID.includes(customerFilter)
       })
     },
+
   },
   methods: {
     openFullscreen(id) {
@@ -239,7 +261,22 @@ export default {
       } else if (elem.msRequestFullscreen) { /* IE11 */
         elem.msRequestFullscreen();
       }
+    },
+    toLocaleTime() {
+      // setInterval(function () {
+      this.time_1 = this.$moment().format('lll')
+      // }, 1000);
+    },
+    realTime() {
+      setInterval(() => {
+        this.toLocaleTime();
+      }, 1000);
     }
+  }
+  ,
+  mounted() {
+    this.toLocaleTime();
+    this.realTime();
   }
 }
 </script>
@@ -250,6 +287,17 @@ export default {
   /* Full height */
   height: 100%;
 
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+:fullscreen {
+  background-image: url("../../../../assets/farm/background.png");
+  /* Full height */
+  height: 100%;
+  overflow-y: scroll;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
@@ -305,5 +353,25 @@ export default {
   color: #ffffff;
   background: #2EC094;
   width: 100px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>
