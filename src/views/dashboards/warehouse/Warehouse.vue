@@ -82,6 +82,9 @@
         <warehouse-card-zone :item="item"/>
       </v-col>
     </v-row>
+    <div class="tw-w-[100px] tw-text-emerald-500">
+      werwer
+    </div>
   </div>
 </template>
 

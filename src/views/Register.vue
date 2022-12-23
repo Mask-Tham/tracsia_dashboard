@@ -335,6 +335,7 @@ export default {
         position: 'หัวหน้า',
         picture: '',
         custumerID: 'tracsia',
+        roleID:'',
         isUse: false,
         ability: [],
         shortname: '',

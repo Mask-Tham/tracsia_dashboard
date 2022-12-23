@@ -69,6 +69,18 @@
 
         <v-col lg="4" class="d-flex align-center auth-bg pa-10 pb-0">
           <v-row>
+            <v-col cols="12" class="d-flex justify-center">
+              <div v-if="$vuetify.breakpoint.mdAndDown">
+                <v-img
+                :src="
+                  $vuetify.theme.dark
+                  ? require('@/assets/images/svg/nav-logo-dark.png')
+                  : require('@/assets/images/svg/nav-logo-light.png')
+                  "
+                max-width="300"
+                ></v-img>
+              </div>
+            </v-col>
             <v-col cols="12" sm="8" md="6" lg="12" class="mx-auto">
               <div
                 class="shadow-green"
