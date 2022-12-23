@@ -9,16 +9,12 @@
             {{ item }}
           </v-tab>
         </v-tabs>
-        <v-tabs-items v-model="tab">
-          <v-tab-item style="background-color: #F4F5FA;" v-for="(i, item) in items" :key="item">
+        <v-tabs-items v-model="tab" class="bg-transparent">
+          <v-tab-item v-for="(i, item) in items" :key="item" >
             <v-col cols="12">
               <v-card-text>
-                <!-- <v-row>
-                      <v-spacer></v-spacer>
-                    <v-btn  color="primary" class="mr-3" @click="openFullscreen('mysl'+i)">Full Screen</v-btn>
-                    </v-row> -->
                 <v-row :id="'mysl' + i">
-                  <v-col v-for="data in gender" :key="data.title" cols="12" md="3" sm="6" xs="12"
+                  <v-col v-for="(data,data_i) in gender" :key="data_i" cols="12" md="3" sm="6" xs="12"
                     class="d-flex align-center">
                     <div class="d-flex"
                       style="width: 100%; color: #fff; align-items: center; padding: 15px; border-radius: 15px;"
@@ -38,13 +34,13 @@
                   </v-col>
                   <div class="container_grid">
 
-                    <div class="graph_below card-div">
+                    <v-card class="graph_below">
                       <h2 style="padding: 15px">Current Status</h2>
                       <div style="display: flex;">
                         <div style="width: 50%; padding: 10px;">
 
                           <div>
-                            <div style="display: flex; background: #F3F6F9; width: 100%;">
+                            <div style="display: flex;  width: 100%;">
                               <div align="center" style="width: 50%; padding: 5px;">Machine</div>
                               <div align="center" style="width: 50%; padding: 5px;">Status</div>
                             </div>
@@ -76,15 +72,15 @@
                             :series="apexChatData.columnChart.series" />
                         </div>
                       </div>
-                    </div>
-                    <div class="map card-div">
+                    </v-card>
+                    <v-card class="map">
                       <h2 style="padding: 15px">Live Machine Status</h2>
                       <div align="center">
                         <img style="width: 600px;" :src="require(`@/assets/images/dashboard/map_Industry.png`)" alt="">
                       </div>
 
-                    </div>
-                    <div class="temp card-div">
+                    </v-card>
+                    <v-card class="temp">
                       <v-row style="height: 100%;">
                         <v-col class="p-0" cols="4" md="4" sm="6" xs="12">
                           <img width="140" :src="require(`@/assets/images/dashboard/tempicon.png`)" alt="">
@@ -109,8 +105,8 @@
                           </div>
                         </v-col>
                       </v-row>
-                    </div>
-                    <div class="vibration card-div">
+                    </v-card>
+                    <v-card class="vibration">
                       <v-row style="height: 100%; align-items: center;">
                         <v-col class="p-0"
                           style="display: flex; align-items: center;flex-direction: column; justify-content: center;"
@@ -134,7 +130,7 @@
                           </div>
                         </v-col>
                       </v-row>
-                    </div>
+                    </v-card>
                   </div>
                 </v-row>
               </v-card-text>
@@ -247,6 +243,7 @@ export default {
     "graph_below graph_below graph_below graph_below graph_below";
 }
 
+
 .graph_below {
   grid-area: graph_below;
 }
@@ -261,11 +258,6 @@ export default {
 
 .vibration {
   grid-area: vibration;
-}
-
-.card-div {
-  background: #ffffff;
-  border-radius: 19px;
 }
 
 .p-0 {

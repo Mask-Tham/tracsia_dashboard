@@ -9,16 +9,12 @@
                         {{ item }}
                     </v-tab>
                 </v-tabs>
-                <v-tabs-items v-model="tab">
-                    <v-tab-item style="background-color: #F4F5FA;" v-for="(i, item) in items" :key="item">
+                <v-tabs-items v-model="tab" class="bg-transparent">
+                    <v-tab-item v-for="(i, item) in items" :key="item">
                         <v-col cols="12">
                             <v-card-text>
-                                <!-- <v-row>
-                      <v-spacer></v-spacer>
-                    <v-btn  color="primary" class="mr-3" @click="openFullscreen('mysl'+i)">Full Screen</v-btn>
-                    </v-row> -->
                                 <v-row :id="'mysl' + i">
-                                    <v-col v-for="data in gender" :key="data.title" cols="12" md="3" sm="6" xs="12"
+                                    <v-col v-for="(data,data_i) in gender" :key="data_i" cols="12" md="3" sm="6" xs="12"
                                         class="d-flex align-center">
                                         <div class="d-flex"
                                             style="width: 100%; color: #fff; align-items: center; padding: 15px; border-radius: 15px;"
@@ -38,7 +34,7 @@
                                     </v-col>
                                     <div class="container_grid">
 
-                                        <div class="graph_below card-div">
+                                        <v-card class="graph_below">
                                             <h2 style="padding: 15px">Current Status</h2>
                                             <div style="display: flex;">
                                                 <div style="width: 50%; padding: 10px;">
@@ -82,8 +78,8 @@
                                                         :series="apexChatData.columnChart.series" />
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="map card-div">
+                                        </v-card>
+                                        <v-card class="map">
                                             <h2 style="padding: 15px">Live Machine Status</h2>
                                             <div align="center" style="position: relative; width: 100%;">
                                                 <!-- sensor -->
@@ -131,8 +127,8 @@
                                                     :src="require(`@/assets/images/dashboard/map_retail.png`)" alt="">
                                             </div>
 
-                                        </div>
-                                        <div class="temp card-div">
+                                        </v-card>
+                                        <v-card class="temp">
                                             <v-row style="height: 100%; margin: 0;">
                                                 <v-col class="p-0"
                                                     style="display: flex; align-items: center; justify-content: center;"
@@ -164,8 +160,8 @@
                                                     </div>
                                                 </v-col>
                                             </v-row>
-                                        </div>
-                                        <div class="vibration card-div">
+                                        </v-card>
+                                        <v-card class="vibration">
                                             <v-row style="height: 100%; margin: 0;">
                                                 <v-col class="p-0"
                                                     style="display: flex; align-items: center;flex-direction: column; justify-content: center;"
@@ -198,7 +194,7 @@
                                                     </div>
                                                 </v-col>
                                             </v-row>
-                                        </div>
+                                        </v-card>
                                     </div>
                                 </v-row>
                             </v-card-text>
@@ -274,12 +270,16 @@ export default {
                 { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i3.png', imgmap: 'map_Industry.png', color: '#884DFF' },
                 { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i4.png', imgmap: 'map_Industry.png', color: '#FF708D' },
             ],
+            interval:null,
         }
     },
     setup() {
         return {
             apexChatData,
         }
+    },
+    beforeDestroy(){
+        clearInterval(this.interval)
     },
     mounted() {
         this.fetchData();
@@ -295,7 +295,7 @@ export default {
 
         },
         realTime() {
-            setInterval(() => {
+           this.interval = setInterval(() => {
                 this.fetchData();
             }, 10000);
         },
@@ -342,11 +342,6 @@ export default {
 
 .vibration {
     grid-area: vibration;
-}
-
-.card-div {
-    background: #ffffff;
-    border-radius: 19px;
 }
 
 .p-0 {

@@ -221,6 +221,7 @@ export default {
         { title: 'Conductivity', total: "", unit: 'µS/cm', img: 'i3.png', imgmap: 'plant.json', color: '#884DFF' },
         //   { title: 'Power Volume', total: 193.86 ,unit: 'kWh', img: 'i4.png', imgmap: 'map_Industry.png', color: '#FF708D' },
       ],
+      interval:null,
     }
   },
   computed: {
@@ -233,6 +234,9 @@ export default {
         return el.isUse.toString().includes(statusFilter) && el.custumerID.includes(customerFilter)
       })
     },
+  },
+  beforeDestroy(){
+    clearInterval(this.interval)
   },
   mounted() {
     this.fetchData();
@@ -265,7 +269,7 @@ export default {
       // }, 1000);
     },
     realTime() {
-      setInterval(() => {
+     this.interval = setInterval(() => {
         this.fetchData();
         this.toLocaleTime();
       }, 10000);

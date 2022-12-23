@@ -11,7 +11,7 @@
     <v-card height="100%">
       <div class="drawer-header d-flex align-center mb-4">
         <span class="font-weight-semibold text-base text--primary">{{
-          !propUserData ? 'Add New Customer' : 'Edit Customer'
+          !propUserData ? 'Add New Customer' : 'Edit User'
         }}</span>
         <v-spacer></v-spacer>
         <v-btn icon small @click="$emit('update:is-add-new-user-sidebar-active', false)">
@@ -176,7 +176,8 @@ export default {
         console.log(this.valid)
         if (this.valid) {
           console.log(this.select_ability)
-          let body = { ability: this.select_ability,
+          const ability = this.checkAbilityDefault(this.select_ability)
+          let body = { ability: ability,
           roleID:this.select_role }
           let username = this.userData.username
           console.log(body, username)
@@ -194,6 +195,18 @@ export default {
         this.error = error.data.message
         this.alert = true
       }
+    },
+    checkAbilityDefault(select_ability){
+      let isDefault = []
+      this.ability_list.forEach((item) => {
+        if (item.isDefault) {
+          isDefault.push(item.key)
+        }
+      })
+      let combinedArray = isDefault.concat(select_ability);
+      // Convert the combined array to a Set and back to an array
+      let uniqueArray = Array.from(new Set(combinedArray));
+      return uniqueArray
     },
   },
   watch: {

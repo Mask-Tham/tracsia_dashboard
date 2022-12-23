@@ -142,7 +142,8 @@ export default {
             console.log(labels);
             this.chartData.labels = labels
             this.chartData.datasets[0].data = data
-        }
+        },
+        
     },
     mounted() {
         this.genDataChart()

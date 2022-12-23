@@ -20,7 +20,7 @@
     </v-row>
     <v-row>
       <v-col cols="12" md="3" sm="6" v-for="(item, i) in zone" :key="i" class="pa-2 d-flex">
-        <warehouse-card-zone :item="item"/>
+        <warehouse-card-zone :items="item"/>
       </v-col>
     </v-row>
   </div>
@@ -133,8 +133,53 @@ export default {
           pallets:Math.floor(Math.random()*10)
         },
       ],
+      userData:null,
+      interval:null,
     }
   },
+  beforeDestroy(){
+    clearInterval(this.interval)
+  },
+  mounted(){
+    this.userData = this.$cookies.get('userData')
+    this.interval = setInterval(()=>{
+      this.getData()
+    },1000*60)
+  },
+  methods:{
+    async getData(){
+      try {
+       let res = await this.$http.get(`/v1/custumer-sensor/list-by-location?custumerID=${this.userData.custumerID}`)
+       console.log(res);
+       let zone = []
+       for (const key in res.data?.data) {
+          const el = res.data?.data[key];
+
+          console.log(el);
+          let assets = []
+          let tag = []
+          el.forEach((item)=>{
+            if (item.type === 'Asset') {
+              assets.push(item)
+            }else if (item.type === 'Tag') {
+              tag.push(item)
+            }
+          })
+
+          zone.push({
+            name:key,
+            workers:[...tag],
+            pallets:[...assets],
+          })
+        
+       }
+
+       this.zone = [...zone]
+      } catch (error) {
+        
+      }
+    },
+  }
 }
 </script>
 

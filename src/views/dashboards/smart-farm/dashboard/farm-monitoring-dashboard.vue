@@ -231,7 +231,8 @@ export default {
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i3.png', imgmap: 'map_Industry.png', color: '#884DFF' },
         { title: 'Power Volume', total: 193.86, unit: 'kWh', img: 'i4.png', imgmap: 'map_Industry.png', color: '#FF708D' },
       ],
-      time_1: ""
+      time_1: "",
+      interval:null,
     }
   },
   setup() {
@@ -251,6 +252,9 @@ export default {
     },
 
   },
+  beforeDestroy(){
+    clearInterval(this.interval)
+  },
   methods: {
     openFullscreen(id) {
       var elem = document.getElementById(id);
@@ -268,7 +272,7 @@ export default {
       // }, 1000);
     },
     realTime() {
-      setInterval(() => {
+     this.interval = setInterval(() => {
         this.toLocaleTime();
       }, 1000);
     }

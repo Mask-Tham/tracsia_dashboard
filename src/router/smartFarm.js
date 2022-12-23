@@ -5,7 +5,8 @@ const smartFarm = [
       component: () => import('@/views/dashboards/smart-farm/dashboard/farm-monitoring-dashboard.vue'),
       meta: {
         layout: 'content',
-        resource: 'tracbot',
+        actions: 'read',
+        resource: 'smartMonitoring',
       },
     },
     {
@@ -14,7 +15,8 @@ const smartFarm = [
       component: () => import('@/views/dashboards/smart-farm/dashboard/smart-farm-dash.vue'),
       meta: {
         layout: 'content',
-        resource: 'tracbot',
+        actions: 'read',
+        resource: 'smartFarm',
       },
     },
     {
@@ -23,7 +25,8 @@ const smartFarm = [
       component: () => import('@/views/dashboards/smart-farm/dashboard/smart-industry-dash.vue'),
       meta: {
         layout: 'content',
-        resource: 'tracbot',
+        actions: 'read',
+        resource: 'smartIndustry',
       },
     },
     {
@@ -32,7 +35,8 @@ const smartFarm = [
       component: () => import('@/views/dashboards/smart-farm/dashboard/smart-retail-dash.vue'),
       meta: {
         layout: 'content',
-        resource: 'tracbot',
+        actions: 'read',
+        resource: 'smartRetail',
       },
     },
     {
@@ -41,7 +45,8 @@ const smartFarm = [
       component: () => import('@/views/dashboards/smart-farm/dashboard/warehouse/Warehouse.vue'),
       meta: {
         layout: 'content',
-        resource: 'tracbot',
+        actions: 'read',
+        resource: 'smartWareHouse',
       },
     },
     {
@@ -50,7 +55,8 @@ const smartFarm = [
       component: () => import('@/views/dashboards/smart-farm/dashboard/esl.vue'),
       meta: {
         layout: 'content',
-        resource: 'tracbot',
+        actions: 'read',
+        resource: 'smartESL',
       },
     },
   ]

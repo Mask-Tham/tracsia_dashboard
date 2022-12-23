@@ -1,122 +1,87 @@
 <template>
-    <v-card>
-        <v-card-title class="pa-3 pb-0 d-flex justify-space-between">
-            <div>Product Management</div>
-            <div>
-                <v-select v-model="select" :items="items" item-text="text" item-value="value" label="Solo field" solo
-                    dense hide-details style="width:200px" @change="genDataChart"></v-select>
-            </div>
-        </v-card-title>
-        <dataTable />
+  <v-card>
+    <v-card-title class="pa-3 pb-0 d-flex justify-space-between">
+      <div>Product Management</div>
+      <div>
+        <!-- <v-btn tile>
+          <v-icon left> {{ icons.mdiTrayArrowUp }} </v-icon>
+          import
+        </v-btn>
+        <v-btn tile >
+          <v-icon left> {{ icons.mdiTrayArrowDown }} </v-icon>
+          download
+        </v-btn> -->
+        <!-- <v-select v-model="select" :items="items" item-text="text" item-value="value" label="Solo field" solo
+                    dense hide-details style="width:200px" @change="genDataChart"></v-select> -->
+      </div>
+    </v-card-title>
 
-        <v-data-table v-model="selected" :headers="headers" :items="desserts" :single-select="singleSelect"
-            item-key="name" show-select class="elevation-1 tw-p-4">
-            
-        </v-data-table>
-    </v-card>
+    <v-data-table
+      v-model="selected"
+      :headers="headers"
+      :items="desserts"
+      :single-select="singleSelect"
+      item-key="name"
+      show-select
+      class="elevation-1 tw-p-4"
+    >
+    <template #item.edit="{item}">
+        <form-add-e-s-l :form="item" @refetch-data="getData"/>
+    </template>
+    </v-data-table>
+  </v-card>
 </template>
 <script>
+import { mdiTrayArrowDown, mdiTrayArrowUp } from '@mdi/js'
+import FormAddESL from './FormAddESL.vue'
+
 export default {
-    data() {
-        return {
-            singleSelect: false,
-            selected: [],
-            headers: [
-                {
-                    text: 'Dessert (100g serving)',
-                    align: 'start',
-                    sortable: false,
-                    value: 'name',
-                },
-                { text: 'Calories', value: 'calories' },
-                { text: 'Fat (g)', value: 'fat' },
-                { text: 'Carbs (g)', value: 'carbs' },
-                { text: 'Protein (g)', value: 'protein' },
-                { text: 'Iron (%)', value: 'iron' },
-            ],
-            desserts: [
-                {
-                    name: 'Frozen Yogurt',
-                    calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0,
-                    iron: '1%',
-                },
-                {
-                    name: 'Ice cream sandwich',
-                    calories: 237,
-                    fat: 9.0,
-                    carbs: 37,
-                    protein: 4.3,
-                    iron: '1%',
-                },
-                {
-                    name: 'Eclair',
-                    calories: 262,
-                    fat: 16.0,
-                    carbs: 23,
-                    protein: 6.0,
-                    iron: '7%',
-                },
-                {
-                    name: 'Cupcake',
-                    calories: 305,
-                    fat: 3.7,
-                    carbs: 67,
-                    protein: 4.3,
-                    iron: '8%',
-                },
-                {
-                    name: 'Gingerbread',
-                    calories: 356,
-                    fat: 16.0,
-                    carbs: 49,
-                    protein: 3.9,
-                    iron: '16%',
-                },
-                {
-                    name: 'Jelly bean',
-                    calories: 375,
-                    fat: 0.0,
-                    carbs: 94,
-                    protein: 0.0,
-                    iron: '0%',
-                },
-                {
-                    name: 'Lollipop',
-                    calories: 392,
-                    fat: 0.2,
-                    carbs: 98,
-                    protein: 0,
-                    iron: '2%',
-                },
-                {
-                    name: 'Honeycomb',
-                    calories: 408,
-                    fat: 3.2,
-                    carbs: 87,
-                    protein: 6.5,
-                    iron: '45%',
-                },
-                {
-                    name: 'Donut',
-                    calories: 452,
-                    fat: 25.0,
-                    carbs: 51,
-                    protein: 4.9,
-                    iron: '22%',
-                },
-                {
-                    name: 'KitKat',
-                    calories: 518,
-                    fat: 26.0,
-                    carbs: 65,
-                    protein: 7,
-                    iron: '6%',
-                },
-            ],
-        }
+  components: { FormAddESL },
+  data() {
+    return {
+      singleSelect: false,
+      selected: [],
+      headers: [
+        { text: 'name', value: 'name' },
+        { text: 'barcode', value: 'barcode' },
+        { text: 'qrcode', value: 'qrcode' },
+        { text: 'label1', value: 'label1' },
+        { text: 'label2', value: 'label2' },
+        { text: 'label3', value: 'label3' },
+        { text: 'label4', value: 'label4' },
+        { text: 'label5', value: 'label5' },
+        { text: 'label6', value: 'label6' },
+        { text: 'label7', value: 'label7' },
+        { text: 'label8', value: 'label8' },
+        { text: 'label9', value: 'label9' },
+        { text: 'label10', value: 'label10' },
+        { text: 'label11', value: 'label11' },
+        { text: 'label12', value: 'label12' },
+        { text: 'Edit', value: 'edit' },
+      ],
+      desserts: [],
+      icons: {
+        mdiTrayArrowDown,
+        mdiTrayArrowUp,
+      },
+      userData: null,
+    }
+  },
+  mounted() {
+    this.userData = this.$cookies.get('userData')
+    this.getData()
+  },
+  methods: {
+    async getData() {
+      try {
+        let res = await this.$http.get(`/v1/minew-esl/list?custumerID=${this.userData.custumerID}`)
+        console.log(res)
+        this.desserts = res.data.data
+      } catch (error) {
+        console.log(error)
+      }
     },
+    
+  },
 }
 </script>

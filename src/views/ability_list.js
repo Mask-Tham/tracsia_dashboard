@@ -10,38 +10,58 @@ const READ_MANAGEMENT = 'read-management'
 const READ_ROOM_TRACKING = 'read-room-tracking'
 const READ_USER = 'read-user'
 const READ_WAREHOUSE = 'read-warehouse'
-const READ_HEALTCARE = 'read-healthcare'
+const READ_HEALTHCARE = 'read-healthcare'
 const READ_EMPLOYEE_TRACKING = 'read-employee-tracking'
+const READ_SMART_FARM = 'read-smart-farm'
+const READ_SMART_MONITORING = 'read-smart-monitoring'
+const READ_SMART_INDUSTRY = 'read-smart-industry'
+const READ_SMART_RETAIL = 'read-smart-retail'
+const READ_SMART_WAREHOUSE = 'read-smart-warehouse'
+const READ_SMART_ESL = 'read-smart-esl'
+
+const SUBJECT_ALL = 'all'
+const SUBJECT_PUBLIC = 'Public'
+const SUBJECT_MANAGEMENT = 'management'
+const SUBJECT_MANAGE_USER = 'manageUser'
+const SUBJECT_LOCATION = 'location'
+const SUBJECT_PORTER_TRACKING = 'porterTracking'
+const SUBJECT_ROOM_TRACKING = 'roomTracking'
+const SUBJECT_USER = 'user'
+const SUBJECT_WAREHOUSE = 'warehouse'
+const SUBJECT_HEALTHCARE = 'healthcare'
+const SUBJECT_EMPLOYEE_TRACKING = 'employeeTracking'
+const SUBJECT_SMART_FARM = 'smartFarm'
+const SUBJECT_SMART_MONITORING = 'smartMonitoring'
+const SUBJECT_SMART_INDUSTRY = 'smartIndustry'
+const SUBJECT_SMART_RETAIL = 'smartRetail'
+const SUBJECT_SMART_WAREHOUSE = 'smartWareHouse'
+const SUBJECT_SMART_ESL = 'smartESL'
+
+
 
 const ability_list_manage = [
-  { key: MANAGE_ALL, text: 'manage-all', action: 'manage', subject: 'all', isDefault: false },
-  { key: MANAGE_PUBLIC, text: 'manage-Public', action: 'manage', subject: 'Public', isDefault: true },
-  { key: MANAGE_USER, text: 'manage-user', action: 'manage', subject: 'manageUser', isDefault: false },
-  { key: MANAGE_LOCATION, text: 'manage-location', action: 'manage', subject: 'location', isDefault: false },
-  {
-    key: MANAGE_PORTER_TRACKING,
-    text: 'manage-porter-tracking',
-    action: 'manage',
-    subject: 'porterTracking',
-    isDefault: false,
-  },
+  { key: MANAGE_ALL, text: 'manage-all', action: 'manage', subject: SUBJECT_ALL, isDefault: false },
+  { key: MANAGE_PUBLIC, text: 'manage-Public', action: 'manage', subject: SUBJECT_PUBLIC, isDefault: true },
+  { key: MANAGE_USER, text: 'manage-user', action: 'manage', subject: SUBJECT_MANAGE_USER, isDefault: false },
+  { key: MANAGE_LOCATION, text: 'manage-location', action: 'manage', subject: SUBJECT_LOCATION, isDefault: false },
+  { key: MANAGE_PORTER_TRACKING, text: 'manage-porter-tracking', action: 'manage', subject: SUBJECT_PORTER_TRACKING, isDefault: false, },
 ]
 
 const ability_list_read = [
-  { key: READ_ALL, text: 'read-all', action: 'read', subject: 'all', isDefault: false },
-  { key: READ_PUBLIC, text: 'read-Public', action: 'read', subject: 'Public', isDefault: true },
-  { key: READ_MANAGEMENT, text: 'read-management', action: 'read', subject: 'management', isDefault: false },
-  { key: READ_ROOM_TRACKING, text: 'read-room-tracking', action: 'read', subject: 'roomTracking', isDefault: false },
-  { key: READ_USER, text: 'read-user', action: 'read', subject: 'user', isDefault: true },
-  { key: READ_WAREHOUSE, text: 'read-warehouse', action: 'read', subject: 'warehouse', isDefault: false },
-  { key: READ_HEALTCARE, text: 'read-healthcare', action: 'read', subject: 'healthcare', isDefault: false },
-  {
-    key: READ_EMPLOYEE_TRACKING,
-    text: 'read-employee-tracking',
-    action: 'read',
-    subject: 'employeeTracking',
-    isDefault: false,
-  },
+  { key: READ_ALL, text: 'read-all', action: 'read', subject: SUBJECT_ALL, isDefault: false },
+  { key: READ_PUBLIC, text: 'read-Public', action: 'read', subject: SUBJECT_PUBLIC, isDefault: true },
+  { key: READ_MANAGEMENT, text: 'read-management', action: 'read', subject: SUBJECT_MANAGEMENT, isDefault: false },
+  { key: READ_ROOM_TRACKING, text: 'read-room-tracking', action: 'read', subject: SUBJECT_ROOM_TRACKING, isDefault: false },
+  { key: READ_USER, text: 'read-user', action: 'read', subject: SUBJECT_USER, isDefault: true },
+  { key: READ_WAREHOUSE, text: 'read-warehouse', action: 'read', subject: SUBJECT_WAREHOUSE, isDefault: false },
+  { key: READ_HEALTHCARE, text: 'read-healthcare', action: 'read', subject: SUBJECT_HEALTHCARE, isDefault: false },
+  { key: READ_EMPLOYEE_TRACKING, text: 'read-employee-tracking', action: 'read', subject: SUBJECT_EMPLOYEE_TRACKING, isDefault: false, },
+  { key: READ_SMART_FARM, text: 'read-smart-farm', action: 'read', subject: SUBJECT_SMART_FARM, isDefault: false },
+  { key: READ_SMART_MONITORING, text: 'read-smart-monitoring', action: 'read', subject: SUBJECT_SMART_MONITORING, isDefault: false },
+  { key: READ_SMART_INDUSTRY, text: 'read-smart-industry', action: 'read', subject: SUBJECT_SMART_INDUSTRY, isDefault: false },
+  { key: READ_SMART_RETAIL, text: 'read-smart-retail', action: 'read', subject: SUBJECT_SMART_RETAIL, isDefault: false },
+  { key: READ_SMART_WAREHOUSE, text: 'read-smart-warehouse', action: 'read', subject: SUBJECT_SMART_WAREHOUSE, isDefault: false },
+  { key: READ_SMART_ESL, text: 'read-smart-esl', action: 'read', subject: SUBJECT_SMART_ESL, isDefault: false },
 ]
 
 const ability_list = [...ability_list_manage, ...ability_list_read]
@@ -95,8 +115,8 @@ const ability_obj_read = {
     subject: 'warehouse',
     isDefault: false,
   },
-  [READ_HEALTCARE]: {
-    key: READ_HEALTCARE,
+  [READ_HEALTHCARE]: {
+    key: READ_HEALTHCARE,
     text: 'read-healthcare',
     action: 'read',
     subject: 'employeeTracking',
