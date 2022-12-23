@@ -1,6 +1,6 @@
 import { mdiCheckboxBlankCircleOutline } from '@mdi/js'
 const themeStyle = require('./themeStyle')
-
+console.log(themeStyle);
 const themeConfig = {
   app: {
     name: 'Tracsia',

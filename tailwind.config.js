@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
 // const themeStyle = require('./themeStyle')
-
+// npm uninstall tailwindcss postcss autoprefixer
+// npm install tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 module.exports = {
   content: [
     "./index.html",
