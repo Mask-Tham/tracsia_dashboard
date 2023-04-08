@@ -287,7 +287,7 @@ export default {
     },
     methods: {
         async fetchData() {
-            let res = await this.$http.get(`/v1/custumer-sensor/by-group-poge/?custumerID=tracsia&pageOptionID=POT20221219075808543`)
+            let res = await this.$http.get(`/v1/custumer-sensor/by-group-poge/?customerID=tracsia&pageOptionID=POT20221219075808543`)
             console.log(res.data.data[0]) //temperature
             this.items_temp[0].value = res.data.data[0].temperature
             this.items_temp[0].timestamp = this.$moment(res.data.data[0].timestamp).format('L')

@@ -129,10 +129,7 @@ export default {
           const body = {
             locationName: this.formData.locationName,
             locationSort: `${this.nodeData.locationSort || ''}${this.formData.locationName}#`,
-            custumerID: `${userData.custumerID}`,
-            adminCreate: '',
-            adminUpdate: '',
-            image: '',
+            customerID: `${userData.custumerID}`,
           }
           console.log(body)
 

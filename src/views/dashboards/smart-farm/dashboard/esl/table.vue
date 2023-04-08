@@ -74,7 +74,7 @@ export default {
   methods: {
     async getData() {
       try {
-        let res = await this.$http.get(`/v1/minew-esl/list?custumerID=${this.userData.custumerID}`)
+        let res = await this.$http.get(`/v1/minew-esl/list?customerID=${this.userData.custumerID}`)
         console.log(res)
         this.desserts = res.data.data
       } catch (error) {

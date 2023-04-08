@@ -107,12 +107,10 @@ export default {
           data: data,
         }
 
-        let minew = await axios(config)
-        console.log(minew)
+        // let minew = await axios(config)
         let body = {
             ...this.form,
           customerID: this.userData.custumerID,
-          token: minew.data.body.token,
         }
         delete body.createdAt
         delete body.updatedAt

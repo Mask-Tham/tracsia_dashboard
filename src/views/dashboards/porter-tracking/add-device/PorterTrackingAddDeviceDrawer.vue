@@ -125,7 +125,7 @@ export default {
     async getData() {
       try {
         console.log(this.location)
-        let res = await this.$http.get(`/v1/location-device/list/?custumerID=${this.location.custumerID}`)
+        let res = await this.$http.get(`/v1/location-device/list/?custumerID=${this.location.customerID}`)
         console.log(res)
         if (res.data.isSuccess) {
           let formData = res.data.data.find(el => el.locationSort === this.location.locationSort)

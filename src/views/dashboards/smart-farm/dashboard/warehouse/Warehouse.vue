@@ -142,6 +142,7 @@ export default {
   },
   mounted(){
     this.userData = this.$cookies.get('userData')
+    this.getData()
     this.interval = setInterval(()=>{
       this.getData()
     },1000*60)
@@ -149,7 +150,7 @@ export default {
   methods:{
     async getData(){
       try {
-       let res = await this.$http.get(`/v1/custumer-sensor/list-by-location?custumerID=${this.userData.custumerID}`)
+       let res = await this.$http.get(`/v1/customer-sensor/list-by-location?customerID=${this.userData.custumerID}`)
        console.log(res);
        let zone = []
        for (const key in res.data?.data) {

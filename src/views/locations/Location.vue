@@ -21,10 +21,7 @@
           <span class="text-capitalize">add location</span>
         </v-tooltip>
       </v-card-title>
-        <v-progress-linear
-          :active="loading"
-          :indeterminate="loading"
-        ></v-progress-linear>
+      <v-progress-linear :active="loading" :indeterminate="loading"></v-progress-linear>
       <v-divider></v-divider>
       <v-card-text>
         <Tree :value="location">
@@ -51,7 +48,7 @@
               <div>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn icon v-bind="attrs" v-on="on" @click="goto(node, path, index )">
+                    <v-btn icon v-bind="attrs" v-on="on" @click="goto(node, path, index)">
                       <v-icon>
                         {{ icons.mdiEye }}
                       </v-icon>
@@ -115,7 +112,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn icon v-bind="attrs" v-on="on" @click="removeNode(path)">
+                    <v-btn icon v-bind="attrs" v-on="on" @click="removeNode(node)">
                       <v-icon>
                         {{ icons.mdiDelete }}
                       </v-icon>
@@ -269,7 +266,7 @@ export default {
   methods: {
     async fetchData() {
       this.loading = true
-      let res = await this.$http.get(`/v1/location/list/?custumerID=${this.userData.custumerID}`)
+      let res = await this.$http.get(`/v1/location/list/?customerID=${this.userData.custumerID}`)
 
       this.rawlocation = [...res.data.data]
 
@@ -306,7 +303,7 @@ export default {
     goto(node, path, index) {
       console.log(canUse({ action: 'manage', resource: 'porterTracking' }))
       console.log('goto')
-      console.log(node,path,index)
+      console.log(node, path, index)
       localStorage.setItem('location', JSON.stringify(node))
       this.$router.push(`/location/info`)
     },
@@ -350,19 +347,27 @@ export default {
         node.text = new_name
       }
     },
-    removeNode(path) {
-      // console.log(this.treeData);
-      let el = this.location
-      if (path.length > 1) {
-        el = el[path[0]]
-        console.log(el)
-        for (let i = 1; i < path.length - 1; i++) {
-          console.log(i)
-          el = el.children[path[i]]
-        }
-        el = el.children
+    async removeNode(node) {
+      try {
+        let res = await this.$http.delete(
+          `/v1/location/delete?customerID=${node.customerID}&locationID=${node.locationID}`,
+        )
+        this.fetchData()
+      } catch (error) {
+        console.error(error);
       }
-      el.splice(path[path.length - 1], 1)
+      // console.log(this.treeData);
+      // let el = this.location
+      // if (path.length > 1) {
+      //   el = el[path[0]]
+      //   console.log(el)
+      //   for (let i = 1; i < path.length - 1; i++) {
+      //     console.log(i)
+      //     el = el.children[path[i]]
+      //   }
+      //   el = el.children
+      // }
+      // el.splice(path[path.length - 1], 1)
     },
   },
 }

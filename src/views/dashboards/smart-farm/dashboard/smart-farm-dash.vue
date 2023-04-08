@@ -245,7 +245,7 @@ export default {
   },
   methods: {
     async fetchData() {
-      let res = await this.$http.get(`v1/custumer-sensor/by-group-poge/?custumerID=tracsia&pageOptionID=POT20221219075517485`)
+      let res = await this.$http.get(`v1/custumer-sensor/by-group-poge/?customerID=tracsia&pageOptionID=POT20221219075517485`)
       console.log(res.data.data[0]) //temperature
       this.gender[0].total = res.data.data[0].illuminance
       this.gender[1].total = res.data.data[0].moisture

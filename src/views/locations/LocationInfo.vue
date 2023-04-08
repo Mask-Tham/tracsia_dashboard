@@ -4,12 +4,12 @@
     <location-update v-model="isUpdateLocationSidebarActive"> </location-update>
 
     <!-- porter device -->
-    <porter-tracking-add-device-drawer
+    <!-- <porter-tracking-add-device-drawer
       v-if="location.children.length <= 0 && usePorter"
       v-model="isDevicePorterSidebarActive"
       :propFormData="porterData"
       :allUserData="userTableC"
-    ></porter-tracking-add-device-drawer>
+    ></porter-tracking-add-device-drawer> -->
 
     <v-skeleton-loader
       v-if="loading"
@@ -33,7 +33,7 @@
           </div>
           <div>
             <span class="text-capitalize">customer : </span>
-            <span>{{ locationData.custumerID }}</span>
+            <span>{{ locationData.customerID }}</span>
           </div>
           <!-- <div>
             <span class="text-capitalize">create at : </span>
@@ -67,7 +67,7 @@
           </v-tooltip>
 
           <!-- porter -->
-          <v-tooltip bottom v-if="location.children.length <= 0 && usePorter">
+          <!-- <v-tooltip bottom v-if="location.children.length <= 0 && usePorter">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 icon
@@ -85,7 +85,7 @@
               </v-btn>
             </template>
             <span class="text-capitalize">porter</span>
-          </v-tooltip>
+          </v-tooltip> -->
 
           <!-- tracle -->
           <v-tooltip bottom v-if="isRunnerUp && useTracle">
@@ -196,10 +196,10 @@ export default {
     async getInfo() {
       try {
         let res = await this.$http.get(
-          `/v1/location/info?custumerID=${this.location.custumerID}&locationSort=${this.location.locationSort}`,
+          `/v1/location/info?customerID=${this.location.customerID}&locationID=${this.location.locationID}`,
         )
         console.log(this.location,res)
-        this.locationData = res.data.data.find(el => el.locationSort === this.location.locationSort)
+        this.locationData = res.data.data
         this.setVar()
       } catch (error) {
         console.error(error)
