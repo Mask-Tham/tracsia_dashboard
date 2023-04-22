@@ -125,8 +125,8 @@
 
 <script>
 // eslint-disable-next-line object-curly-newline
-import { mdiKeyOutline, mdiLockOpenOutline, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
-import { required, passwordValidator2 } from '@core/utils/validation'
+import { passwordValidator2, required } from '@core/utils/validation'
+import { mdiEyeOffOutline, mdiEyeOutline, mdiKeyOutline, mdiLockOpenOutline } from '@mdi/js'
 // import { ref } from '@vue/composition-api'
 import Alert from '@/utils/Alert.vue'
 
@@ -163,36 +163,6 @@ export default {
     }
   },
   methods: {
-    async ChangePassword() {
-      this.$refs.formChangePass.validate()
-      try {
-        console.log(this.valid)
-        if (this.valid) {
-          this.loading = true
-          const userData = this.$cookies.get('userData')
-          console.log(userData)
-          let body = {
-            username: userData.username,
-            password: this.currentPassword,
-            newpassword: this.cPassword,
-          }
-          console.log(body)
-          let res = await this.$http.post(`user/api/changepassword`, body)
-          console.log(res)
-
-          this.success = res.data.message + ' success'
-          this.alertSuc = true
-          this.alert = false
-          this.loading = false
-        }
-      } catch (error) {
-        console.error(error)
-        this.error = error.data.message
-        this.alert = true
-        this.alertSuc = false
-        this.loading = false
-      }
-    },
   },
 }
 </script>
