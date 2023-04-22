@@ -1,7 +1,6 @@
 <template>
-  <div class="auth-wrapper auth-v2" style="position: fixed"
-    :style="{ background: $vuetify.theme.dark ? '#312d4b' : '#fff' }">
-    <div class="auth-inner">
+  <div class="auth-wrapper auth-v2 bg-gradient" style="position: fixed">
+    <div class="auth-inner" >
       <!-- brand logo -->
       <!-- <router-link to="/" class="brand-logo d-flex align-center">
         <v-img :src="appLogo" max-height="30px" max-width="30px" alt="logo" contain class="me-3"></v-img>
@@ -11,17 +10,7 @@
         </h2>
       </router-link> -->
       <!--/ brand logo -->
-
-      <div style="
-          width: 356px;
-          height: 341px;
-          background-color: #3abb6d;
-          border-radius: 50%;
-          position: absolute;
-          top: -206px;
-          left: -178px;
-        "></div>
-      <div style="
+      <!-- <div style="
           width: 677px;
           height: 650px;
           background-color: #3abb6d;
@@ -29,29 +18,30 @@
           position: absolute;
           top: 500px;
           left: -54px;
-        "></div>
+        "></div> -->
 
       <v-row class="auth-row ma-0">
         <v-col lg="7" class="d-none d-lg-flex justify-lg-center overflow-hidden pa-0">
           <div class="d-lg-flex flex-column align-center justify-lg-center" style="width: 100%">
-            <div style="width: 500px">
+            <div style="width: 700px">
               <v-img :src="
                 $vuetify.theme.dark
                   ? require('@/assets/images/svg/nav-logo-dark.png')
                   : require('@/assets/images/svg/nav-logo-light.png')
               " width="400" class="mb-10"></v-img>
-              <p class="text-2xl font-weight-semibold text--primary mb-2">
+              <p class="text-xl font-weight-semibold mb-2" style="color: #fff">
                 The most flexible IoT integration and management platform.
               </p>
-              <v-carousel :show-arrows="false" hide-delimiter-background cycle height="400">
+              <!-- <v-carousel :show-arrows="false" hide-delimiter-background cycle height="400">
                 <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src"
                   reverse-transition="fade-transition" transition="fade-transition"></v-carousel-item>
-              </v-carousel>
+              </v-carousel> -->
+               <v-img :src="require('@/assets/images/Tracsia (YSF).svg')"></v-img>
             </div>
           </div>
         </v-col>
 
-        <v-col lg="4" class="d-flex align-center auth-bg pa-10 pb-0">
+        <v-col lg="4" class="d-flex align-center pa-10 pb-0">
           <v-row>
             <v-col cols="12" class="d-flex justify-center">
               <div v-if="$vuetify.breakpoint.mdAndDown">
@@ -69,14 +59,6 @@
               <div class="shadow-green" style="z-index: 1; position: relative"
                 :style="{ background: $vuetify.theme.dark ? '#312d4b' : '#fff' }">
                 <v-card flat>
-                  <div class="md:tw-hidden tw-block" style="width: 100%;">
-                    <div style="width: 100%; display: flex;">
-                      <v-img align="center" :src="require('@/assets/images/svg/nav-logo-light.png')
-                      " width="80"></v-img>
-                    </div>
-
-                  </div>
-                  <br>
                   <v-card-text>
                     <p class="text-2xl font-weight-semibold text--primary mb-2">Login to your Account</p>
                     <p class="mb-2">Please sign-in to your account and start the adventure</p>
@@ -441,5 +423,31 @@ export default {
 .paragraph-css {
   text-indent: 8px;
   word-break: break-all;
+}
+.bg-gradient{
+  background: rgb(38,61,127);
+  background: linear-gradient(90deg, rgba(38,61,127,1) 0%, rgba(38,225,97,1) 100%);
+}
+@media (max-width: 1280px) {
+.bg-gradient{
+  &:before {
+    background: inherit;
+    content: '';
+    display: block;
+    height: 50%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    -webkit-backface-visibility: hidden; // for Chrome Windows
+  }
+
+  &:before {
+    top: 0;
+    background: white;
+    transform: skewY(20deg);
+    transform-origin: 100% 0;
+  }
+}
 }
 </style>
