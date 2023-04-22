@@ -1,15 +1,15 @@
 import {
+  mdiAccountEdit,
+  mdiAccountStar,
   mdiCogs,
+  mdiHomeOutline,
+  mdiOfficeBuildingMarker,
   mdiShoppingOutline,
   mdiSprout,
   mdiStorefrontOutline,
   mdiTractorVariant,
-  mdiWarehouse,
-  mdiHomeOutline,
-  mdiOfficeBuildingMarker,
   mdiViewDashboard,
-  mdiAccountEdit,
-  mdiAccountStar,
+  mdiWarehouse,
 } from '@mdi/js'
 
 export default [
@@ -172,6 +172,16 @@ export default [
         to: 'super_admin-manage-user',
       },
     ],
+  },
+  {
+    title: 'Report',
+    icon: mdiHomeOutline,
+    to: 'management-report',
+    action: 'read',
+    resource: 'management',
+
+    // badge: '3',
+    badgeColor: 'warning',
   },
   {
     icon: mdiTractorVariant,
