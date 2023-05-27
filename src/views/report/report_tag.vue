@@ -20,10 +20,10 @@
         <report-tag :account-data="accountSettingData.account"></report-tag>
       </v-tab-item>
 
-      <v-tab-item>
+      <!-- <v-tab-item>
         <search></search>
         <account-settings-security></account-settings-security>
-      </v-tab-item>
+      </v-tab-item> -->
 
       <v-tab-item>
         <search></search>
@@ -36,11 +36,11 @@
   
 <script>
 import {
-  mdiAccountOutline,
-  mdiBellOutline,
-  mdiBookmarkOutline,
-  mdiInformationOutline,
-  mdiLockOpenOutline,
+mdiAccountOutline,
+mdiBellOutline,
+mdiBookmarkOutline,
+mdiInformationOutline,
+mdiLockOpenOutline,
 } from '@mdi/js'
 import { ref } from '@vue/composition-api'
 
@@ -67,7 +67,7 @@ export default {
     // tabs
     const tabs = [
       { title: 'Tag', icon: mdiAccountOutline },
-      { title: 'Asset', icon: mdiLockOpenOutline },
+      // { title: 'Asset', icon: mdiLockOpenOutline },
       { title: 'Sensor', icon: mdiInformationOutline },
     ]
 
