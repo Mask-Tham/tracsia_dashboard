@@ -8,6 +8,15 @@ const management = [
       resource: 'management',
     },
   },
+  {
+    path: '/Report',
+    name: 'management-report',
+    component: () => import('@/views/report/report_tag.vue'),
+    meta: {
+      layout: 'content',
+      resource: 'management',
+    },
+  },
 ]
 
 export default management
